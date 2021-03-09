@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.94843bda.chunk.css",
+    "main.js": "/static/js/main.4c7bb5df.chunk.js",
+    "main.css.map": "/static/css/main.94843bda.chunk.css.map",
+    "main.js.map": "/static/js/main.4c7bb5df.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1c590e87.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1c590e87.js.map",
+    "static/css/2.9c88df16.chunk.css": "/static/css/2.9c88df16.chunk.css",
+    "static/js/2.e9b3d4ff.chunk.js": "/static/js/2.e9b3d4ff.chunk.js",
+    "static/css/2.9c88df16.chunk.css.map": "/static/css/2.9c88df16.chunk.css.map",
+    "static/js/2.e9b3d4ff.chunk.js.map": "/static/js/2.e9b3d4ff.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e3361805abb4f28ab567164dd1a49aa2.js": "/precache-manifest.e3361805abb4f28ab567164dd1a49aa2.js",
+    "serviceWorker.js": "/serviceWorker.js",
+    "static/media/12-bitcoin-cash-square-crop.svg": "/static/media/12-bitcoin-cash-square-crop.cb0541dc.svg",
+    "static/media/App.css": "/static/media/fa-solid-900.8e1ed89b.woff2",
+    "static/media/antd.less": "/static/media/antd.078ba7a3.less",
+    "static/media/bitcoinabclogo.png": "/static/media/bitcoinabclogo.f8b4bb08.png",
+    "static/media/edit.ebc0cdbe.svg": "/static/media/edit.ebc0cdbe.svg",
+    "static/media/trashcan.00f515b9.svg": "/static/media/trashcan.00f515b9.svg"
+  }
+}

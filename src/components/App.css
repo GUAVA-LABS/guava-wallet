@@ -1,0 +1,148 @@
+@import '~antd/dist/antd.less';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css?family=Khula&display=swap&.css');
+
+/* Hide up and down arros on input type="number" */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide up and down arros on input type="number" */
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Hide scroll bars on antd modals*/
+.ant-modal-wrap.ant-modal-centered::-webkit-scrollbar {
+    display: none;
+}
+
+/* ITEMS BELOW TO BE MOVED TO STYLED COMPONENTS*/
+
+/* EnhancedInputs.js */
+.ant-input-group-addon {
+    background-color: #f4f4f4 !important;
+    border: 1px solid rgb(234, 237, 243);
+    color: #3e3f42 !important;
+}
+
+/* useWallet.js, useBCH.js */
+@media (max-width: 768px) {
+    .ant-notification {
+        width: 100%;
+        top: 20px !important;
+        max-width: unset;
+        margin-right: 0;
+    }
+}
+
+/* OK and Cancel button colors on Modals*/
+.ant-card-actions > li > span:hover,
+.ant-btn:hover,
+.ant-btn:focus {
+    color: #f59332;
+    transition: color 0.3s;
+    background-color: white;
+}
+.ant-btn {
+    border-radius: 8px;
+    background-color: #fff;
+    color: rgb(62, 63, 66);
+    font-weight: bold;
+}
+
+/*Custom Input Fields */
+input.ant-input,
+.ant-select-selection {
+    background-color: #fff !important;
+    box-shadow: none !important;
+    border-radius: 4px;
+    font-weight: bold;
+    color: rgb(62, 63, 66);
+    opacity: 1;
+    height: 50px;
+}
+
+.ant-select-selection:hover {
+    border: 1px solid #eaedf3;
+}
+
+.ant-select-selection-selected-value {
+    color: rgb(62, 63, 66);
+}
+
+.ant-select-dropdown-menu-item {
+    color: #444;
+    background-color: #fff;
+}
+
+.ant-select-dropdown-menu-item-active,
+.ant-select-dropdown-menu-item:hover {
+    color: #fff;
+    background-color: #ff8d00 !important;
+}
+.selectedCurrencyOption:hover {
+    color: #fff !important;
+    background-color: #ff8d00 !important;
+}
+.ant-input-affix-wrapper {
+    background-color: #fff;
+    border: 1px solid #eaedf3 !important;
+}
+input.ant-input,
+.ant-select-selection {
+    border: none;
+}
+.ant-input::placeholder {
+    text-align: left;
+}
+.ant-select-selector {
+    height: 60px !important;
+    border: 1px solid #eaedf3 !important;
+}
+
+/*Revs with updated Antd*/
+.ant-select-single .ant-select-selector .ant-select-selection-item,
+.ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+    line-height: 60px;
+    text-align: left;
+    color: #3e3f42;
+    font-weight: bold;
+}
+
+/* Handle new antd error formatting */
+.ant-form-item-has-error
+    > div
+    > div.ant-form-item-control-input
+    > div
+    > span
+    > span
+    > span.ant-input-affix-wrapper {
+    background-color: #fff;
+    border-color: #f04134 !important;
+}
+
+.ant-form-item-has-error .ant-input,
+.ant-form-item-has-error .ant-input-affix-wrapper,
+.ant-form-item-has-error .ant-input:hover,
+.ant-form-item-has-error .ant-input-affix-wrapper:hover {
+    background-color: #fff;
+    border-color: #f04134 !important;
+}
+
+.ant-form-item-has-error
+    .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input)
+    .ant-select-selector {
+    background-color: #fff;
+    border-color: #f04134 !important;
+}
