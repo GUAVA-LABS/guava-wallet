@@ -11,14 +11,6 @@ export default function useAvalanche() {
     let avax = new Avalanche("localhost", 9650, "http", myNetworkID, myBlockchainID);
     let xchain = avax.XChain(); //returns a reference to the X-Chain used by AvalancheJS
 
-    const SEND_BCH_ERRORS = {
-        INSUFFICIENT_FUNDS: 0,
-        NETWORK_ERROR: 1,
-        INSUFFICIENT_PRIORITY: 66, // ~insufficient fee
-        DOUBLE_SPENDING: 18,
-        MAX_UNCONFIRMED_TXS: 64,
-    };
-
     const getRestUrl = (apiIndex = 0) => {
         const apiString =
             process.env.REACT_APP_NETWORK === `mainnet`
