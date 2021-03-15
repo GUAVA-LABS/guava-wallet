@@ -4,8 +4,8 @@ import cashaddr from 'cashaddrjs';
 import BigNumber from 'bignumber.js';
 
 export const currency = {
-    name: 'Bitcoin ABC',
-    ticker: 'BCHA',
+    name: 'Avalanche',
+    ticker: 'AVAX',
     logo: mainLogo,
     legacyPrefix: 'bitcoincash',
     prefixes: ['bitcoincash', 'ecash'],
@@ -15,8 +15,8 @@ export const currency = {
     cashDecimals: 8,
     blockExplorerUrl: 'https://explorer.bitcoinabc.org',
     blockExplorerUrlTestnet: 'https://texplorer.bitcoinabc.org',
-    tokenName: 'Bitcoin ABC SLP',
-    tokenTicker: 'SLPA',
+    tokenName: 'Tokens',
+    tokenTicker: 'P-Chain',
     tokenLogo: tokenLogo,
     tokenPrefixes: ['simpleledger', 'etoken'],
     tokenIconsUrl: '', //https://tokens.bitcoin.com/32 for BCH SLP

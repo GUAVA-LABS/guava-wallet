@@ -84,7 +84,7 @@ export const WalletBody = styled.div`
     justify-content: center;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(270deg, #040c3c, #212c6e);
+    background: #E5564E;
 `;
 
 export const WalletCtn = styled.div`
@@ -178,7 +178,7 @@ const App = () => {
                 <WalletBody>
                     <WalletCtn>
                         <HeaderCtn>
-                            <CashTabLogo src={CashTab} alt="cashtab" />
+                            <h1>Guava</h1>
                             {hasTab && (
                                 <EasterEgg src={TabCash} alt="tabcash" />
                             )}
@@ -187,7 +187,7 @@ const App = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <AbcLogo src={ABC} alt="abc" />
+                            <h1>PSF</h1>
                             </a>
                         </HeaderCtn>
                         <WalletLabel name={wallet.name}></WalletLabel>
