@@ -1,8 +1,7 @@
 {
-    "name": "cashtab",
-    "version": "0.1.8",
+    "name": "guava-wallet",
+    "version": "0.1.0",
     "private": true,
-    "homepage": "https://cashtabapp.com/",
     "dependencies": {
         "@ant-design/icons": "^4.3.0",
         "@fortawesome/fontawesome-free": "^5.15.1",
