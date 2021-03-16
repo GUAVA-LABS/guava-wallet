@@ -2,7 +2,6 @@ import React from 'react';
 import TokenListItem from './TokenListItem';
 import { Link } from 'react-router-dom';
 import { currency } from '@components/Common/Ticker.js';
-import { formatBalance } from '@utils/cashMethods';
 
 const TokenList = ({ tokens }) => {
     return (
@@ -13,7 +12,7 @@ const TokenList = ({ tokens }) => {
                     <TokenListItem
                         ticker={token.info.tokenTicker}
                         tokenId={token.tokenId}
-                        balance={formatBalance(token.balance)}
+                        balance={token.balance}
                     />
                 </Link>
             ))}

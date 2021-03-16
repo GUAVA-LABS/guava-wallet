@@ -31,11 +31,13 @@ export const WelcomeLink = styled.a`
 
 export const OnBoarding = ({ history }) => {
     const ContextValue = React.useContext(WalletContext);
-    const { createWallet, validateMnemonic } = ContextValue;
+    const { createWallet } = ContextValue;
     const [formData, setFormData] = useState({
         dirty: true,
         mnemonic: '',
     });
+
+    const validateMnemonic = () => true; //TODO: Validate private key from Ava
 
     const [seedInput, openSeedInput] = useState(false);
     const [isValidMnemonic, setIsValidMnemonic] = useState(false);
@@ -83,9 +85,9 @@ export const OnBoarding = ({ history }) => {
 
     return (
         <>
-            <h2>Welcome to Cashtab!</h2>
+            <h2>Welcome to Guava!</h2>
             <WelcomeText>
-                Cashtab is an{' '}
+                Guava is an{' '}
                 <WelcomeLink
                     href="https://github.com/bitcoin-abc/bitcoin-abc"
                     target="_blank"
@@ -96,23 +98,15 @@ export const OnBoarding = ({ history }) => {
                 non-custodial web wallet for {currency.name}.
                 <br />
                 <br />
-                Want to learn more?{' '}
-                <WelcomeLink
-                    href="https://docs.cashtabapp.com/docs/"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    Check out the Cashtab documentation.
-                </WelcomeLink>
             </WelcomeText>
 
             <PrimaryButton onClick={() => showBackupConfirmModal()}>
                 <PlusSquareOutlined /> New Wallet
             </PrimaryButton>
 
-            <SecondaryButton onClick={() => openSeedInput(!seedInput)}>
+            {/* <SecondaryButton onClick={() => openSeedInput(!seedInput)}>
                 <ImportOutlined /> Import Wallet
-            </SecondaryButton>
+            </SecondaryButton> */}
             {seedInput && (
                 <StyledOnboarding>
                     <Form style={{ width: 'auto' }}>
@@ -124,13 +118,13 @@ export const OnBoarding = ({ history }) => {
                             }
                             help={
                                 !formData.mnemonic || !isValidMnemonic
-                                    ? 'Valid mnemonic seed phrase required'
+                                    ? 'Valid private key required'
                                     : ''
                             }
                         >
                             <Input
                                 prefix={<LockOutlined />}
-                                placeholder="mnemonic (seed phrase)"
+                                placeholder="private key"
                                 name="mnemonic"
                                 autoComplete="off"
                                 onChange={e => handleChange(e)}

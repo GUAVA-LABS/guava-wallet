@@ -6,7 +6,6 @@ import {
 } from '@components/Common/CustomIcons';
 import styled from 'styled-components';
 import { ScanQRCode } from './ScanQRCode';
-import useBCH from '@hooks/useBCH';
 import { currency } from '@components/Common/Ticker.js';
 
 export const InputAddonText = styled.span`
@@ -166,12 +165,11 @@ export const FormItemWithQRCodeAddon = ({
 };
 
 export const AddressValidators = () => {
-    const { BCH } = useBCH();
 
     return {
         safelyDetectAddressFormat: value => {
             try {
-                return BCH.Address.detectAddressFormat(value);
+                return true; // TODO: Add Ava Validators
             } catch (error) {
                 return null;
             }

@@ -84,7 +84,7 @@ export const WalletBody = styled.div`
     justify-content: center;
     width: 100%;
     min-height: 100vh;
-    background: #E5564E;
+    background: #EE796F;
 `;
 
 export const WalletCtn = styled.div`
@@ -195,17 +195,7 @@ const App = () => {
                             <Route path="/wallet">
                                 <Wallet />
                             </Route>
-                            <Route path="/send">
-                                <Send />
-                            </Route>
-                            <Route
-                                path="/send-token/:tokenId"
-                                render={props => (
-                                    <SendToken
-                                        tokenId={props.match.params.tokenId}
-                                    />
-                                )}
-                            />
+                          
                             <Route path="/configure">
                                 <Configure />
                             </Route>
