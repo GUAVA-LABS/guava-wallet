@@ -30,7 +30,7 @@ export const WelcomeLink = styled.a`
 export const OnBoarding = ({ history }) => {
     const ContextValue = React.useContext(WalletContext);
     const { wallet, setWallet, createWallet, getWalletFromLocalStorage } = ContextValue;
-    const { validateMnemonic } = wallet;
+    const validateMnemonic = () => true; // TODO: Mnemonic validation on AVA
     const [formData, setFormData] = useState({
         dirty: true,
         mnemonic: '',

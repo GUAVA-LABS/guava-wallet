@@ -169,7 +169,7 @@ const App = () => {
                         <HeaderCtn>
                             <h1>guAVA</h1>
                         </HeaderCtn>
-                        <WalletLabel name={wallet.name}></WalletLabel>
+                       
                         <Switch>
                             <Route path="/wallet">
                                 <Wallet />
