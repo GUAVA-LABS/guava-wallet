@@ -44,7 +44,7 @@ const Copied = styled.div`
 `;
 
 const CustomInput = styled.div`
-    font-size: 15px;
+    font-size: 12px;
     color: #8e8e8e;
     text-align: center;
     cursor: pointer;
@@ -56,7 +56,7 @@ const CustomInput = styled.div`
     span {
         font-weight: bold;
         color: #444;
-        font-size: 16px;
+        font-size: 12px;
     }
     input {
         border: none;
@@ -169,9 +169,7 @@ export const QRCode = ({
                     includeMargin
                     imageSettings={{
                         src:
-                            address && address.includes('bitcoin')
-                                ? currency.logo
-                                : currency.tokenLogo,
+                            currency.tokenLogo,
                         x: null,
                         y: null,
                         height: 32,
@@ -189,23 +187,7 @@ export const QRCode = ({
                             spellCheck="false"
                             type="text"
                         />
-                        <span>
-                            {address.slice(
-                                address.includes('bitcoin') ? 12 : 13,
-                                address.includes('bitcoin')
-                                    ? 12 + trimAmount
-                                    : 13 + trimAmount,
-                            )}
-                        </span>
-                        {address.slice(
-                            address.includes('bitcoin')
-                                ? 12 + trimAmount
-                                : 13 + trimAmount,
-                            address.includes('bitcoin')
-                                ? address_trim
-                                : address_trim,
-                        )}
-                        <span>{address.slice(-trimAmount)}</span>
+                        <span>{address}</span>
                     </CustomInput>
                 )}
             </div>

@@ -1,1 +1,0 @@
-{"ast":null,"code":"import \"./polyfill\";","map":{"version":3,"sources":["../src/index.ts"],"names":[],"mappings":"AAAA","sourcesContent":["import \"./polyfill\";\n"],"sourceRoot":""},"metadata":{},"sourceType":"module"}

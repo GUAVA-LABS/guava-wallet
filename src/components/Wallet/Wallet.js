@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LinkOutlined, LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from '@ant-design/icons';
 import { WalletContext } from '@utils/context';
 import { OnBoarding } from '@components/OnBoarding/OnBoarding';
 import { QRCode } from '@components/Common/QRCode';
-import { currency } from '@components/Common/Ticker.js';
 import { Link } from 'react-router-dom';
-import TokenList from './TokenList';
-import { CashLoader } from '@components/Common/CustomIcons';
 
 export const LoadingCtn = styled.div`
     width: 100%;
@@ -145,125 +142,35 @@ export const ExternalLink = styled.a`
 
 const WalletInfo = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, fiatPrice, balances, txHistory, apiError } = ContextValue;
-    const [address, setAddress] = React.useState('cashAddress');
+    const { wallet } = ContextValue;
+    const { address, balances } = wallet;
 
-    const hasHistory =
-        (txHistory &&
-            txHistory[0] &&
-            txHistory[0].transactions &&
-            txHistory[0].transactions.length > 0) ||
-        (txHistory &&
-            txHistory[1] &&
-            txHistory[1].transactions &&
-            txHistory[1].transactions.length > 0);
-
-    const handleChangeAddress = () => {
-        setAddress(address === 'cashAddress' ? 'slpAddress' : 'cashAddress');
-    };
-
+    if (balances) {
+        balances.totalBalance = balances.filter(x => x.asset === 'AVAX').pop();
+        balances.totalBalance = balances.totalBalance ? balances.totalBalance.balance : 0;
+    }
     return (
-        <>
-            {!balances.totalBalance && !apiError && !hasHistory ? (
-                <>
-                    <ZeroBalanceHeader>
-                        <span role="img" aria-label="party emoji">
-                            🎉
-                        </span>
-                        Congratulations on your new wallet!{' '}
-                        <span role="img" aria-label="party emoji">
-                            🎉
-                        </span>
-                        <br /> Start using the wallet immediately to receive{' '}
-                        {currency.ticker} payments, or load it up with{' '}
-                        {currency.ticker} to send to others
-                    </ZeroBalanceHeader>
-                    <BalanceHeader>0 {currency.ticker}</BalanceHeader>
-                </>
-            ) : (
-                <>
-                    <BalanceHeader>
-                        {balances.totalBalance} {currency.ticker}
-                    </BalanceHeader>
-                    {fiatPrice !== null && !isNaN(balances.totalBalance) && (
-                        <BalanceHeaderFiat>
-                            ${(balances.totalBalance * fiatPrice).toFixed(2)}{' '}
-                            USD
-                        </BalanceHeaderFiat>
-                    )}
-                </>
-            )}
-            {apiError && (
-                <>
-                    <p style={{ color: 'red' }}>
-                        <b>An error occured on our end.</b>
-                        <br></br> Re-establishing connection...
-                    </p>
-                    <CashLoader />
-                </>
-            )}
-
-            {wallet &&
-                ((wallet.Path245 && wallet.Path145) || wallet.Path1899) && (
-                    <>
-                        {wallet.Path1899 ? (
+      
+           <>
+            <h1>{balances ? balances.totalBalance : 0} AVAX</h1>
+            {address && <>
+                      
                             <QRCode
                                 id="borderedQRCode"
                                 address={
-                                    address === 'slpAddress'
-                                        ? wallet.Path1899.slpAddress
-                                        : wallet.Path1899.cashAddress
+                                    address
                                 }
                             />
-                        ) : (
-                            <QRCode
-                                id="borderedQRCode"
-                                address={
-                                    address === 'slpAddress'
-                                        ? wallet.Path245.slpAddress
-                                        : wallet.Path145.cashAddress
-                                }
-                            />
-                        )}
+                        
                     </>
-                )}
-
-            <SwitchBtnCtn>
-                <SwitchBtn
-                    onClick={() => handleChangeAddress()}
-                    className={
-                        address !== 'cashAddress' ? 'nonactiveBtn' : null
-                    }
-                >
-                    {currency.ticker}
-                </SwitchBtn>
-                <SwitchBtn
-                    onClick={() => handleChangeAddress()}
-                    className={
-                        address === 'cashAddress' ? 'nonactiveBtn' : 'slpActive'
-                    }
-                >
-                    {currency.tokenTicker}
-                </SwitchBtn>
-            </SwitchBtnCtn>
-            {balances.totalBalance ? (
-                <>
-                    <ExternalLink
-                        href={`${currency.blockExplorerUrl}/address/${wallet.Path1899.cashAddress}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <LinkOutlined /> View Transactions
-                    </ExternalLink>
-                </>
-            ) : null}
+                }
         </>
     );
 };
 
 const Wallet = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, tokens, loading } = ContextValue;
+    const { wallet, loading } = ContextValue;
 
     return (
         <>
@@ -272,11 +179,9 @@ const Wallet = () => {
                     <LoadingOutlined />
                 </LoadingCtn>
             )}
-            {!loading && wallet.Path245 && <WalletInfo />}
-            {!loading && wallet.Path245 && tokens && tokens.length > 0 && (
-                <TokenList tokens={tokens} />
-            )}
-            {!loading && !wallet.Path245 ? <OnBoarding /> : null}
+            {!loading && wallet && <WalletInfo />}
+         
+            {!loading && !wallet ? <OnBoarding /> : null}
         </>
     );
 };

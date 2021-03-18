@@ -5,12 +5,10 @@ import { Input, Form, Modal } from 'antd';
 import {
     ExclamationCircleOutlined,
     PlusSquareOutlined,
-    ImportOutlined,
     LockOutlined,
 } from '@ant-design/icons';
 import StyledOnboarding from '@components/Common/StyledOnBoarding';
 import PrimaryButton, {
-    SecondaryButton,
     SmartButton,
 } from '@components/Common/PrimaryButton';
 import { currency } from '@components/Common/Ticker.js';
@@ -31,13 +29,12 @@ export const WelcomeLink = styled.a`
 
 export const OnBoarding = ({ history }) => {
     const ContextValue = React.useContext(WalletContext);
-    const { createWallet } = ContextValue;
+    const { wallet, setWallet, createWallet, getWalletFromLocalStorage } = ContextValue;
+    const { validateMnemonic } = wallet;
     const [formData, setFormData] = useState({
         dirty: true,
         mnemonic: '',
     });
-
-    const validateMnemonic = () => true; //TODO: Validate private key from Ava
 
     const [seedInput, openSeedInput] = useState(false);
     const [isValidMnemonic, setIsValidMnemonic] = useState(false);
@@ -79,6 +76,7 @@ export const OnBoarding = ({ history }) => {
                 // Track number of created wallets from onboarding
                 Event('Onboarding.js', 'Create Wallet', 'New');
                 createWallet();
+                setWallet(getWalletFromLocalStorage());
             },
         });
     }
@@ -103,8 +101,8 @@ export const OnBoarding = ({ history }) => {
             <PrimaryButton onClick={() => showBackupConfirmModal()}>
                 <PlusSquareOutlined /> New Wallet
             </PrimaryButton>
-
-            {/* <SecondaryButton onClick={() => openSeedInput(!seedInput)}>
+{/* 
+            <SecondaryButton onClick={() => openSeedInput(!seedInput)}>
                 <ImportOutlined /> Import Wallet
             </SecondaryButton> */}
             {seedInput && (
@@ -118,13 +116,13 @@ export const OnBoarding = ({ history }) => {
                             }
                             help={
                                 !formData.mnemonic || !isValidMnemonic
-                                    ? 'Valid private key required'
+                                    ? 'Valid mnemonic seed phrase required'
                                     : ''
                             }
                         >
                             <Input
                                 prefix={<LockOutlined />}
-                                placeholder="private key"
+                                placeholder="mnemonic (seed phrase)"
                                 name="mnemonic"
                                 autoComplete="off"
                                 onChange={e => handleChange(e)}
@@ -133,7 +131,7 @@ export const OnBoarding = ({ history }) => {
                         </Form.Item>
 
                         <SmartButton
-                            disabled={!isValidMnemonic}
+                            disabled={true}
                             onClick={() => submit()}
                         >
                             Import

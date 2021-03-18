@@ -6,19 +6,13 @@ import { theme } from '@assets/styles/theme';
 import {
     FolderOpenFilled,
     CaretRightOutlined,
-    SettingFilled,
 } from '@ant-design/icons';
 import Wallet from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
-import SendToken from '@components/Send/SendToken';
 import Configure from '@components/Configure/Configure';
 import NotFound from '@components/NotFound';
-import CashTab from '@assets/cashtab.png';
-import TabCash from '@assets/tabcash.png';
-import ABC from '@assets/bitcoinabclogo.png';
 import './App.css';
 import { WalletContext } from '@utils/context';
-import { checkForTokenById } from '@utils/tokenMethods.js';
 import WalletLabel from '@components/Common/WalletLabel.js';
 import {
     Route,
@@ -161,12 +155,7 @@ export const AbcLogo = styled.img`
 
 const App = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, tokens } = ContextValue;
-
-    const hasTab = checkForTokenById(
-        tokens,
-        '50d8292c6255cda7afc6c8566fed3cf42a2794e9619740fe8f4c95431271410e',
-    );
+    const { wallet } = ContextValue;
     const location = useLocation();
     const history = useHistory();
     const selectedKey =
@@ -178,22 +167,16 @@ const App = () => {
                 <WalletBody>
                     <WalletCtn>
                         <HeaderCtn>
-                            <h1>Guava</h1>
-                            {hasTab && (
-                                <EasterEgg src={TabCash} alt="tabcash" />
-                            )}
-                            <a
-                                href="https://www.bitcoinabc.org/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                            <h1>PSF</h1>
-                            </a>
+                            <h1>guAVA</h1>
                         </HeaderCtn>
                         <WalletLabel name={wallet.name}></WalletLabel>
                         <Switch>
                             <Route path="/wallet">
                                 <Wallet />
+                            </Route>
+                          
+                            <Route path="/send">
+                                <Send />
                             </Route>
                           
                             <Route path="/configure">
@@ -220,13 +203,13 @@ const App = () => {
                                 <CaretRightOutlined />
                                 <fbt desc="Send menu button">Send</fbt>
                             </NavButton>
-                            <NavButton
+                            {/* <NavButton
                                 active={selectedKey === 'configure'}
                                 onClick={() => history.push('/configure')}
                             >
                                 <SettingFilled />
                                 <fbt desc="Settings menu button">Settings</fbt>
-                            </NavButton>
+                            </NavButton> */}
                         </Footer>
                     ) : null}
                 </WalletBody>

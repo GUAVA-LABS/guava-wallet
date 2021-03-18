@@ -12,6 +12,11 @@ const host = process.env.HOST || '0.0.0.0';
 
 module.exports = function (proxy, allowedHost) {
     return {
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+          },
         // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
         // websites from potentially accessing local content through DNS rebinding:
         // https://github.com/webpack/webpack-dev-server/issues/887
@@ -29,7 +34,7 @@ module.exports = function (proxy, allowedHost) {
         // specified the `proxy` setting. Finally, we let you override it if you
         // really know what you're doing with a special environment variable.
         disableHostCheck:
-            !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
+           true,
         // Enable gzip compression of generated files.
         compress: true,
         // Silence WebpackDevServer's own logs since they're generally not useful.
@@ -81,7 +86,12 @@ module.exports = function (proxy, allowedHost) {
             disableDotRule: true,
         },
         public: allowedHost,
-        proxy,
+        proxy: {
+            '/node:80': {
+                target: 'http://guavanode.ngrok.io',
+                pathRewrite: { '^/node:80': '' },
+              },
+          },
         before(app, server) {
             if (fs.existsSync(paths.proxySetup)) {
                 // This registers user provided middleware for proxy reasons

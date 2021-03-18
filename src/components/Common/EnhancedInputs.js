@@ -165,15 +165,9 @@ export const FormItemWithQRCodeAddon = ({
 };
 
 export const AddressValidators = () => {
-
     return {
-        safelyDetectAddressFormat: value => {
-            try {
-                return true; // TODO: Add Ava Validators
-            } catch (error) {
-                return null;
-            }
-        },
+        //TODO: Validate AVAX address format
+        safelyDetectAddressFormat: value => true, 
         isSLPAddress: value =>
             AddressValidators.safelyDetectAddressFormat(value) === 'slpaddr',
         isBCHAddress: value =>

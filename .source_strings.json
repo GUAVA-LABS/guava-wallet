@@ -5,9 +5,9 @@
     "t+5SwD1ho9xhYy5PlfAPGg==": "Wallet"
    },
    "filepath": "src/components/App.js",
-   "line_beg": 223,
+   "line_beg": 196,
    "col_beg": 32,
-   "line_end": 223,
+   "line_end": 196,
    "col_end": 75,
    "desc": "Wallet menu button",
    "project": "",
@@ -19,28 +19,14 @@
     "fXmXHZxGc0NA87a+A1ppng==": "Send"
    },
    "filepath": "src/components/App.js",
-   "line_beg": 231,
+   "line_beg": 204,
    "col_beg": 32,
-   "line_end": 231,
+   "line_end": 204,
    "col_end": 71,
    "desc": "Send menu button",
    "project": "",
    "type": "text",
    "jsfbt": "Send"
-  },
-  {
-   "hashToText": {
-    "M8PvPwXAFjS9vGdEg8xnWw==": "Settings"
-   },
-   "filepath": "src/components/App.js",
-   "line_beg": 238,
-   "col_beg": 32,
-   "line_end": 238,
-   "col_end": 79,
-   "desc": "Settings menu button",
-   "project": "",
-   "type": "text",
-   "jsfbt": "Settings"
   }
  ],
  "childParentMappings": {}

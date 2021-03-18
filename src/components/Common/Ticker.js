@@ -1,11 +1,11 @@
 import mainLogo from '@assets/12-bitcoin-cash-square-crop.svg';
-import tokenLogo from '@assets/simple-ledger-protocol-logo.png';
+import tokenLogo from '@assets/guava.png';
 import cashaddr from 'cashaddrjs';
 import BigNumber from 'bignumber.js';
 
 export const currency = {
     name: 'Avalanche',
-    ticker: 'AVAX',
+    ticker: 'nAVAX',
     logo: mainLogo,
     legacyPrefix: 'bitcoincash',
     prefixes: ['bitcoincash', 'ecash'],
