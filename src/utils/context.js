@@ -1,22 +1,30 @@
 import React from 'react';
 import {
     Avalanche,
-    BN
+    BN,
+    BinTools,
   } from "avalanche";
 import useAsyncTimeout from '@hooks/useAsyncTimeout';
+import HDKey from 'hdkey';
+const bip39 = require('bip39');
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 const useMountEffect = (fun) => React.useEffect(fun, [])
 
 //TODO: Move these values to REACT_ENV variables
+const testnet = true;
 const environmentVariables = {
     NETWORK_ID: 12345,
     BLOCKCHAIN_ID: "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed",
-    AVA_NODE_HTTPS_URL: "guavanode.ngrok.io"
+    AVA_NODE_HTTPS_URL: testnet? "guavanode.ngrok.io" : "ec2-54-144-95-11.compute-1.amazonaws.com"
 }
 
 const useWallet = () => {
     const INTERVAL_IN_MILISECONDS = 10000;
+    const AVA_TOKEN_INDEX = '9000';
+    const AVA_ACCOUNT_PATH = `m/44'/${AVA_TOKEN_INDEX}'/0'`;
+    const bintools = BinTools.getInstance();
+
     const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_HTTPS_URL } = environmentVariables;
     let avalancheInstance = new Avalanche(AVA_NODE_HTTPS_URL, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
@@ -24,13 +32,20 @@ const useWallet = () => {
     const [wallet, setWallet] = React.useState(false);
 
     const createWallet = () => {
-        const keychainInstance = xchain.keyChain();
-        const addressBuffer = keychainInstance.makeKey();
+        const mnemonic = bip39.generateMnemonic(256);
+        const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
+        const keychainInstance = importedKeychainInstance(privateKey);
         const addressStrings = keychainInstance.getAddressStrings();
-        const privateKeyString = addressBuffer.getPrivateKeyString();
-        window.localStorage.setItem("guava-wallet", JSON.stringify({ pk: privateKeyString, address: addressStrings[0] })) 
+        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic, address: addressStrings[0] })) 
     };
 
+    const derivePrivateKeyFromMnemonic = mnemonic => {
+        const seed = bip39.mnemonicToSeedSync(mnemonic);
+        const masterHdKey = HDKey.fromMasterSeed(seed);
+        const accountHdKey = masterHdKey.derive(AVA_ACCOUNT_PATH);
+        const privateKey = `PrivateKey-` + bintools.cb58Encode(Buffer.from(accountHdKey.privateKey));
+        return privateKey;
+    }
     const importedKeychainInstance = privateKeyString => {
         const keychainInstance = xchain.keyChain();
         keychainInstance.importKey(privateKeyString);
@@ -41,18 +56,17 @@ const useWallet = () => {
         const wallet = window.localStorage.getItem("guava-wallet");
         if (wallet) {
             const parsedWalletFromLocalStorage = JSON.parse(wallet);
-            const keychainInstance = importedKeychainInstance(parsedWalletFromLocalStorage.pk)
+            const privateKey = derivePrivateKeyFromMnemonic(parsedWalletFromLocalStorage.mnemonic);
+            const keychainInstance = importedKeychainInstance(privateKey);
             const addressStrings = keychainInstance.getAddressStrings();
             const balances = await xchain.getAllBalances(addressStrings[0]);
-            return {  xchain, keychainInstance, pk: parsedWalletFromLocalStorage.pk, address: addressStrings[0], balances };
+            return {  xchain, keychainInstance, mnemonic: parsedWalletFromLocalStorage.mnemonic, address: addressStrings[0], balances };
         }
     }
 
     const sendAssetXChain = async (amount, destinationAddress) => {
             const sendAmount = new BN(amount);
-            const { pk: privateKey } = await getWalletFromLocalStorage();
-            const keychainInstance = xchain.keyChain();
-            keychainInstance.importKey(privateKey);
+            const { keychainInstance } = getWalletFromLocalStorage();
             const addressesFromSender = keychainInstance.getAddressStrings();
             const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
             const avaxAssetIDBuffer= await xchain.getAVAXAssetID();
