@@ -16,7 +16,7 @@ const testnet = false;
 const environmentVariables = {
     NETWORK_ID: 1,
     BLOCKCHAIN_ID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
-    AVA_NODE_IP: testnet? "guavanode.ngrok.io" : "ec2-54-144-95-11.compute-1.amazonaws.com"
+    AVA_NODE_IP: testnet? "guavanode.ngrok.io" : "4b7d3d3d19d3.ngrok.io"
 }
 
 const useWallet = () => {
@@ -26,7 +26,7 @@ const useWallet = () => {
     const bintools = BinTools.getInstance();
 
     const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
-    let avalancheInstance = new Avalanche(AVA_NODE_IP, 9650, "http", NETWORK_ID, BLOCKCHAIN_ID);
+    let avalancheInstance = new Avalanche(AVA_NODE_IP, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
 
     const [wallet, setWallet] = React.useState(false);
