@@ -12,11 +12,11 @@ const bip39 = require('bip39');
 const useMountEffect = (fun) => React.useEffect(fun, [])
 
 //TODO: Move these values to REACT_ENV variables
-const testnet = true;
+const testnet = false;
 const environmentVariables = {
-    NETWORK_ID: 12345,
-    BLOCKCHAIN_ID: "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed",
-    AVA_NODE_HTTPS_URL: testnet? "guavanode.ngrok.io" : "ec2-54-144-95-11.compute-1.amazonaws.com"
+    NETWORK_ID: 1,
+    BLOCKCHAIN_ID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
+    AVA_NODE_IP: testnet? "guavanode.ngrok.io" : "ec2-54-144-95-11.compute-1.amazonaws.com"
 }
 
 const useWallet = () => {
@@ -25,14 +25,14 @@ const useWallet = () => {
     const AVA_ACCOUNT_PATH = `m/44'/${AVA_TOKEN_INDEX}'/0'`;
     const bintools = BinTools.getInstance();
 
-    const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_HTTPS_URL } = environmentVariables;
-    let avalancheInstance = new Avalanche(AVA_NODE_HTTPS_URL, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
+    const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
+    let avalancheInstance = new Avalanche(AVA_NODE_IP, 9650, "http", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
 
     const [wallet, setWallet] = React.useState(false);
 
-    const createWallet = () => {
-        const mnemonic = bip39.generateMnemonic(256);
+    const createWallet = importMnemonic => {
+        const mnemonic = importMnemonic || bip39.generateMnemonic(256);
         const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
         const keychainInstance = importedKeychainInstance(privateKey);
         const addressStrings = keychainInstance.getAddressStrings();

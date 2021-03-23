@@ -6,9 +6,11 @@ import {
     ExclamationCircleOutlined,
     PlusSquareOutlined,
     LockOutlined,
+    ImportOutlined
 } from '@ant-design/icons';
 import StyledOnboarding from '@components/Common/StyledOnBoarding';
 import PrimaryButton, {
+    SecondaryButton,
     SmartButton,
 } from '@components/Common/PrimaryButton';
 import { currency } from '@components/Common/Ticker.js';
@@ -53,6 +55,7 @@ export const OnBoarding = ({ history }) => {
         // Track number of created wallets from onboarding
         Event('Onboarding.js', 'Create Wallet', 'Imported');
         createWallet(formData.mnemonic);
+        setWallet(getWalletFromLocalStorage());
     }
 
     const handleChange = e => {
@@ -101,10 +104,10 @@ export const OnBoarding = ({ history }) => {
             <PrimaryButton onClick={() => showBackupConfirmModal()}>
                 <PlusSquareOutlined /> New Wallet
             </PrimaryButton>
-{/* 
+
             <SecondaryButton onClick={() => openSeedInput(!seedInput)}>
                 <ImportOutlined /> Import Wallet
-            </SecondaryButton> */}
+            </SecondaryButton>
             {seedInput && (
                 <StyledOnboarding>
                     <Form style={{ width: 'auto' }}>
@@ -131,7 +134,6 @@ export const OnBoarding = ({ history }) => {
                         </Form.Item>
 
                         <SmartButton
-                            disabled={true}
                             onClick={() => submit()}
                         >
                             Import

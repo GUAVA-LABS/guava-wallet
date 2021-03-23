@@ -6,6 +6,7 @@ import { theme } from '@assets/styles/theme';
 import {
     FolderOpenFilled,
     CaretRightOutlined,
+    SettingFilled
 } from '@ant-design/icons';
 import Wallet from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
@@ -203,13 +204,13 @@ const App = () => {
                                 <CaretRightOutlined />
                                 <fbt desc="Send menu button">Send</fbt>
                             </NavButton>
-                            {/* <NavButton
+                            <NavButton
                                 active={selectedKey === 'configure'}
                                 onClick={() => history.push('/configure')}
                             >
                                 <SettingFilled />
                                 <fbt desc="Settings menu button">Settings</fbt>
-                            </NavButton> */}
+                            </NavButton>
                         </Footer>
                     ) : null}
                 </WalletBody>
