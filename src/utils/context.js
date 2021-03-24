@@ -16,7 +16,7 @@ const testnet = false;
 const environmentVariables = {
     NETWORK_ID: 1,
     BLOCKCHAIN_ID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
-    AVA_NODE_IP: testnet? "guavanode.ngrok.io" : "4b7d3d3d19d3.ngrok.io"
+    AVA_NODE_IP: "guavanode.ngrok.io"
 }
 
 const useWallet = () => {
