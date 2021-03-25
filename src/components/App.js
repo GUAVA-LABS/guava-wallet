@@ -197,13 +197,13 @@ const App = () => {
                                 <fbt desc="Wallet menu button">Wallet</fbt>
                             </NavButton>
 
-                            <NavButton
+                            {/* <NavButton
                                 active={selectedKey === 'send'}
                                 onClick={() => history.push('/send')}
                             >
                                 <CaretRightOutlined />
                                 <fbt desc="Send menu button">Send</fbt>
-                            </NavButton>
+                            </NavButton> */}
                             <NavButton
                                 active={selectedKey === 'configure'}
                                 onClick={() => history.push('/configure')}

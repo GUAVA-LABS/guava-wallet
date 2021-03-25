@@ -6,6 +6,7 @@ import {
   } from "avalanche";
 import useAsyncTimeout from '@hooks/useAsyncTimeout';
 import HDKey from 'hdkey';
+import { bnToBig } from './helpers';
 const bip39 = require('bip39');
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,7 +60,15 @@ const useWallet = () => {
             const privateKey = derivePrivateKeyFromMnemonic(parsedWalletFromLocalStorage.mnemonic);
             const keychainInstance = importedKeychainInstance(privateKey);
             const addressStrings = keychainInstance.getAddressStrings();
-            const balances = await xchain.getAllBalances(addressStrings[0]);
+            let balances = await xchain.getAllBalances(addressStrings[0]);
+            console.log('balances before', balances);
+            balances = balances.map(balance => {
+                balance.balance = bnToBig(balance.balance, 9).toString()
+                return balance;    
+            }
+                );
+            console.log('balances after', balances)
+
             return {  xchain, keychainInstance, mnemonic: parsedWalletFromLocalStorage.mnemonic, address: addressStrings[0], balances };
         }
     }
