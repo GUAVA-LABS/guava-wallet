@@ -26,7 +26,7 @@ export const WelcomeText = styled.p`
 
 export const WelcomeLink = styled.a`
     text-decoration: underline;
-    color: #ff8d00;
+    color: #f18e86;
 `;
 
 export const OnBoarding = ({ history }) => {
@@ -72,7 +72,7 @@ export const OnBoarding = ({ history }) => {
         confirm({
             title: "Don't forget to back up your wallet",
             icon: <ExclamationCircleOutlined />,
-            content: `Once your wallet is created you can back it up by writing down your 12-word seed. You can find your seed on the Settings page. If you are browsing in Incognito mode or if you clear your browser history, you will lose any funds that are not backed up!`,
+            content: `Once your wallet is created you can back it up by writing down your 24 word seed. You can find your seed on the Settings page. If you are browsing in Incognito mode or if you clear your browser history, you will lose any funds that are not backed up!`,
             okText: 'Okay, make me a wallet!',
             onOk() {
                 // Event("Category", "Action", "Label")

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const PrimaryButton = styled.button`
     border: none;
     color: #fff;
-    background-image: linear-gradient(270deg, #ff8d00 0%, #bb5a00 100%);
+    background-image: linear-gradient(270deg, #f18e86 0%, #EE796F 100%);
     transition: all 0.5s ease;
     background-size: 200% auto;
     font-size: 18px;

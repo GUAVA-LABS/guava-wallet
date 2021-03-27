@@ -26,7 +26,6 @@ const useWallet = () => {
     const INTERVAL_IN_MILISECONDS = 10000;
     const AVA_ACCOUNT_PATH = `m/44'/9000'/0'`;
     const bintools = BinTools.getInstance();
-    // 0202de84a31046ecb2cfef87827af5c13c63037c3e4c456811543634b1f744d902
     const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
     let avalancheInstance = new Avalanche(AVA_NODE_IP, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
@@ -45,10 +44,10 @@ const useWallet = () => {
         const seed = bip39.mnemonicToSeedSync(mnemonic);
         const masterHdKey = HDKey.fromMasterSeed(seed);
         const accountHdKey = masterHdKey.derive(AVA_ACCOUNT_PATH);
-      
        
         return accountHdKey.derive('m/0/0').privateKey;
     }
+
     const importedKeychainInstance = privateKeyBuffer => {
         const keychainInstance = xchain.keyChain();
        keychainInstance.importKey(privateKeyBuffer); 
@@ -64,12 +63,12 @@ const useWallet = () => {
        
             const addressStrings = keychainInstance.getAddressStrings();
             let balances = await xchain.getAllBalances(addressStrings[0]);
-            
+
             balances = balances.map(balance => {
                 balance.balance = bnToBig(balance.balance, 9).toString()
                 return balance;    
-            }
-                );
+            });
+
             return {  xchain, keychainInstance, mnemonic: parsedWalletFromLocalStorage.mnemonic, address: addressStrings[0], balances };
         }
     }

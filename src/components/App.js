@@ -22,6 +22,7 @@ import {
     useLocation,
     useHistory,
 } from 'react-router-dom';
+import GuavaHeaderImg from '@assets/guavaheader.png';
 
 import fbt from 'fbt';
 
@@ -66,9 +67,9 @@ export const NavButton = styled.button`
     ${({ active }) =>
         active &&
         `    
-        color: #ff8d00;
+        color: #EE796F;
         .anticon {
-            color: #ff8d00;
+            color: #EE796F;
         }
   `}
 `;
@@ -141,8 +142,9 @@ export const EasterEgg = styled.img`
     }
 `;
 
-export const CashTabLogo = styled.img`
-    width: 120px;
+export const GuavaHeader = styled.img`
+    width: 250px;
+    margin: 0 auto;
     @media (max-width: 768px) {
         width: 110px;
     }
@@ -168,7 +170,7 @@ const App = () => {
                 <WalletBody>
                     <WalletCtn>
                         <HeaderCtn>
-                            <h1>guAVA</h1>
+                            <GuavaHeader src={GuavaHeaderImg} alt="Guava Wallet" />
                         </HeaderCtn>
                        
                         <Switch>
