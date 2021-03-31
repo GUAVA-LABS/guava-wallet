@@ -143,16 +143,11 @@ export const ExternalLink = styled.a`
 const WalletInfo = () => {
     const ContextValue = React.useContext(WalletContext);
     const { wallet } = ContextValue;
-    const { address, balances } = wallet;
-
-    if (balances) {
-        balances.totalBalance = balances.filter(x => x.asset === 'AVAX').pop();
-        balances.totalBalance = balances.totalBalance ? balances.totalBalance.balance : 0;
-    }
+    const { address } = wallet;
     return (
       
            <>
-            <h1>{balances ? balances.totalBalance : 0} AVAX</h1>
+            <h1>{wallet.avaxBalance ? wallet.avaxBalance : 0} AVAX</h1>
             {address && <>
                       
                             <QRCode

@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 
 export const currency = {
     name: 'Avalanche',
-    ticker: 'nAVAX',
+    ticker: 'AVAX',
     logo: mainLogo,
     legacyPrefix: 'bitcoincash',
     prefixes: ['bitcoincash', 'ecash'],

@@ -6,7 +6,8 @@ import { theme } from '@assets/styles/theme';
 import {
     FolderOpenFilled,
     CaretRightOutlined,
-    SettingFilled
+    SettingFilled,
+    DollarCircleFilled
 } from '@ant-design/icons';
 import Wallet from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
@@ -181,7 +182,11 @@ const App = () => {
                             <Route path="/send">
                                 <Send />
                             </Route>
-                          
+                            <Route path="/market">
+                                <div>
+                                    <h1>Market</h1>
+                                </div>
+                            </Route>
                             <Route path="/configure">
                                 <Configure />
                             </Route>
@@ -199,13 +204,20 @@ const App = () => {
                                 <fbt desc="Wallet menu button">Wallet</fbt>
                             </NavButton>
 
-                            {/* <NavButton
+                            <NavButton
                                 active={selectedKey === 'send'}
                                 onClick={() => history.push('/send')}
                             >
                                 <CaretRightOutlined />
                                 <fbt desc="Send menu button">Send</fbt>
-                            </NavButton> */}
+                            </NavButton>
+                            <NavButton
+                                active={selectedKey === 'market'}
+                                onClick={() => history.push('/market')}
+                            >
+                                <DollarCircleFilled />
+                                <fbt desc="Market menu button">Market</fbt>
+                            </NavButton>
                             <NavButton
                                 active={selectedKey === 'configure'}
                                 onClick={() => history.push('/configure')}
@@ -213,6 +225,7 @@ const App = () => {
                                 <SettingFilled />
                                 <fbt desc="Settings menu button">Settings</fbt>
                             </NavButton>
+
                         </Footer>
                     ) : null}
                 </WalletBody>

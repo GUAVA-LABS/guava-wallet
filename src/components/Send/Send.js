@@ -73,11 +73,8 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
         apiError,
     } = React.useContext(WalletContext);
 
-    const { balances } = wallet;
-    if (balances) {
-        balances.totalBalance = balances.filter(x => x.asset === 'AVAX').pop();
-        balances.totalBalance = balances.totalBalance ? balances.totalBalance.balance : 0;
-    }
+    const { avaxBalance } = wallet;
+
     
     console.log('balances', wallet);
     // Get device window width
@@ -233,7 +230,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
             bchValue,
             selectedCurrency,
             fiatPrice,
-            balances.totalBalance,
+            avaxBalance,
         );
         setSendAvaxAmountError(error);
 
@@ -253,7 +250,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                     {currency.ticker} to {formData.address}?
                 </p>
             </Modal>
-            {!balances ? (
+            {!avaxBalance ? (
                 <ZeroBalanceHeader>
                     You currently have 0 {currency.ticker}
                     <br />
@@ -264,7 +261,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                     <BalanceHeader>
                         <p>Available balance</p>
                         <h3>
-                            {balances.totalBalance}{' '}
+                            {avaxBalance}{' '}
                             {currency.ticker}
                         </h3>
                     </BalanceHeader>
@@ -328,7 +325,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                             ></SendBchInput>
                           
                             <div style={{ paddingTop: '12px' }}>
-                                {!balances ||
+                                {!avaxBalance ||
                                 apiError ||
                                 sendAvaxAmountError ||
                                 sendAvaxAddressError ? (

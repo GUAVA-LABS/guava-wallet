@@ -8,6 +8,7 @@ import {
 import { getPreferredHRP } from 'avalanche/dist/utils'
 import useAsyncTimeout from '@hooks/useAsyncTimeout';
 import HDKey from 'hdkey';
+import Big from 'big.js';
 import { bnToBig } from './helpers';
 const bip39 = require('bip39');
 
@@ -37,7 +38,7 @@ const useWallet = () => {
         const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
         const keychainInstance = importedKeychainInstance(privateKey);
         const addressStrings = keychainInstance.getAddressStrings();
-        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic, address: addressStrings[0] })) 
+        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic, address: addressStrings[0], avaxBalance: 0})) 
     };
 
     const derivePrivateKeyFromMnemonic = mnemonic => {
@@ -45,7 +46,7 @@ const useWallet = () => {
         const masterHdKey = HDKey.fromMasterSeed(seed);
         const accountHdKey = masterHdKey.derive(AVA_ACCOUNT_PATH);
        
-        return accountHdKey.derive('m/0/0').privateKey;
+        return accountHdKey.privateKey;
     }
 
     const importedKeychainInstance = privateKeyBuffer => {
@@ -63,20 +64,23 @@ const useWallet = () => {
        
             const addressStrings = keychainInstance.getAddressStrings();
             let balances = await xchain.getAllBalances(addressStrings[0]);
-
-            balances = balances.map(balance => {
-                balance.balance = bnToBig(balance.balance, 9).toString()
-                return balance;    
-            });
-
-            return {  xchain, keychainInstance, mnemonic: parsedWalletFromLocalStorage.mnemonic, address: addressStrings[0], balances };
+            const avaxBalance = balances.filter(x => x.asset === 'AVAX').pop();
+            const avaxBalanceValue = avaxBalance ? bnToBig(avaxBalance.balance, 9).toString() : "0";
+            return {  xchain, keychainInstance, mnemonic: parsedWalletFromLocalStorage.mnemonic, address: addressStrings[0], avaxBalance: avaxBalanceValue  };
         }
     }
 
     const sendAssetXChain = async (amount, destinationAddress) => {
-            const sendAmount = new BN(amount);
-            const { keychainInstance } = getWalletFromLocalStorage();
+            Big.NE = -(9- 1);
+           console.log(amount);
+           const sendAmount = new BN(new Big(amount).times(Big(Math.pow(10, 9))).toString());
+
+            console.log(sendAmount);
+            const { keychainInstance, xchain  } = await getWalletFromLocalStorage();
+            const txFee = xchain.getTxFee();
+            const sendAmountWithTxFee = sendAmount.sub(txFee);
             const addressesFromSender = keychainInstance.getAddressStrings();
+            
             const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
             const avaxAssetIDBuffer= await xchain.getAVAXAssetID();
             const baseTransactionOptions = {
@@ -88,7 +92,8 @@ const useWallet = () => {
                 changeAddresses: addressesFromSender
             }
 
-            const unsignedTransaction = await xchain.buildBaseTx(...baseTransactionOptions);
+            const { utxoset, assetID, toAddress, fromAddresses, changeAddresses } = baseTransactionOptions;
+            const unsignedTransaction = await xchain.buildBaseTx(utxoset, sendAmountWithTxFee, assetID, [toAddress], fromAddresses, changeAddresses);
             const signedTransaction = unsignedTransaction.sign(keychainInstance);
             const issuedTransactionID = await xchain.issueTx(signedTransaction);
             return issuedTransactionID;

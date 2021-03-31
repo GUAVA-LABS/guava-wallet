@@ -8,17 +8,17 @@
         }
       ]
     },
-    "fXmXHZxGc0NA87a+A1ppng==": {
-      "translations": [
-        {
-          "translation": "Enviar"
-        }
-      ]
-    },
     "M8PvPwXAFjS9vGdEg8xnWw==": {
       "translations": [
         {
           "translation": "Settings"
+        }
+      ]
+    },
+    "fXmXHZxGc0NA87a+A1ppng==": {
+      "translations": [
+        {
+          "translation": "Send"
         }
       ]
     }
