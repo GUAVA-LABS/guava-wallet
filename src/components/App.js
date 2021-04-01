@@ -7,7 +7,7 @@ import {
     FolderOpenFilled,
     CaretRightOutlined,
     SettingFilled,
-    DollarCircleFilled
+    ShopFilled
 } from '@ant-design/icons';
 import Wallet from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
@@ -23,6 +23,8 @@ import {
     useLocation,
     useHistory,
 } from 'react-router-dom';
+import GuavaMarketIconSrc from '@assets/market-icon.png';
+import GuavaMarketPlaceholderImgSrc from '@assets/avamarket.jpeg';
 import GuavaHeaderImg from '@assets/guavaheader.png';
 
 import fbt from 'fbt';
@@ -156,6 +158,12 @@ export const AbcLogo = styled.img`
         width: 120px;
     }
 `;
+export const GuavaMarketIcon = styled.img`
+    width: 1em;
+    margin: 0 auto;
+    display: block;
+    height: 1em;
+`;
 
 const App = () => {
     const ContextValue = React.useContext(WalletContext);
@@ -184,7 +192,7 @@ const App = () => {
                             </Route>
                             <Route path="/market">
                                 <div>
-                                    <h1>Market</h1>
+                                    <img src={GuavaMarketPlaceholderImgSrc} alt="Guava Market" />
                                 </div>
                             </Route>
                             <Route path="/configure">
@@ -215,7 +223,7 @@ const App = () => {
                                 active={selectedKey === 'market'}
                                 onClick={() => history.push('/market')}
                             >
-                                <DollarCircleFilled />
+                                <ShopFilled />
                                 <fbt desc="Market menu button">Market</fbt>
                             </NavButton>
                             <NavButton
