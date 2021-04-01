@@ -9,6 +9,8 @@ import { getPreferredHRP } from 'avalanche/dist/utils'
 import useAsyncTimeout from '@hooks/useAsyncTimeout';
 import HDKey from 'hdkey';
 import Big from 'big.js';
+import axios from 'axios';
+import { currency } from '@components/Common/Ticker';
 import { bnToBig } from './helpers';
 const bip39 = require('bip39');
 
@@ -32,6 +34,7 @@ const useWallet = () => {
     let xchain = avalancheInstance.XChain();
 
     const [wallet, setWallet] = React.useState(false);
+    const [fiatPrice, setFiatPrice] = React.useState(0);
 
     const createWallet = importMnemonic => {
         const mnemonic = importMnemonic || bip39.generateMnemonic(256);
@@ -107,12 +110,20 @@ const useWallet = () => {
         })();
     }; 
 
+    const fetchFiatPrice = async () => {
+        const fetchedPriceObject= await axios.get(currency.priceApi);
+        setFiatPrice(fetchedPriceObject.data["usd"]);
+    };
 
     useMountEffect(setExistingWalletOnFirstMount);
 
     useAsyncTimeout(async () => {
         const wallet = await getWalletFromLocalStorage();
         setWallet(wallet);
+    }, INTERVAL_IN_MILISECONDS);
+
+    useAsyncTimeout(async () => {
+        fetchFiatPrice();
     }, INTERVAL_IN_MILISECONDS);
 
     
@@ -123,6 +134,7 @@ const useWallet = () => {
         wallet,
         setWallet,
         tokens: [],
+        fiatPrice
     }
 }
 
