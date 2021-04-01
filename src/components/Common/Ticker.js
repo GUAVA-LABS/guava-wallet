@@ -1,4 +1,4 @@
-import mainLogo from '@assets/12-bitcoin-cash-square-crop.svg';
+import mainLogo from '@assets/avax_icon_circle.png';
 import tokenLogo from '@assets/guava.png';
 import cashaddr from 'cashaddrjs';
 import BigNumber from 'bignumber.js';
