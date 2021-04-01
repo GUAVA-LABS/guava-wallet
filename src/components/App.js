@@ -24,7 +24,7 @@ import {
     useHistory,
 } from 'react-router-dom';
 import GuavaMarketIconSrc from '@assets/market-icon.png';
-import GuavaMarketPlaceholderImgSrc from '@assets/avamarket.jpeg';
+import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
 
 import fbt from 'fbt';
@@ -158,11 +158,9 @@ export const AbcLogo = styled.img`
         width: 120px;
     }
 `;
-export const GuavaMarketIcon = styled.img`
-    width: 1em;
+export const GuavaMarket = styled.img`
+    max-width: 85%;
     margin: 0 auto;
-    display: block;
-    height: 1em;
 `;
 
 const App = () => {
@@ -192,7 +190,7 @@ const App = () => {
                             </Route>
                             <Route path="/market">
                                 <div>
-                                    <img src={GuavaMarketPlaceholderImgSrc} alt="Guava Market" />
+                                    <GuavaMarket src={GuavaMarketPlaceholderImgSrc} alt="Guava Market" />
                                 </div>
                             </Route>
                             <Route path="/configure">
