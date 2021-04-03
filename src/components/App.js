@@ -9,11 +9,12 @@ import {
     SettingFilled,
     ShopFilled
 } from '@ant-design/icons';
-import Wallet from '@components/Wallet/Wallet';
+import Wallet, { LoadingCtn } from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
 import Configure from '@components/Configure/Configure';
 import NotFound from '@components/NotFound';
 import './App.css';
+import { LoadingOutlined } from '@ant-design/icons';
 import { WalletContext } from '@utils/context';
 import WalletLabel from '@components/Common/WalletLabel.js';
 import {
@@ -26,7 +27,7 @@ import {
 import GuavaMarketIconSrc from '@assets/market-icon.png';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
-
+import axios from 'axios';
 import fbt from 'fbt';
 
 const CustomApp = styled.div`
@@ -165,12 +166,33 @@ export const GuavaMarket = styled.img`
 
 const App = () => {
     const ContextValue = React.useContext(WalletContext);
+    const [marketImage, setMarketImage] = React.useState(false);
+
     const { wallet } = ContextValue;
     const location = useLocation();
     const history = useHistory();
     const selectedKey =
         location && location.pathname ? location.pathname.substr(1) : '';
 
+    const fetchMarketImageFromAirtable = async () => {
+        try {
+        //TODO: Move to environment variables
+        const airtableApiUrl = "https://api.airtable.com/v0/appYoHNjKSpv1cPF2/Assets%20Submissions?maxRecords=1&sort%5B0%5D%5Bfield%5D=ID&sort%5B0%5D%5Bdirection%5D=desc&view=Grid%20view";
+        const airtableReadOnlyApiKey = "keyc9Awfjh1RPAbyZ";
+        const responseFromAirtable = await axios.get(airtableApiUrl, {
+            headers: {
+                "Authorization": `Bearer ${airtableReadOnlyApiKey}`
+            }
+        })
+        setMarketImage(responseFromAirtable.data.records[0].fields.Image[0].url);
+        } catch (e) {
+            setMarketImage(GuavaMarketPlaceholderImgSrc);
+        }
+    }
+
+    React.useEffect(() => {
+        fetchMarketImageFromAirtable();
+    })
     return (
         <ThemeProvider theme={theme}>
             <CustomApp>
@@ -190,7 +212,12 @@ const App = () => {
                             </Route>
                             <Route path="/market">
                                 <div>
-                                    <GuavaMarket src={GuavaMarketPlaceholderImgSrc} alt="Guava Market" />
+                                   {!marketImage && (
+                                        <LoadingCtn>
+                                            <LoadingOutlined />
+                                        </LoadingCtn>
+                                    )}
+                                    {marketImage && <GuavaMarket src={marketImage} alt="Guava Market" />}
                                 </div>
                             </Route>
                             <Route path="/configure">
