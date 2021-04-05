@@ -81,7 +81,7 @@ const useWallet = () => {
             console.log(sendAmount);
             const { keychainInstance, xchain  } = await getWalletFromLocalStorage();
             const txFee = xchain.getTxFee();
-            const sendAmountWithTxFee = sendAmount.sub(txFee);
+            const sendAmountWithTxFee = sendAmount.add(txFee);
             const addressesFromSender = keychainInstance.getAddressStrings();
             
             const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
