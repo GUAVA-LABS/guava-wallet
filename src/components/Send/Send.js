@@ -17,7 +17,7 @@ import { isMobile, isIOS, isSafari } from 'react-device-detect';
 import {
     currency,
 } from '@components/Common/Ticker.js';
-import { shouldRejectAmountInput } from '@utils/validation';
+import { shouldRejectAmountInput, fiatToCrypto } from '@utils/validation';
 
 export const BalanceHeader = styled.div`
     p {
@@ -76,11 +76,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
     const { avaxBalance } = wallet;
 
     
-    console.log('balances', wallet);
-    // Get device window width
-    // If this is less than 769, the page will open with QR scanner open
     const { width } = useWindowDimensions();
-    // Load with QR code open if device is mobile and NOT iOS + anything but safari
     const scannerSupported = width < 769 && isMobile && !(isIOS && !isSafari);
 
     const [formData, setFormData] = useState({
@@ -88,6 +84,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
         value: '',
         address: filledAddress || '',
     });
+
     const [loading, setLoading] = useState(false);
     const [queryStringText] = useState(null);
     const [sendAvaxAddressError] = useState(false);
@@ -129,7 +126,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
             let value = txInfoKeyValue[1];
             txInfo[key] = value;
         }
-        console.log(`txInfo from page params`, txInfo);
         setTxInfoFromUrl(txInfo);
         populateFormsFromUrl(txInfo);
     }, []);
@@ -154,13 +150,15 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
             return;
         }
 
-
+        let avaxAmount;
         setLoading(true);
         const { address, value } = formData;
-
+        avaxAmount = value;
+        if (selectedCurrency === 'USD') {
+            avaxAmount = fiatToCrypto(value, fiatPrice).toString();
+        }
         try {
-
-            const link = await sendAssetXChain(value, address);
+            const link = await sendAssetXChain(avaxAmount, address);
             console.log('txid', link);
             notification.success({
                 message: 'Success',

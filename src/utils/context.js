@@ -94,6 +94,7 @@ const useWallet = () => {
                 fromAddresses: addressesFromSender,
                 changeAddresses: addressesFromSender
             }
+            console.log(baseTransactionOptions);
 
             const { utxoset, assetID, toAddress, fromAddresses, changeAddresses } = baseTransactionOptions;
             const unsignedTransaction = await xchain.buildBaseTx(utxoset, sendAmountWithTxFee, assetID, [toAddress], fromAddresses, changeAddresses);

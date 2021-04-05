@@ -16,7 +16,7 @@ export const shouldRejectAmountInput = (
         // Ensure no more than 8 decimal places
         testedAmount = new BigNumber(fiatToCrypto(cashAmount, fiatPrice));
     }
-
+    console.log(testedAmount.toString(), fiatPrice)
     // Validate value for > 0
     if (isNaN(testedAmount)) {
         error = 'Amount must be a number';
