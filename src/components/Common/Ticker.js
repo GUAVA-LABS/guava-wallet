@@ -11,7 +11,7 @@ export const currency = {
     prefixes: ['bitcoincash', 'ecash'],
     coingeckoId: 'bitcoin-cash-abc-2',
     defaultFee: 5.01,
-    dust: '0.00000546', // The minimum amount of BCHA that can be sent by the app
+    dust: '0.001', // The minimum amount of BCHA that can be sent by the app
     cashDecimals: 8,
     priceApi: 'https://wallet.avax.network/api/price',
     blockExplorerUrl: 'https://explorer.bitcoinabc.org',

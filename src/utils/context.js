@@ -44,6 +44,11 @@ const useWallet = () => {
         window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic, address: addressStrings[0], avaxBalance: 0})) 
     };
 
+    const deleteWallet = () => {
+        window.localStorage.removeItem('guava-wallet');
+        setWallet(false);
+    }
+
     const derivePrivateKeyFromMnemonic = mnemonic => {
         const seed = bip39.mnemonicToSeedSync(mnemonic);
         const masterHdKey = HDKey.fromMasterSeed(seed);
@@ -131,6 +136,7 @@ const useWallet = () => {
     return {
         sendAssetXChain,
         getWalletFromLocalStorage,
+        deleteWallet,
         createWallet,
         wallet,
         setWallet,

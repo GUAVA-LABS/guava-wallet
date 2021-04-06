@@ -221,6 +221,7 @@ const App = () => {
                                 </div>
                             </Route>
                             <Route path="/configure">
+                                {!wallet && <Redirect exact from="/configure" to="/" />}
                                 <Configure />
                             </Route>
                             <Redirect exact from="/" to="/wallet" />

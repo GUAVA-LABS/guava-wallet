@@ -7,6 +7,7 @@ import {
     WalletFilled,
     ImportOutlined,
     LockOutlined,
+    DeleteOutlined,
 } from '@ant-design/icons';
 import { WalletContext } from '@utils/context';
 import { StyledCollapse } from '@components/Common/StyledCollapse';
@@ -159,13 +160,12 @@ const StyledSpacer = styled.div`
 
 const Configure = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, loading, apiError } = ContextValue;
+    const { wallet, deleteWallet, loading, apiError } = ContextValue;
 
     const {
         addNewSavedWallet,
         activateWallet,
         renameWallet,
-        deleteWallet,
         validateMnemonic,
         getSavedWallets,
     } = ContextValue;
@@ -393,6 +393,21 @@ const Configure = () => {
                                     : ''}
                             </p>
                         </Panel>
+                    </StyledCollapse>
+                )}
+
+                <h2 style={{ marginTop: '12px' }}>
+                    <DeleteOutlined /> Remove wallet
+                </h2>
+                <Alert
+                    style={{ marginBottom: '12px' }}
+                    description="Your data will be totally erased. Remember to backup your seed before deleting your wallet."
+                    type="error"
+                    showIcon
+                />
+                {wallet && wallet.mnemonic && (
+                    <StyledCollapse>
+                          <SecondaryButton onClick={() => deleteWallet()}>Delete Wallet</SecondaryButton> 
                     </StyledCollapse>
                 )}
                
