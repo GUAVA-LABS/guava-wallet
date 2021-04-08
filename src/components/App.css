@@ -50,7 +50,7 @@ body {
 .ant-card-actions > li > span:hover,
 .ant-btn:hover,
 .ant-btn:focus {
-    color: #EE796F;
+    color: #01142E;
     transition: color 0.3s;
     background-color: white;
 }

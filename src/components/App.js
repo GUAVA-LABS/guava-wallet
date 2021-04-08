@@ -71,9 +71,9 @@ export const NavButton = styled.button`
     ${({ active }) =>
         active &&
         `    
-        color: #EE796F;
+        color: #D4008B;
         .anticon {
-            color: #EE796F;
+            color: #D4008B;
         }
   `}
 `;
@@ -84,7 +84,7 @@ export const WalletBody = styled.div`
     justify-content: center;
     width: 100%;
     min-height: 100vh;
-    background: #EE796F;
+    background: #f2f2f2;
 `;
 
 export const WalletCtn = styled.div`
