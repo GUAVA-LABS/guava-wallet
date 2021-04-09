@@ -7,7 +7,8 @@ import {
     FolderOpenFilled,
     CaretRightOutlined,
     SettingFilled,
-    ShopFilled
+    ShopFilled,
+    SnippetsFilled
 } from '@ant-design/icons';
 import Wallet, { LoadingCtn } from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
@@ -261,10 +262,10 @@ const App = () => {
                                 <fbt desc="Settings menu button">Settings</fbt>
                             </NavButton>
                             <NavButton
-                                active={selectedKey === 'configure'}
-                                onClick={() => history.push('/configure')}
+                                active={selectedKey === 'news'}
+                                onClick={() => history.push('/news')}
                             >
-                                <SettingFilled />
+                                <SnippetsFilled />
                                 <fbt desc="News menu button">News</fbt>
                             </NavButton>
 
