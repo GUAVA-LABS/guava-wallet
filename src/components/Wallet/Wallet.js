@@ -131,7 +131,7 @@ export const ExternalLink = styled.a`
         color: #ff8d00;
         border-color: #ff8d00;
         svg {
-            fill: #D5008C;
+            fill: #ff8d00;
         }
     }
     @media (max-width: 768px) {
