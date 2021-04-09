@@ -68,7 +68,7 @@ input.ant-input,
     box-shadow: none !important;
     border-radius: 4px;
     font-weight: bold;
-    color: #D5008C;
+    color: rgb(62, 63, 66);
     opacity: 1;
     height: 50px;
 }
