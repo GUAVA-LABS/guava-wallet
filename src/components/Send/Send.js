@@ -21,7 +21,7 @@ import { shouldRejectAmountInput, fiatToCrypto } from '@utils/validation';
 
 export const BalanceHeader = styled.div`
     p {
-        color: #777;
+        color: #444;
         width: 100%;
         font-size: 14px;
         margin-bottom: 0px;
@@ -55,7 +55,7 @@ export const ZeroBalanceHeader = styled.div`
 `;
 
 const ConvertAmount = styled.div`
-    color: #777;
+    color: #D5008C;
     width: 100%;
     font-size: 14px;
     margin-bottom: 10px;

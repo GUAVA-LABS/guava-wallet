@@ -71,9 +71,9 @@ export const NavButton = styled.button`
     ${({ active }) =>
         active &&
         `    
-        color: #EE796F;
+        color: #D5008C;
         .anticon {
-            color: #EE796F;
+            color: #D5008C;
         }
   `}
 `;
@@ -84,7 +84,7 @@ export const WalletBody = styled.div`
     justify-content: center;
     width: 100%;
     min-height: 100vh;
-    background: #EE796F;
+    background: #f2f2f2;
 `;
 
 export const WalletCtn = styled.div`
@@ -237,6 +237,7 @@ const App = () => {
                                 <FolderOpenFilled />
                                 <fbt desc="Wallet menu button">Wallet</fbt>
                             </NavButton>
+                            
 
                             <NavButton
                                 active={selectedKey === 'send'}
@@ -259,6 +260,15 @@ const App = () => {
                                 <SettingFilled />
                                 <fbt desc="Settings menu button">Settings</fbt>
                             </NavButton>
+                            <NavButton
+                                active={selectedKey === 'configure'}
+                                onClick={() => history.push('/configure')}
+                            >
+                                <SettingFilled />
+                                <fbt desc="News menu button">News</fbt>
+                            </NavButton>
+
+                                                    
 
                         </Footer>
                     ) : null}

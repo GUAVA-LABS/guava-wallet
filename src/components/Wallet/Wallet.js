@@ -61,7 +61,7 @@ export const SwitchBtnCtn = styled.div`
         box-shadow: none !important;
     }
     .slpActive {
-        background: #5ebd6d !important;
+        background: #D5008C !important;
         box-shadow: inset 5px 5px 11px #4e9d5a, inset -5px -5px 11px #6edd80 !important;
     }
 `;
@@ -76,7 +76,7 @@ export const SwitchBtn = styled.div`
     width: 100px;
     margin: 0 1px;
     text-decoration: none;
-    background: #ff8d00;
+    background: #D5008C;
     box-shadow: inset 8px 8px 16px #d67600, inset -8px -8px 16px #ffa400;
     user-select: none;
     :first-child {
@@ -131,7 +131,7 @@ export const ExternalLink = styled.a`
         color: #ff8d00;
         border-color: #ff8d00;
         svg {
-            fill: #ff8d00;
+            fill: #D5008C;
         }
     }
     @media (max-width: 768px) {
