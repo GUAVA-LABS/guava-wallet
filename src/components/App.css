@@ -146,3 +146,12 @@ input.ant-input,
     background-color: #fff;
     border-color: #f04134 !important;
 }
+
+.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
+    display: none;
+    
+}
+.swiper-button-prev:after, .swiper-button-next:after{
+    color:#D5008C;
+
+}
