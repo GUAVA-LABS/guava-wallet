@@ -29,7 +29,6 @@ import GuavaMarketIconSrc from '@assets/market-icon.png';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
 import axios from 'axios';
-import fbt from 'fbt';
 
 const CustomApp = styled.div`
     text-align: center;
@@ -236,7 +235,7 @@ const App = () => {
                                 onClick={() => history.push('/wallet')}
                             >
                                 <FolderOpenFilled />
-                                <fbt desc="Wallet menu button">Wallet</fbt>
+                                Wallet
                             </NavButton>
                             
 
@@ -245,28 +244,28 @@ const App = () => {
                                 onClick={() => history.push('/send')}
                             >
                                 <CaretRightOutlined />
-                                <fbt desc="Send menu button">Send</fbt>
+                                Send
                             </NavButton>
                             <NavButton
                                 active={selectedKey === 'market'}
                                 onClick={() => history.push('/market')}
                             >
                                 <ShopFilled />
-                                <fbt desc="Market menu button">Market</fbt>
+				Market
                             </NavButton>
                             <NavButton
                                 active={selectedKey === 'configure'}
                                 onClick={() => history.push('/configure')}
                             >
                                 <SettingFilled />
-                                <fbt desc="Settings menu button">Settings</fbt>
+				Settings
                             </NavButton>
                             <NavButton
                                 active={selectedKey === 'news'}
                                 onClick={() => history.push('/news')}
                             >
                                 <SnippetsFilled />
-                                <fbt desc="News menu button">News</fbt>
+				News
                             </NavButton>
 
                                                     

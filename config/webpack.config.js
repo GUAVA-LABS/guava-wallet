@@ -273,8 +273,6 @@ module.exports = function (webpackEnv) {
 
             isEnvDevelopment &&
                 require.resolve('react-dev-utils/webpackHotDevClient'),
-            // Finally, this is your app's code:
-            paths.appI18nJs,
             paths.appIndexJs,
             // We include the app code last so that if there is a runtime error during
             // initialization, it doesn't blow up the WebpackDevServer client, and
@@ -397,8 +395,6 @@ module.exports = function (webpackEnv) {
             // https://github.com/facebook/create-react-app/issues/253
             modules: [
                 'node_modules',
-                paths.appI18n,
-                paths.appNodeModules,
             ].concat(modules.additionalModulePaths || []),
             // These are the reasonable defaults supported by the Node ecosystem.
             // We also include JSX as a common component filename extension to support
@@ -504,17 +500,6 @@ module.exports = function (webpackEnv) {
                                             },
                                         },
                                     ],
-                                    [
-                                        'babel-plugin-fbt',
-                                        {
-                                            fbtEnumPath: path.join(
-                                                paths.appPath,
-                                                '.enum_manifest.json',
-                                            ),
-                                            extraOptions: { __self: true },
-                                        },
-                                    ],
-                                    'babel-plugin-fbt-runtime',
                                 ],
                                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                                 // It enables caching results in ./node_modules/.cache/babel-loader/
