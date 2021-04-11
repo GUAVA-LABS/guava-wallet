@@ -1,15 +1,11 @@
 import React from 'react';
 import 'antd/dist/antd.less';
 import '../index.css';
+import { Swiper, Slide } from 'react-dynamic-swiper';
+//import 'swiper/css/swiper.min.css'; 
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '@assets/styles/theme';
-import {
-    FolderOpenFilled,
-    CaretRightOutlined,
-    SettingFilled,
-    ShopFilled,
-    SnippetsFilled
-} from '@ant-design/icons';
+
 import Wallet, { LoadingCtn } from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
 import Configure from '@components/Configure/Configure';
@@ -27,18 +23,20 @@ import {
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
 import axios from 'axios';
+import MenuItems from '@components/Common/MenuItems.js';
 
 const CustomApp = styled.div`
     text-align: center;
     font-family: 'Gilroy', sans-serif;
     background-color: #fbfbfd;
 `;
-const Footer = styled.div`
+
+export const Footer = styled.div`
     background-color: #fff;
     border-radius: 20px;
     position: fixed;
     bottom: 0;
-    width: 500px;
+    width: 440px;
     @media (max-width: 768px) {
         width: 100%;
     }
@@ -171,18 +169,19 @@ const App = () => {
     const history = useHistory();
     const selectedKey =
         location && location.pathname ? location.pathname.substr(1) : '';
+    const currentPage = React.useState(0);
 
     const fetchMarketImageFromAirtable = async () => {
         try {
-        //TODO: Move to environment variables
-        const airtableApiUrl = "https://api.airtable.com/v0/appYoHNjKSpv1cPF2/Assets%20Submissions?maxRecords=1&sort%5B0%5D%5Bfield%5D=ID&sort%5B0%5D%5Bdirection%5D=desc&view=Grid%20view";
-        const airtableReadOnlyApiKey = "keyc9Awfjh1RPAbyZ";
-        const responseFromAirtable = await axios.get(airtableApiUrl, {
-            headers: {
-                "Authorization": `Bearer ${airtableReadOnlyApiKey}`
-            }
-        })
-        setMarketImage(responseFromAirtable.data.records[0].fields.Image[0].url);
+            //TODO: Move to environment variables
+            const airtableApiUrl = "https://api.airtable.com/v0/appYoHNjKSpv1cPF2/Assets%20Submissions?maxRecords=1&sort%5B0%5D%5Bfield%5D=ID&sort%5B0%5D%5Bdirection%5D=desc&view=Grid%20view";
+            const airtableReadOnlyApiKey = "keyc9Awfjh1RPAbyZ";
+            const responseFromAirtable = await axios.get(airtableApiUrl, {
+                headers: {
+                    "Authorization": `Bearer ${airtableReadOnlyApiKey}`
+                }
+            })
+            setMarketImage(responseFromAirtable.data.records[0].fields.Image[0].url);
         } catch (e) {
             setMarketImage(GuavaMarketPlaceholderImgSrc);
         }
@@ -191,6 +190,8 @@ const App = () => {
     React.useEffect(() => {
         fetchMarketImageFromAirtable();
     })
+
+
     return (
         <ThemeProvider theme={theme}>
             <CustomApp>
@@ -199,18 +200,19 @@ const App = () => {
                         <HeaderCtn>
                             <GuavaHeader src={GuavaHeaderImg} alt="Guava Wallet" />
                         </HeaderCtn>
-                       
+
                         <Switch>
                             <Route path="/wallet">
                                 <Wallet />
                             </Route>
-                          
+
+
                             <Route path="/send">
                                 <Send />
                             </Route>
                             <Route path="/market">
                                 <div>
-                                   {!marketImage && (
+                                    {!marketImage && (
                                         <LoadingCtn>
                                             <LoadingOutlined />
                                         </LoadingCtn>
@@ -225,51 +227,13 @@ const App = () => {
                             <Redirect exact from="/" to="/wallet" />
                             <Route component={NotFound} />
                         </Switch>
+                        {wallet ? (
+                       
+                       <MenuItems selectedKey={selectedKey}
+                           currentPage={0}
+                           handleClick={history.push} />
+           ) : null}
                     </WalletCtn>
-                    {wallet ? (
-                        <Footer>
-                            <NavButton
-                                active={selectedKey === 'wallet'}
-                                onClick={() => history.push('/wallet')}
-                            >
-                                <FolderOpenFilled />
-                                Wallet
-                            </NavButton>
-                            
-
-                            <NavButton
-                                active={selectedKey === 'send'}
-                                onClick={() => history.push('/send')}
-                            >
-                                <CaretRightOutlined />
-                                Send
-                            </NavButton>
-                            <NavButton
-                                active={selectedKey === 'market'}
-                                onClick={() => history.push('/market')}
-                            >
-                                <ShopFilled />
-				Market
-                            </NavButton>
-                            <NavButton
-                                active={selectedKey === 'configure'}
-                                onClick={() => history.push('/configure')}
-                            >
-                                <SettingFilled />
-				Settings
-                            </NavButton>
-                            <NavButton
-                                active={selectedKey === 'news'}
-                                onClick={() => history.push('/news')}
-                            >
-                                <SnippetsFilled />
-				News
-                            </NavButton>
-
-                                                    
-
-                        </Footer>
-                    ) : null}
                 </WalletBody>
             </CustomApp>
         </ThemeProvider>
