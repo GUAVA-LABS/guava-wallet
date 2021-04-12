@@ -57,7 +57,7 @@ const SmartButton = styled.button`
     background-image: ${({ disabled = false }) =>
         disabled === true
             ? 'none'
-            : 'linear-gradient(270deg, #ff8d00 0%, #bb5a00 100%);'};
+            : 'linear-gradient(270deg, #D5008C 0%, #D5008C 100%);'};
     color: ${({ disabled = false }) => (disabled === true ? '#444;' : '#fff;')};
     background: ${({ disabled = false }) =>
         disabled === true ? '#e9eaed;' : ''};
