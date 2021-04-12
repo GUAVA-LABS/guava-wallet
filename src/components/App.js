@@ -13,7 +13,6 @@ import NotFound from '@components/NotFound';
 import './App.css';
 import { LoadingOutlined } from '@ant-design/icons';
 import { WalletContext } from '@utils/context';
-import WalletLabel from '@components/Common/WalletLabel.js';
 import {
     Route,
     Redirect,
@@ -21,7 +20,6 @@ import {
     useLocation,
     useHistory,
 } from 'react-router-dom';
-import GuavaMarketIconSrc from '@assets/market-icon.png';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
 import axios from 'axios';
