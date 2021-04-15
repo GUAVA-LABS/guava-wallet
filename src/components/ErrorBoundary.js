@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 class ErrorBoundary extends Component {
 
     constructor(props) {
-        console.log("erro boundary")
+        
         super(props)
         this.state = {
             hasError: false

@@ -12,6 +12,8 @@ import Big from 'big.js';
 import axios from 'axios';
 import { currency } from '@components/Common/Ticker';
 import { bnToBig } from './helpers';
+import { notification, } from 'antd';
+import Paragraph from 'antd/lib/typography/Paragraph';
 const bip39 = require('bip39');
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -124,8 +126,24 @@ const useWallet = () => {
     useMountEffect(setExistingWalletOnFirstMount);
 
     useAsyncTimeout(async () => {
+        try {
         const wallet = await getWalletFromLocalStorage();
         setWallet(wallet);
+        } catch(error){
+            notification.error({
+            message: 'Network Error',
+            description: (
+                
+                    <Paragraph>
+                        Connection issues with Guava Node. Try again later.
+                    </Paragraph>
+                
+            ),
+            duration: 5,
+        });
+
+
+        }
     }, INTERVAL_IN_MILISECONDS);
 
     useAsyncTimeout(async () => {
