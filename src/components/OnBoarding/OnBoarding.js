@@ -26,7 +26,7 @@ export const WelcomeText = styled.p`
 
 export const WelcomeLink = styled.a`
     text-decoration: underline;
-    color: #f18e86;
+    color: #D5008C;
 `;
 
 export const OnBoarding = ({ history }) => {
@@ -93,6 +93,7 @@ export const OnBoarding = ({ history }) => {
                     href="https://github.com/bitcoin-abc/bitcoin-abc"
                     target="_blank"
                     rel="noreferrer"
+                    
                 >
                     open source,
                 </WelcomeLink>{' '}

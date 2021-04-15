@@ -144,6 +144,7 @@ const WalletInfo = () => {
     const ContextValue = React.useContext(WalletContext);
     const { wallet } = ContextValue;
     const { address } = wallet;
+    
     return (
       
            <>
@@ -172,11 +173,13 @@ const Wallet = () => {
             {loading && (
                 <LoadingCtn>
                     <LoadingOutlined />
+                    
                 </LoadingCtn>
             )}
             {!loading && wallet && <WalletInfo />}
          
             {!loading && !wallet ? <OnBoarding /> : null}
+            
         </>
     );
 };

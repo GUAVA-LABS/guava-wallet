@@ -215,7 +215,7 @@ body::-webkit-scrollbar {
 .ant-btn {
     border-radius: 8px;
     background-color: #fff;
-    color: rgb(62, 63, 66);
+    color: #D5008C);
     font-weight: bold;
 }
 
@@ -390,7 +390,7 @@ input.ant-input,
     box-shadow: none !important;
     border-radius: 4px;
     font-weight: bold;
-    color: rgb(62, 63, 66);
+    color: #D5008C;
     opacity: 1;
     height: 50px;
 }
@@ -411,11 +411,11 @@ input.ant-input,
 .ant-select-dropdown-menu-item-active,
 .ant-select-dropdown-menu-item:hover {
     color: #fff;
-    background-color: #ff8d00 !important;
+    background-color: #D5008C !important;
 }
 .selectedCurrencyOption:hover {
     color: #fff !important;
-    background-color: #ff8d00 !important;
+    background-color: #D5008C!important;
 }
 .ant-input-affix-wrapper {
     background-color: #fff;

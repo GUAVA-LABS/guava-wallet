@@ -50,7 +50,7 @@ body {
 .ant-card-actions > li > span:hover,
 .ant-btn:hover,
 .ant-btn:focus {
-    color: #EE796F;
+    color: #D5008C;
     transition: color 0.3s;
     background-color: white;
 }
@@ -89,11 +89,11 @@ input.ant-input,
 .ant-select-dropdown-menu-item-active,
 .ant-select-dropdown-menu-item:hover {
     color: #fff;
-    background-color: #ff8d00 !important;
+    background-color: #D5008C !important;
 }
 .selectedCurrencyOption:hover {
     color: #fff !important;
-    background-color: #ff8d00 !important;
+    background-color: #D5008C!important;
 }
 .ant-input-affix-wrapper {
     background-color: #fff;
@@ -129,7 +129,7 @@ input.ant-input,
     > span
     > span.ant-input-affix-wrapper {
     background-color: #fff;
-    border-color: #f04134 !important;
+    border-color: #D5008C !important;
 }
 
 .ant-form-item-has-error .ant-input,
@@ -137,14 +137,14 @@ input.ant-input,
 .ant-form-item-has-error .ant-input:hover,
 .ant-form-item-has-error .ant-input-affix-wrapper:hover {
     background-color: #fff;
-    border-color: #f04134 !important;
+    border-color: #D5008C !important;
 }
 
 .ant-form-item-has-error
     .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input)
     .ant-select-selector {
     background-color: #fff;
-    border-color: #f04134 !important;
+    border-color: #D5008C !important;
 }
 
 .swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {

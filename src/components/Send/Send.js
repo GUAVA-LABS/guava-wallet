@@ -242,6 +242,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 visible={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
+                
             >
                 <p>
                     Are you sure you want to send {formData.value}{' '}

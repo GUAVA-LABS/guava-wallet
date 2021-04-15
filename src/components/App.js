@@ -24,11 +24,13 @@ import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
 import axios from 'axios';
 import MenuItems from '@components/Common/MenuItems.js';
+import ErrorBoundary from '@components/ErrorBoundary';
 
 const CustomApp = styled.div`
     text-align: center;
     font-family: 'Gilroy', sans-serif;
     background-color: #fbfbfd;
+    
 `;
 
 export const Footer = styled.div`
@@ -113,7 +115,7 @@ export const HeaderCtn = styled.div`
     a {
         color: #848484;
         :hover {
-            color: #ff8d00;
+            color: #D5008C;
         }
     }
     @media (max-width: 768px) {
@@ -190,9 +192,11 @@ const App = () => {
     React.useEffect(() => {
         fetchMarketImageFromAirtable();
     })
-
+    
 
     return (
+        
+        <ErrorBoundary>
         <ThemeProvider theme={theme}>
             <CustomApp>
                 <WalletBody>
@@ -237,6 +241,9 @@ const App = () => {
                 </WalletBody>
             </CustomApp>
         </ThemeProvider>
+        </ErrorBoundary>
+        
+        
     );
 };
 
