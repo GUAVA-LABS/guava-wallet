@@ -15,6 +15,7 @@ import PrimaryButton, {
 } from '@components/Common/PrimaryButton';
 import { currency } from '@components/Common/Ticker.js';
 import { Event } from '@utils/GoogleAnalytics';
+import FormPassword from '@components/OnBoarding/formPassword'
 
 export const WelcomeText = styled.p`
     color: #444;
@@ -70,9 +71,10 @@ export const OnBoarding = ({ history }) => {
 
     function showBackupConfirmModal() {
         confirm({
+            
             title: "Don't forget to back up your wallet",
             icon: <ExclamationCircleOutlined />,
-            content: `Once your wallet is created you can back it up by writing down your 24 word seed. You can find your seed on the Settings page. If you are browsing in Incognito mode or if you clear your browser history, you will lose any funds that are not backed up!`,
+            content: <FormPassword/>,
             okText: 'Okay, make me a wallet!',
             onOk() {
                 // Event("Category", "Action", "Label")
@@ -86,6 +88,7 @@ export const OnBoarding = ({ history }) => {
 
     return (
         <>
+
             <h2>Welcome to Guava!</h2>
             <WelcomeText>
                 Guava is an{' '}

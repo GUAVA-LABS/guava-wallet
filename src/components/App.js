@@ -23,6 +23,7 @@ import MenuItems from '@components/Common/MenuItems';
 import ErrorBoundary from '@components/ErrorBoundary';
 import dynamicContent from '@utils/dynamicContent';
 import News from '@components/News/News';
+import FormPassword from '@components/OnBoarding/formPassword'
 
 const CustomApp = styled.div`
     text-align: center;
@@ -187,14 +188,17 @@ const App = () => {
     return (
         
         <ErrorBoundary>
+        
         <ThemeProvider theme={theme}>
             <CustomApp>
                 <WalletBody>
+                    
                     <WalletCtn>
                         <HeaderCtn>
                             <GuavaHeader src={GuavaHeaderImg} alt="Guava Wallet" />
-                        </HeaderCtn>
-
+                            
+                       </HeaderCtn>
+                        
                         <Switch>
                             <Route path="/wallet">
                                 <Wallet />
