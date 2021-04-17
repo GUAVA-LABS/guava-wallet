@@ -29,6 +29,7 @@
         "react-dynamic-swiper": "^2.0.2",
         "react-ga": "^3.3.0",
         "react-image": "^4.0.3",
+        "react-markdown": "^6.0.0",
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
         "styled-components": "^4.4.0",

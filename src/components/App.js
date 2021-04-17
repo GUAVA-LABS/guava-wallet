@@ -22,9 +22,10 @@ import {
 } from 'react-router-dom';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
-import MenuItems from '@components/Common/MenuItems.js';
+import MenuItems from '@components/Common/MenuItems';
 import ErrorBoundary from '@components/ErrorBoundary';
 import dynamicContent from '@utils/dynamicContent';
+import News from '@components/News/News';
 
 const CustomApp = styled.div`
     text-align: center;
@@ -220,6 +221,9 @@ const App = () => {
                             <Route path="/configure">
                                 {!wallet && <Redirect exact from="/configure" to="/" />}
                                 <Configure />
+                            </Route>
+                            <Route path="/news">
+                                <News />
                             </Route>
                             <Redirect exact from="/" to="/wallet" />
                             <Route component={NotFound} />
