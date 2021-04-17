@@ -4,8 +4,6 @@ import {
     BN,
     BinTools,
   } from "avalanche";
-  import { KeyPair } from 'avalanche/dist/apis/avm'
-import { getPreferredHRP } from 'avalanche/dist/utils'
 import useAsyncTimeout from '@hooks/useAsyncTimeout';
 import HDKey from 'hdkey';
 import Big from 'big.js';
@@ -20,14 +18,13 @@ const bip39 = require('bip39');
 const useMountEffect = (fun) => React.useEffect(fun, [])
 
 //TODO: Move these values to REACT_ENV variables
-const testnet = false;
 const environmentVariables = {
     NETWORK_ID: 1,
     BLOCKCHAIN_ID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
     AVA_NODE_IP: "guavanode.ngrok.io"
 }
 
-onst useWallet = () => {
+const useWallet = () => {
     const INTERVAL_IN_MILISECONDS = 10000;
     const AVA_ACCOUNT_PATH = `m/44'/9000'/0'`;
     const bintools = BinTools.getInstance();
