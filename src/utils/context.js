@@ -27,7 +27,7 @@ const environmentVariables = {
     AVA_NODE_IP: "guavanode.ngrok.io"
 }
 
-const useWallet = () => {
+onst useWallet = () => {
     const INTERVAL_IN_MILISECONDS = 10000;
     const AVA_ACCOUNT_PATH = `m/44'/9000'/0'`;
     const bintools = BinTools.getInstance();
