@@ -9,9 +9,11 @@ const dynamicContent = async (endpoint) => {
             //TODO: Move to environment variables
             const responseFromAirtable = await axios.get(endpointMap[endpoint], {
                 headers: {
-                    "Authorization": `Bearer ${airtableReadOnlyApiKey}`
+                    "Authorization": `Bearer ${AIRTABLE_READONLY_API_KEY}`
                 }
             })
 
             return responseFromAirtable;
 }
+
+export default dynamicContent;

@@ -22,9 +22,9 @@ import {
 } from 'react-router-dom';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.png';
-import axios from 'axios';
 import MenuItems from '@components/Common/MenuItems.js';
 import ErrorBoundary from '@components/ErrorBoundary';
+import dynamicContent from '@utils/dynamicContent';
 
 const CustomApp = styled.div`
     text-align: center;
@@ -175,14 +175,7 @@ const App = () => {
 
     const fetchMarketImageFromAirtable = async () => {
         try {
-            //TODO: Move to environment variables
-            const airtableApiUrl = "https://api.airtable.com/v0/appYoHNjKSpv1cPF2/Assets%20Submissions?maxRecords=1&sort%5B0%5D%5Bfield%5D=ID&sort%5B0%5D%5Bdirection%5D=desc&view=Grid%20view";
-            const airtableReadOnlyApiKey = "keyc9Awfjh1RPAbyZ";
-            const responseFromAirtable = await axios.get(airtableApiUrl, {
-                headers: {
-                    "Authorization": `Bearer ${airtableReadOnlyApiKey}`
-                }
-            })
+            const responseFromAirtable = await dynamicContent('market');
             setMarketImage(responseFromAirtable.data.records[0].fields.Image[0].url);
         } catch (e) {
             setMarketImage(GuavaMarketPlaceholderImgSrc);
