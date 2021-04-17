@@ -1,11 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.less';
 import '../index.css';
-import { Swiper, Slide } from 'react-dynamic-swiper';
-//import 'swiper/css/swiper.min.css'; 
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '@assets/styles/theme';
-
 import Wallet, { LoadingCtn } from '@components/Wallet/Wallet';
 import Send from '@components/Send/Send';
 import Configure from '@components/Configure/Configure';
@@ -172,7 +169,6 @@ const App = () => {
     const history = useHistory();
     const selectedKey =
         location && location.pathname ? location.pathname.substr(1) : '';
-    const currentPage = React.useState(0);
 
     const fetchMarketImageFromAirtable = async () => {
         try {
