@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
+import { WalletContext } from '@utils/context';
 
 
 const layout = {
@@ -11,6 +13,7 @@ const layout = {
     span: 16,
   },
 };
+
 const tailLayout = {
   wrapperCol: {
     offset: 8,
@@ -18,14 +21,39 @@ const tailLayout = {
   },
 };
 
-const formPassword = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-
+const FormPassword = ({ getWallet, afterSubmit }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const ContextValue = React.useContext(WalletContext);
+  const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
+
+  const onFinish = (values) => {
+    const wallet = getWallet();
+    const { password } = values;
+    
+    switch(encryptionStatus) {
+      case ENCRYPTION_STATUS_CODE.DECRYPTED: 
+        const mnemonicCypher = encrypt(password, wallet.mnemonic);
+        setWallet({
+          ...wallet,
+          mnemonic: mnemonicCypher
+        })
+        break;
+      case ENCRYPTION_STATUS_CODE.ENCRYPTED:
+        const decryptedMnemonic = decrypt(password, wallet.mnemonic);
+        setWallet({
+          ...wallet,
+          mnemonic: decryptedMnemonic
+        })
+        break;
+      default:
+      }
+
+      afterSubmit();
+  }
+
 
   return (
     <Form
@@ -54,10 +82,14 @@ const formPassword = () => {
       <Form.Item {...tailLayout} name="remember" valuePropName="checked">
         <Checkbox>Remember me</Checkbox>
       </Form.Item>
-
      
+        <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
     </Form>
   );
 };
 
-export default formPassword;
+export default FormPassword;

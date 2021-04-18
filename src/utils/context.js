@@ -12,6 +12,7 @@ import { currency } from '@components/Common/Ticker';
 import { bnToBig } from './helpers';
 import { notification, } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
+import useEncryption from '@hooks/useEncryption';
 const bip39 = require('bip39');
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -31,16 +32,19 @@ const useWallet = () => {
     const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
     let avalancheInstance = new Avalanche(AVA_NODE_IP, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
+    const [loading, setLoading] = React.useState(true);
 
     const [wallet, setWallet] = React.useState(false);
     const [fiatPrice, setFiatPrice] = React.useState(0);
+    const { encryptionStatus, encrypt, decrypt } = useEncryption();
 
     const createWallet = importMnemonic => {
         const mnemonic = importMnemonic || bip39.generateMnemonic(256);
         const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
         const keychainInstance = importedKeychainInstance(privateKey);
         const addressStrings = keychainInstance.getAddressStrings();
-        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic, address: addressStrings[0], avaxBalance: 0})) 
+        setWallet({ mnemonic, address: addressStrings[0], avaxBalance: 0 });
+        return { mnemonic, address: addressStrings[0], avaxBalance: 0 }
     };
 
     const deleteWallet = () => {
@@ -66,14 +70,12 @@ const useWallet = () => {
         const wallet = window.localStorage.getItem("guava-wallet");
         if (wallet) {
             const parsedWalletFromLocalStorage = JSON.parse(wallet);
-            const privateKey = derivePrivateKeyFromMnemonic(parsedWalletFromLocalStorage.mnemonic);
-            const keychainInstance = importedKeychainInstance(privateKey);
-       
-            const addressStrings = keychainInstance.getAddressStrings();
-            let balances = await xchain.getAllBalances(addressStrings[0]);
+            const { address, mnemonic } = parsedWalletFromLocalStorage;
+            let balances = await xchain.getAllBalances(address);
             const avaxBalance = balances.filter(x => x.asset === 'AVAX').pop();
             const avaxBalanceValue = avaxBalance ? bnToBig(avaxBalance.balance, 9).toString() : "0";
-            return {  xchain, keychainInstance, mnemonic: parsedWalletFromLocalStorage.mnemonic, address: addressStrings[0], avaxBalance: avaxBalanceValue  };
+            const updatedWallet = { mnemonic, address, avaxBalance: avaxBalanceValue }
+            return updatedWallet;
         }
     }
 
@@ -110,8 +112,11 @@ const useWallet = () => {
 
     const setExistingWalletOnFirstMount = () => {
         (async () => {
+            setLoading(true);
             const walletFromLocalStorage = await getWalletFromLocalStorage();
+            console.log('primeira busca', walletFromLocalStorage);
             setWallet(walletFromLocalStorage);
+            setLoading(false);
         })();
     }; 
 
@@ -124,8 +129,10 @@ const useWallet = () => {
 
     useAsyncTimeout(async () => {
         try {
-        const wallet = await getWalletFromLocalStorage();
-        setWallet(wallet);
+        const responseFromLocalStorage = await getWalletFromLocalStorage();
+        if (responseFromLocalStorage) {
+            setWallet(responseFromLocalStorage);
+        }
         } catch(error){
             notification.error({
             message: 'Network Error',
@@ -147,16 +154,28 @@ const useWallet = () => {
         fetchFiatPrice();
     }, INTERVAL_IN_MILISECONDS);
 
+    React.useEffect(() => {
+        if (wallet) {
+        console.log('guava wallet update');
+        console.log(wallet);
+        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic: wallet.mnemonic, address: wallet.address, avaxBalance: wallet.avaxBalance})) 
+        }
+    }, [wallet])
+
     
     return {
         sendAssetXChain,
         getWalletFromLocalStorage,
         deleteWallet,
         createWallet,
+        loading,
         wallet,
         setWallet,
         tokens: [],
-        fiatPrice
+        fiatPrice,
+        encryptionStatus,
+        encrypt,
+        decrypt
     }
 }
 

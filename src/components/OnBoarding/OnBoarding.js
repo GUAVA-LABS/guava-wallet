@@ -41,6 +41,8 @@ export const OnBoarding = ({ history }) => {
 
     const [seedInput, openSeedInput] = useState(false);
     const [isValidMnemonic, setIsValidMnemonic] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const { confirm } = Modal;
 
     async function submit() {
@@ -70,20 +72,7 @@ export const OnBoarding = ({ history }) => {
     };
 
     function showBackupConfirmModal() {
-        confirm({
-            
-            title: "Don't forget to back up your wallet",
-            icon: <ExclamationCircleOutlined />,
-            content: <FormPassword/>,
-            okText: 'Okay, make me a wallet!',
-            onOk() {
-                // Event("Category", "Action", "Label")
-                // Track number of created wallets from onboarding
-                Event('Onboarding.js', 'Create Wallet', 'New');
-                createWallet();
-                setWallet(getWalletFromLocalStorage());
-            },
-        });
+        setIsModalVisible(true);
     }
 
     return (
@@ -145,6 +134,16 @@ export const OnBoarding = ({ history }) => {
                     </Form>
                 </StyledOnboarding>
             )}
+       <Modal title="Create a password for your wallet" visible={isModalVisible} onCancel={() => setIsModalVisible(false)}>
+            <FormPassword getWallet={() => {
+                const wallet = createWallet();
+                return wallet;
+            }} 
+            afterSubmit={() => {
+                            setIsModalVisible(false)
+                          }}
+            />
+      </Modal>
         </>
     );
 };

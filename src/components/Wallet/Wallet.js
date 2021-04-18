@@ -5,6 +5,8 @@ import { WalletContext } from '@utils/context';
 import { OnBoarding } from '@components/OnBoarding/OnBoarding';
 import { QRCode } from '@components/Common/QRCode';
 import { Link } from 'react-router-dom';
+import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
+import FormPassword from '@components/OnBoarding/formPassword';
 
 export const LoadingCtn = styled.div`
     width: 100%;
@@ -142,13 +144,13 @@ export const ExternalLink = styled.a`
 
 const WalletInfo = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet } = ContextValue;
+    const { wallet, encryptionStatus } = ContextValue;
     const { address } = wallet;
-    
-    return (
-      
-           <>
-            <h1>{wallet.avaxBalance ? wallet.avaxBalance : 0} AVAX</h1>
+
+    const AddressAndBalance = ({ address, avaxBalance }) => {
+        
+        return (<>
+            <h1>{avaxBalance ? avaxBalance : 0} AVAX</h1>
             {address && <>
                       
                             <QRCode
@@ -158,8 +160,14 @@ const WalletInfo = () => {
                                 }
                             />
                         
-                    </>
-                }
+        </>}
+        </>);
+    }
+
+    return (
+       <>
+            {encryptionStatus === ENCRYPTION_STATUS_CODE.DECRYPTED && <AddressAndBalance address={address} avaxBalance={wallet.avaxBalance} /> }
+            {encryptionStatus === ENCRYPTION_STATUS_CODE.ENCRYPTED && <FormPassword getWallet={() => wallet} afterSubmit={() => {}} />}
         </>
     );
 };
@@ -167,6 +175,7 @@ const WalletInfo = () => {
 const Wallet = () => {
     const ContextValue = React.useContext(WalletContext);
     const { wallet, loading } = ContextValue;
+    console.log('logando carteira dentro do Wallet', wallet);
 
     return (
         <>
