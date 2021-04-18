@@ -45,7 +45,7 @@ const Copied = styled.div`
 
 const CustomInput = styled.div`
     font-size: 12px;
-    color: #8e8e8e;
+    color: #6cbe45;
     text-align: center;
     cursor: pointer;
     margin-bottom: 15px;

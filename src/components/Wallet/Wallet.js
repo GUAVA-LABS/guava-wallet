@@ -175,7 +175,6 @@ const WalletInfo = () => {
 const Wallet = () => {
     const ContextValue = React.useContext(WalletContext);
     const { wallet, loading } = ContextValue;
-    console.log('logando carteira dentro do Wallet', wallet);
 
     return (
         <>
