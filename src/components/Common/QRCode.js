@@ -45,7 +45,7 @@ const Copied = styled.div`
 
 const CustomInput = styled.div`
     font-size: 12px;
-    color: #6cbe45;
+    color: #8e8e8e;
     text-align: center;
     cursor: pointer;
     margin-bottom: 15px;
@@ -55,8 +55,8 @@ const CustomInput = styled.div`
 
     span {
         font-weight: bold;
-        color: #444;
-        font-size: 12px;
+        color: #6cbe45;
+        font-size: 16px;
     }
     input {
         border: none;
@@ -83,7 +83,7 @@ const CustomInput = styled.div`
     @media (max-width: 768px) {
         font-size: 11px;
         span {
-            font-size: 12px;
+            font-size: 16px;
         }
         input {
             font-size: 11px;
