@@ -134,7 +134,11 @@ export const OnBoarding = ({ history }) => {
                     </Form>
                 </StyledOnboarding>
             )}
-       <Modal title="Create a password for your wallet" visible={isModalVisible} onCancel={() => setIsModalVisible(false)}>
+       <Modal 
+       title="Create a password for your wallet and remember it!" 
+       visible={isModalVisible} 
+       onCancel={() => setIsModalVisible(false)}
+       footer={null}>
             <FormPassword getWallet={() => {
                 const wallet = createWallet();
                 return wallet;

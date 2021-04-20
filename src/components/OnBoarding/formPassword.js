@@ -85,7 +85,7 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
      
         <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Ok, make me a wallet.
         </Button>
       </Form.Item>
     </Form>
