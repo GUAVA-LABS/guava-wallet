@@ -21,7 +21,7 @@ const tailLayout = {
   },
 };
 
-const FormPassword = ({ getWallet, afterSubmit }) => {
+const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -38,14 +38,15 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
         const mnemonicCypher = encrypt(password, wallet.mnemonic);
         setWallet({
           ...wallet,
-          mnemonic: mnemonicCypher
+          mnemonicCypher,
+          mnemonic: false
         })
         break;
       case ENCRYPTION_STATUS_CODE.ENCRYPTED:
-        const decryptedMnemonic = decrypt(password, wallet.mnemonic);
+        const decryptedMnemonic = decrypt(password, wallet.mnemonicCypher);
         setWallet({
           ...wallet,
-          mnemonic: decryptedMnemonic
+          mnemonic: decryptedMnemonic,
         })
         break;
       default:
@@ -54,8 +55,9 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
     afterSubmit();
   }
 
+  const showForm = locked || encryptionStatus === ENCRYPTION_STATUS_CODE.ENCRYPTED;
 
-  return (
+  const LockedForm = () =>
     <Form
       {...layout}
       name="basic"
@@ -65,7 +67,6 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-
       <Form.Item
         label="Password"
         name="password"
@@ -80,11 +81,12 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          Ok, make me a wallet.
+          {textSubmit}
         </Button>
       </Form.Item>
-    </Form>
-  );
+   </Form>;
+  
+   return showForm ? <LockedForm /> : <div>{children}</div>;
 };
 
 export default FormPassword;

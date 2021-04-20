@@ -125,10 +125,7 @@ export const OnBoarding = ({ history }) => {
                                 required
                             />
                         </Form.Item>
-
-                        <SmartButton
-                            onClick={() => submit()}
-                        >
+                        <SmartButton onClick={() => setIsModalVisible(true)}>
                             Import
                         </SmartButton>
                     </Form>
@@ -140,9 +137,11 @@ export const OnBoarding = ({ history }) => {
        onCancel={() => setIsModalVisible(false)}
        footer={null}>
             <FormPassword getWallet={() => {
-                const wallet = createWallet();
+                const wallet = createWallet(formData.mnemonic || false);
                 return wallet;
             }} 
+            locked={true}
+            textSubmit={formData.mnenomic ? "Ok, import wallet from seed" : "Ok, make me a wallet"}
             afterSubmit={() => {
                             setIsModalVisible(false)
                           }}

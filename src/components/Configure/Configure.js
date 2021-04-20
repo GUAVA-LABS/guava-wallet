@@ -9,6 +9,7 @@ import {
   CashLoadingIcon,
   ThemedCopyOutlined,
 } from "@components/Common/CustomIcons";
+import FormPassword from '@components/OnBoarding/formPassword';
 
 const { Panel } = Collapse;
 const StyledConfigure = styled.div`
@@ -26,39 +27,41 @@ const Configure = () => {
   return (
     <Spin spinning={false} indicator={CashLoadingIcon}>
       <StyledConfigure>
-        <h2>
-          <ThemedCopyOutlined /> Backup your wallet
-        </h2>
-        <Alert
-          style={{ marginBottom: "12px" }}
-          description="Your seed phrase is the only way to restore your wallet. Write it down. Keep it safe."
-          type="warning"
-          showIcon
-        />
-        {wallet && wallet.mnemonic && (
-          <StyledCollapse>
-            <Panel header="Click to reveal seed phrase" key="1">
-              <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
-            </Panel>
-          </StyledCollapse>
-        )}
+        <FormPassword getWallet={() => wallet} textSubmit="Unlock Wallet to check settings.">
+          <h2>
+            <ThemedCopyOutlined /> Backup your wallet
+          </h2>
+          <Alert
+            style={{ marginBottom: "12px" }}
+            description="Your seed phrase is the only way to restore your wallet. Write it down. Keep it safe."
+            type="warning"
+            showIcon
+          />
+          {wallet && wallet.mnemonic && (
+            <StyledCollapse>
+              <Panel header="Click to reveal seed phrase" key="1">
+                <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
+              </Panel>
+            </StyledCollapse>
+          )}
 
-        <h2 style={{ marginTop: "12px" }}>
-          <DeleteOutlined /> Remove wallet
-        </h2>
-        <Alert
-          style={{ marginBottom: "12px" }}
-          description="Your data will be totally erased. Remember to backup your seed before deleting your wallet."
-          type="error"
-          showIcon
-        />
-        {wallet && wallet.mnemonic && (
-          <StyledCollapse>
-            <SecondaryButton onClick={() => deleteWallet()}>
-              Delete Wallet
-            </SecondaryButton>
-          </StyledCollapse>
-        )}
+          <h2 style={{ marginTop: "12px" }}>
+            <DeleteOutlined /> Remove wallet
+          </h2>
+          <Alert
+            style={{ marginBottom: "12px" }}
+            description="Your data will be totally erased. Remember to backup your seed before deleting your wallet."
+            type="error"
+            showIcon
+          />
+            {wallet && wallet.mnemonic && (
+              <StyledCollapse>
+                <SecondaryButton onClick={() => deleteWallet()}>
+                  Delete Wallet
+                </SecondaryButton>
+              </StyledCollapse>
+            )}
+        </FormPassword>
       </StyledConfigure>
     </Spin>
   );

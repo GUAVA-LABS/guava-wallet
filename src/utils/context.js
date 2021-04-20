@@ -12,7 +12,8 @@ import { currency } from '@components/Common/Ticker';
 import { bnToBig } from './helpers';
 import { notification, } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
-import useEncryption from '@hooks/useEncryption';
+import useEncryption, { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
+import useIdle from '@hooks/useIdle';
 const bip39 = require('bip39');
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,18 +33,17 @@ const useWallet = () => {
     const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
     let avalancheInstance = new Avalanche(AVA_NODE_IP, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
+    const isIdle = useIdle({ timeToIdle: 1000 });
     const [loading, setLoading] = React.useState(true);
-
     const [wallet, setWallet] = React.useState(false);
     const [fiatPrice, setFiatPrice] = React.useState(0);
-    const { encryptionStatus, encrypt, decrypt } = useEncryption();
+    const { encryptionStatus, encrypt, decrypt, setEncryptionStatus } = useEncryption();
 
     const createWallet = importMnemonic => {
         const mnemonic = importMnemonic || bip39.generateMnemonic(256);
         const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
         const keychainInstance = importedKeychainInstance(privateKey);
         const addressStrings = keychainInstance.getAddressStrings();
-        setWallet({ mnemonic, address: addressStrings[0], avaxBalance: 0 });
         return { mnemonic, address: addressStrings[0], avaxBalance: 0 }
     };
 
@@ -56,7 +56,6 @@ const useWallet = () => {
         const seed = bip39.mnemonicToSeedSync(mnemonic);
         const masterHdKey = HDKey.fromMasterSeed(seed);
         const accountHdKey = masterHdKey.derive(AVA_ACCOUNT_PATH);
-       
         return accountHdKey.privateKey;
     }
 
@@ -66,16 +65,23 @@ const useWallet = () => {
        return keychainInstance;
     }
 
-    const getWalletFromLocalStorage = async () => {
+    const parseWalletFromLocalStorage = () => {
         const wallet = window.localStorage.getItem("guava-wallet");
-        if (wallet) {
-            const parsedWalletFromLocalStorage = JSON.parse(wallet);
-            const { address } = parsedWalletFromLocalStorage;
-            let balances = await xchain.getAllBalances(address);
-            const avaxBalance = balances.filter(x => x.asset === 'AVAX').pop();
-            const avaxBalanceValue = avaxBalance ? bnToBig(avaxBalance.balance, 9).toString() : "0";
-            const updatedWallet = { address, avaxBalance: avaxBalanceValue }
-            return updatedWallet;
+        return JSON.parse(wallet);
+    }
+
+    const fetchAllBalancesFromAddress = async (address) => {
+        let balances = await xchain.getAllBalances(address);
+        const avaxBalance = balances.filter(x => x.asset === 'AVAX').pop();
+        const avaxBalanceValue = avaxBalance ? bnToBig(avaxBalance.balance, 9).toString() : "0";
+        return avaxBalanceValue;
+    }
+
+    const getWalletFromLocalStorage = async () => {
+        const wallet = parseWalletFromLocalStorage();
+        if (wallet && wallet.address) {
+            const avaxBalanceValue = await fetchAllBalancesFromAddress(wallet.address);
+            return { ...wallet, avaxBalance: avaxBalanceValue }
         }
     }
 
@@ -109,15 +115,22 @@ const useWallet = () => {
             return issuedTransactionID;
     };
 
+    const setWalletAndEncrypt = async () => {
+        const walletFromLocalStorage = await getWalletFromLocalStorage();
+        if (walletFromLocalStorage && walletFromLocalStorage.mnemonicCypher) {
+            setEncryptionStatus(ENCRYPTION_STATUS_CODE.ENCRYPTED);
+            setWallet({ ...walletFromLocalStorage, mnemonic: false });
+        }
+    }
+    // yarn add activity-detector
 
     const setExistingWalletOnFirstMount = () => {
         (async () => {
             setLoading(true);
-            const walletFromLocalStorage = await getWalletFromLocalStorage();
-            console.log('primeira busca', walletFromLocalStorage);
-            setWallet(walletFromLocalStorage);
+            await setWalletAndEncrypt(true);
             setLoading(false);
         })();
+        
     }; 
 
     const fetchFiatPrice = async () => {
@@ -152,11 +165,13 @@ const useWallet = () => {
         fetchFiatPrice();
     }, INTERVAL_IN_MILISECONDS);
 
+    useAsyncTimeout(async () => {
+       await setWalletAndEncrypt();
+    }, INTERVAL_IN_MILISECONDS * 30);
+
     React.useEffect(() => {
         if (wallet) {
-        console.log('guava wallet update');
-        console.log(wallet);
-        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonic: wallet.mnemonic, address: wallet.address, avaxBalance: wallet.avaxBalance})) 
+        window.localStorage.setItem("guava-wallet", JSON.stringify({ mnemonicCypher: wallet.mnemonicCypher, mnemonic: wallet.mnemonic, address: wallet.address, avaxBalance: wallet.avaxBalance})) 
         }
     }, [wallet])
 

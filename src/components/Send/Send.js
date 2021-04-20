@@ -18,6 +18,7 @@ import {
     currency,
 } from '@components/Common/Ticker.js';
 import { shouldRejectAmountInput, fiatToCrypto } from '@utils/validation';
+import FormPassword from '@components/OnBoarding/formPassword';
 
 export const BalanceHeader = styled.div`
     p {
@@ -237,137 +238,139 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
 
     return (
         <>
-            <Modal
-                title="Confirm Send"
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                
-            >
-                <p>
-                    Are you sure you want to send {formData.value}{' '}
-                    {currency.ticker} to {formData.address}?
-                </p>
-            </Modal>
-            {!avaxBalance ? (
-                <ZeroBalanceHeader>
-                    You currently have 0 {currency.ticker}
-                    <br />
-                    Deposit some funds to use this feature
-                </ZeroBalanceHeader>
-            ) : (
-                <>
-                    <BalanceHeader>
-                        <p>Available balance</p>
-                        <h3>
-                            {avaxBalance}{' '}
-                            {currency.ticker}
-                        </h3>
-                    </BalanceHeader>
-                   
-                </>
-            )}
+          <FormPassword getWallet={() => wallet} textSubmit="Unlock your wallet to send transactions.">
+                <Modal
+                    title="Confirm Send"
+                    visible={isModalVisible}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    
+                >
+                    <p>
+                        Are you sure you want to send {formData.value}{' '}
+                        {currency.ticker} to {formData.address}?
+                    </p>
+                </Modal>
+                {!avaxBalance ? (
+                    <ZeroBalanceHeader>
+                        You currently have 0 {currency.ticker}
+                        <br />
+                        Deposit some funds to use this feature
+                    </ZeroBalanceHeader>
+                ) : (
+                    <>
+                        <BalanceHeader>
+                            <p>Available balance</p>
+                            <h3>
+                                {avaxBalance}{' '}
+                                {currency.ticker}
+                            </h3>
+                        </BalanceHeader>
+                    
+                    </>
+                )}
 
-            <Row type="flex">
-                <Col span={24}>
-                    <Spin spinning={loading} indicator={CashLoadingIcon}>
-                        <Form style={{ width: 'auto' }}>
-                            <FormItemWithQRCodeAddon
-                                loadWithCameraOpen={scannerSupported}
-                                disabled={Boolean(filledAddress)}
-                                validateStatus={''
-                                }
-                                help={
-                                    sendAvaxAddressError
-                                        ? sendAvaxAddressError
-                                        : ''
-                                }
-                                onScan={result =>
-                                    handleAddressChange({
-                                        target: {
-                                            name: 'address',
-                                            value: result,
-                                        },
-                                    })
-                                }
-                                inputProps={{
-                                    disabled: Boolean(filledAddress),
-                                    placeholder: `${currency.ticker} Address`,
-                                    name: 'address',
-                                    onChange: e => handleAddressChange(e),
-                                    required: true,
-                                    value: filledAddress || formData.address,
-                                }}
-                            ></FormItemWithQRCodeAddon>
-                            <SendBchInput
-                                validateStatus={
-                                    sendAvaxAmountError ? 'error' : ''
-                                }
-                                help={
-                                    sendAvaxAmountError ? sendAvaxAmountError : ''
-                                }
-                               
-                                inputProps={{
-                                    name: 'value',
-                                    dollar: 0,
-                                    placeholder: 'Amount',
-                                    onChange: e => handleBchAmountChange(e),
-                                    required: true,
-                                    value: formData.value,
-                                }}
-                                selectProps={{
-                                    value: selectedCurrency,
-                                    disabled: queryStringText !== null,
-                                    onChange: e =>
-                                        handleSelectedCurrencyChange(e),
-                                }}
-                            ></SendBchInput>
-                          
-                            <div style={{ paddingTop: '12px' }}>
-                                {!avaxBalance ||
-                                apiError ||
-                                sendAvaxAmountError ||
-                                sendAvaxAddressError ? (
-                                    <SecondaryButton>Send</SecondaryButton>
-                                ) : (
+                <Row type="flex">
+                    <Col span={24}>
+                        <Spin spinning={loading} indicator={CashLoadingIcon}>
+                            <Form style={{ width: 'auto' }}>
+                                <FormItemWithQRCodeAddon
+                                    loadWithCameraOpen={scannerSupported}
+                                    disabled={Boolean(filledAddress)}
+                                    validateStatus={''
+                                    }
+                                    help={
+                                        sendAvaxAddressError
+                                            ? sendAvaxAddressError
+                                            : ''
+                                    }
+                                    onScan={result =>
+                                        handleAddressChange({
+                                            target: {
+                                                name: 'address',
+                                                value: result,
+                                            },
+                                        })
+                                    }
+                                    inputProps={{
+                                        disabled: Boolean(filledAddress),
+                                        placeholder: `${currency.ticker} Address`,
+                                        name: 'address',
+                                        onChange: e => handleAddressChange(e),
+                                        required: true,
+                                        value: filledAddress || formData.address,
+                                    }}
+                                ></FormItemWithQRCodeAddon>
+                                <SendBchInput
+                                    validateStatus={
+                                        sendAvaxAmountError ? 'error' : ''
+                                    }
+                                    help={
+                                        sendAvaxAmountError ? sendAvaxAmountError : ''
+                                    }
+                                
+                                    inputProps={{
+                                        name: 'value',
+                                        dollar: 0,
+                                        placeholder: 'Amount',
+                                        onChange: e => handleBchAmountChange(e),
+                                        required: true,
+                                        value: formData.value,
+                                    }}
+                                    selectProps={{
+                                        value: selectedCurrency,
+                                        disabled: queryStringText !== null,
+                                        onChange: e =>
+                                            handleSelectedCurrencyChange(e),
+                                    }}
+                                ></SendBchInput>
+                            
+                                <div style={{ paddingTop: '12px' }}>
+                                    {!avaxBalance ||
+                                    apiError ||
+                                    sendAvaxAmountError ||
+                                    sendAvaxAddressError ? (
+                                        <SecondaryButton>Send</SecondaryButton>
+                                    ) : (
+                                        <>
+                                            {txInfoFromUrl ? (
+                                                <PrimaryButton
+                                                    onClick={() => showModal()}
+                                                >
+                                                    Send
+                                                </PrimaryButton>
+                                            ) : (
+                                                <PrimaryButton
+                                                    onClick={() => submit()}
+                                                >
+                                                    Send
+                                                </PrimaryButton>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                                {queryStringText && (
+                                    <Alert
+                                        message={`You are sending a transaction to an address including query parameters "${queryStringText}." Only the "amount" parameter, in units of ${currency.ticker} satoshis, is currently supported.`}
+                                        type="warning"
+                                    />
+                                )}
+                                {apiError && (
                                     <>
-                                        {txInfoFromUrl ? (
-                                            <PrimaryButton
-                                                onClick={() => showModal()}
-                                            >
-                                                Send
-                                            </PrimaryButton>
-                                        ) : (
-                                            <PrimaryButton
-                                                onClick={() => submit()}
-                                            >
-                                                Send
-                                            </PrimaryButton>
-                                        )}
+                                        <CashLoader />
+                                        <p style={{ color: 'red' }}>
+                                            <b>
+                                                An error occured on our end.
+                                                Reconnecting...
+                                            </b>
+                                        </p>
                                     </>
                                 )}
-                            </div>
-                            {queryStringText && (
-                                <Alert
-                                    message={`You are sending a transaction to an address including query parameters "${queryStringText}." Only the "amount" parameter, in units of ${currency.ticker} satoshis, is currently supported.`}
-                                    type="warning"
-                                />
-                            )}
-                            {apiError && (
-                                <>
-                                    <CashLoader />
-                                    <p style={{ color: 'red' }}>
-                                        <b>
-                                            An error occured on our end.
-                                            Reconnecting...
-                                        </b>
-                                    </p>
-                                </>
-                            )}
-                        </Form>
-                    </Spin>
-                </Col>
-            </Row>
+                            </Form>
+                        </Spin>
+                    </Col>
+                </Row>
+            </FormPassword>
         </>
     );
 };

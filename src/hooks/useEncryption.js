@@ -7,8 +7,16 @@ export const ENCRYPTION_STATUS_CODE = {
     DECRYPTED: 2
 }
 
-const useEncryption = () => {
-    const [encryptionStatus, setEncryptionStatus] = React.useState(ENCRYPTION_STATUS_CODE.DECRYPTED);
+const getInitialState = (mnemonicCypher) => {
+    if (!mnemonicCypher) {
+        return ENCRYPTION_STATUS_CODE.DECRYPTED;
+    }
+
+    return ENCRYPTION_STATUS_CODE.ENCRYPTED;
+}
+
+const useEncryption = (mnemonicCypher) => {
+    const [encryptionStatus, setEncryptionStatus] = React.useState(getInitialState(mnemonicCypher));
 
     const encrypt = (password, data) => {
         const encryptedCypher = SJCL.encrypt(password, JSON.stringify(data));
@@ -29,7 +37,8 @@ const useEncryption = () => {
     return {
         encryptionStatus,
         encrypt,
-        decrypt
+        decrypt,
+        setEncryptionStatus
     }
 }
 
