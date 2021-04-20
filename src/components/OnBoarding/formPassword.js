@@ -32,9 +32,9 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
   const onFinish = (values) => {
     const wallet = getWallet();
     const { password } = values;
-    
-    switch(encryptionStatus) {
-      case ENCRYPTION_STATUS_CODE.DECRYPTED: 
+
+    switch (encryptionStatus) {
+      case ENCRYPTION_STATUS_CODE.DECRYPTED:
         const mnemonicCypher = encrypt(password, wallet.mnemonic);
         setWallet({
           ...wallet,
@@ -49,9 +49,9 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
         })
         break;
       default:
-      }
+    }
 
-      afterSubmit();
+    afterSubmit();
   }
 
 
@@ -65,7 +65,7 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-   
+
       <Form.Item
         label="Password"
         name="password"
@@ -78,12 +78,7 @@ const FormPassword = ({ getWallet, afterSubmit }) => {
       >
         <Input.Password />
       </Form.Item>
-
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
-     
-        <Form.Item {...tailLayout}>
+      <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Ok, make me a wallet.
         </Button>

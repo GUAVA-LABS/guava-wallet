@@ -55,7 +55,7 @@ const CustomInput = styled.div`
 
     span {
         font-weight: bold;
-        color: #6cbe45;
+        color: #44444;
         font-size: 16px;
     }
     input {

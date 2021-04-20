@@ -164,12 +164,7 @@ const WalletInfo = () => {
         </>);
     }
 
-    return (
-       <>
-            {encryptionStatus === ENCRYPTION_STATUS_CODE.DECRYPTED && <AddressAndBalance address={address} avaxBalance={wallet.avaxBalance} /> }
-            {encryptionStatus === ENCRYPTION_STATUS_CODE.ENCRYPTED && <FormPassword getWallet={() => wallet} afterSubmit={() => {}} />}
-        </>
-    );
+    return  <AddressAndBalance address={address} avaxBalance={wallet.avaxBalance} />
 };
 
 const Wallet = () => {

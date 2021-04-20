@@ -70,11 +70,11 @@ const useWallet = () => {
         const wallet = window.localStorage.getItem("guava-wallet");
         if (wallet) {
             const parsedWalletFromLocalStorage = JSON.parse(wallet);
-            const { address, mnemonic } = parsedWalletFromLocalStorage;
+            const { address } = parsedWalletFromLocalStorage;
             let balances = await xchain.getAllBalances(address);
             const avaxBalance = balances.filter(x => x.asset === 'AVAX').pop();
             const avaxBalanceValue = avaxBalance ? bnToBig(avaxBalance.balance, 9).toString() : "0";
-            const updatedWallet = { mnemonic, address, avaxBalance: avaxBalanceValue }
+            const updatedWallet = { address, avaxBalance: avaxBalanceValue }
             return updatedWallet;
         }
     }
@@ -137,11 +137,9 @@ const useWallet = () => {
             notification.error({
             message: 'Network Error',
             description: (
-                
                     <Paragraph>
                         Connection issues with Guava Node. Try again later.
                     </Paragraph>
-                
             ),
             duration: 5,
         });
