@@ -32,7 +32,7 @@ export const WelcomeLink = styled.a`
 
 export const OnBoarding = ({ history }) => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, setWallet, createWallet, getWalletFromLocalStorage } = ContextValue;
+    const { createWallet } = ContextValue;
     const validateMnemonic = () => true; // TODO: Mnemonic validation on AVA
     const [formData, setFormData] = useState({
         dirty: true,
@@ -42,24 +42,6 @@ export const OnBoarding = ({ history }) => {
     const [seedInput, openSeedInput] = useState(false);
     const [isValidMnemonic, setIsValidMnemonic] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const { confirm } = Modal;
-
-    async function submit() {
-        setFormData({
-            ...formData,
-            dirty: false,
-        });
-
-        if (!formData.mnemonic) {
-            return;
-        }
-        // Event("Category", "Action", "Label")
-        // Track number of created wallets from onboarding
-        Event('Onboarding.js', 'Create Wallet', 'Imported');
-        createWallet(formData.mnemonic);
-        setWallet(getWalletFromLocalStorage());
-    }
 
     const handleChange = e => {
         const { value, name } = e.target;
@@ -82,7 +64,7 @@ export const OnBoarding = ({ history }) => {
             <WelcomeText>
                 Guava is an{' '}
                 <WelcomeLink
-                    href="https://github.com/bitcoin-abc/bitcoin-abc"
+                    
                     target="_blank"
                     rel="noreferrer"
                     

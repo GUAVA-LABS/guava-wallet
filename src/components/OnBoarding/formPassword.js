@@ -1,9 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 import { WalletContext } from '@utils/context';
+import { UnlockOutlined } from '@ant-design/icons'
 
+export const StyledButton = styled(Button)`
+  border: 2px solid #D5008C;
+  display: inline-block;
+  
+`;
 
 const layout = {
   labelCol: {
@@ -57,6 +63,11 @@ const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) 
 
   const showForm = locked || encryptionStatus === ENCRYPTION_STATUS_CODE.ENCRYPTED;
 
+  const UnlockButton = () => <StyledButton htmlType="submit" icon={<UnlockOutlined />}>
+                             </StyledButton>;
+
+  const addonAfter = textSubmit ? false : <UnlockButton />;
+
   const LockedForm = () =>
     <Form
       {...layout}
@@ -68,8 +79,10 @@ const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) 
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
-        label="Password"
+        
         name="password"
+        align="center"
+
         rules={[
           {
             required: true,
@@ -77,16 +90,20 @@ const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) 
           },
         ]}
       >
-        <Input.Password />
+        <Input.Password placeholder="********" {...addonAfter} />
       </Form.Item>
-      <Form.Item {...tailLayout}>
+      {textSubmit && <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           {textSubmit}
         </Button>
-      </Form.Item>
-   </Form>;
+      </Form.Item>}
+    </Form>;
   
-   return showForm ? <LockedForm /> : <div>{children}</div>;
+  return (<>
+    {showForm && <LockedForm />}
+    {!showForm && <div>{children}</div>}
+  </>)
+
 };
 
 export default FormPassword;

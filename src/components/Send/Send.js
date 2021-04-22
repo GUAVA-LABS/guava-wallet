@@ -19,6 +19,8 @@ import {
 } from '@components/Common/Ticker.js';
 import { shouldRejectAmountInput, fiatToCrypto } from '@utils/validation';
 import FormPassword from '@components/OnBoarding/formPassword';
+import useAsyncTimeout from '@hooks/useAsyncTimeout';
+import axios from 'axios';
 
 export const BalanceHeader = styled.div`
     p {
@@ -69,16 +71,29 @@ const ConvertAmount = styled.div`
 const SendBCH = ({ filledAddress, callbackTxId }) => {
     const {
         wallet,
-        fiatPrice,
         sendAssetXChain,
         apiError,
     } = React.useContext(WalletContext);
 
     const { avaxBalance } = wallet;
+    const [fiatPrice, setFiatPrice] = React.useState(0);
+    const INTERVAL_IN_MILISECONDS = 1000;
+
+    const fetchFiatPrice = async () => {
+        const fetchedPriceObject= await axios.get(currency.priceApi);
+        setFiatPrice(fetchedPriceObject.data["usd"]);
+    };
 
     
     const { width } = useWindowDimensions();
     const scannerSupported = width < 769 && isMobile && !(isIOS && !isSafari);
+
+
+    useAsyncTimeout(async () => {
+        await fetchFiatPrice();
+    }, INTERVAL_IN_MILISECONDS);
+
+
 
     const [formData, setFormData] = useState({
         dirty: true,
@@ -238,7 +253,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
 
     return (
         <>
-          <FormPassword getWallet={() => wallet} textSubmit="Unlock your wallet to send transactions.">
                 <Modal
                     title="Confirm Send"
                     visible={isModalVisible}
@@ -370,7 +384,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                         </Spin>
                     </Col>
                 </Row>
-            </FormPassword>
         </>
     );
 };

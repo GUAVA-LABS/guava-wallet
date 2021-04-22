@@ -57,7 +57,6 @@ export const NavButton = styled.button`
     }
     background-color: #fff;
     border: none;
-    font-size: 12px;
     font-weight: bold;
     .anticon {
         display: block;
@@ -170,21 +169,7 @@ const App = () => {
     const history = useHistory();
     const selectedKey =
         location && location.pathname ? location.pathname.substr(1) : '';
-
-    const fetchMarketImageFromAirtable = async () => {
-        try {
-            const responseFromAirtable = await dynamicContent('market');
-            setMarketImage(responseFromAirtable.data.records[0].fields.Image[0].url);
-        } catch (e) {
-            setMarketImage(GuavaMarketPlaceholderImgSrc);
-        }
-    }
-
-    React.useEffect(() => {
-        fetchMarketImageFromAirtable();
-    })
     
-
     return (
         
         <ErrorBoundary>
@@ -203,24 +188,16 @@ const App = () => {
                             <Route path="/wallet">
                                 <Wallet />
                             </Route>
-
-
                             <Route path="/send">
+                            <FormPassword  getWallet={() => wallet} textSubmit="Unlock Wallet">
                                 <Send />
-                            </Route>
-                            <Route path="/market">
-                                <div>
-                                    {!marketImage && (
-                                        <LoadingCtn>
-                                            <LoadingOutlined />
-                                        </LoadingCtn>
-                                    )}
-                                    {marketImage && <GuavaMarket src={marketImage} alt="Guava Market" />}
-                                </div>
+                            </FormPassword>
                             </Route>
                             <Route path="/configure">
                                 {!wallet && <Redirect exact from="/configure" to="/" />}
-                                <Configure />
+                                <FormPassword getWallet={() => wallet}>
+                                    <Configure />
+                                </FormPassword>
                             </Route>
                             <Route path="/news">
                                 <News />

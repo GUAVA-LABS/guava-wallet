@@ -9,7 +9,6 @@ import {
   CashLoadingIcon,
   ThemedCopyOutlined,
 } from "@components/Common/CustomIcons";
-import FormPassword from '@components/OnBoarding/formPassword';
 
 const { Panel } = Collapse;
 const StyledConfigure = styled.div`
@@ -24,10 +23,10 @@ const StyledConfigure = styled.div`
 const Configure = () => {
   const ContextValue = React.useContext(WalletContext);
   const { wallet, deleteWallet } = ContextValue;
+
   return (
     <Spin spinning={false} indicator={CashLoadingIcon}>
       <StyledConfigure>
-        <FormPassword getWallet={() => wallet} textSubmit="Unlock Wallet to check settings.">
           <h2>
             <ThemedCopyOutlined /> Backup your wallet
           </h2>
@@ -37,13 +36,11 @@ const Configure = () => {
             type="warning"
             showIcon
           />
-          {wallet && wallet.mnemonic && (
             <StyledCollapse>
               <Panel header="Click to reveal seed phrase" key="1">
                 <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
               </Panel>
             </StyledCollapse>
-          )}
 
           <h2 style={{ marginTop: "12px" }}>
             <DeleteOutlined /> Remove wallet
@@ -54,17 +51,16 @@ const Configure = () => {
             type="error"
             showIcon
           />
-            {wallet && wallet.mnemonic && (
-              <StyledCollapse>
-                <SecondaryButton onClick={() => deleteWallet()}>
-                  Delete Wallet
-                </SecondaryButton>
-              </StyledCollapse>
-            )}
-        </FormPassword>
-      </StyledConfigure>
+            <StyledCollapse>
+              <SecondaryButton onClick={() => deleteWallet()}>
+                Delete Wallet
+              </SecondaryButton>
+            </StyledCollapse>
+        </StyledConfigure>
+      
     </Spin>
   );
 };
 
 export default Configure;
+    

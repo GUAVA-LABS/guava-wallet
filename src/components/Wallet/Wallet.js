@@ -5,8 +5,6 @@ import { WalletContext } from '@utils/context';
 import { OnBoarding } from '@components/OnBoarding/OnBoarding';
 import { QRCode } from '@components/Common/QRCode';
 import { Link } from 'react-router-dom';
-import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
-import FormPassword from '@components/OnBoarding/formPassword';
 
 export const LoadingCtn = styled.div`
     width: 100%;
@@ -144,7 +142,7 @@ export const ExternalLink = styled.a`
 
 const WalletInfo = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, encryptionStatus } = ContextValue;
+    const { wallet } = ContextValue;
     const { address } = wallet;
 
     const AddressAndBalance = ({ address, avaxBalance }) => {

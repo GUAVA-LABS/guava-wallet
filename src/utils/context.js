@@ -13,18 +13,17 @@ import { bnToBig } from './helpers';
 import { notification, } from 'antd';
 import Paragraph from 'antd/lib/typography/Paragraph';
 import useEncryption, { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
-import useIdle from '@hooks/useIdle';
 const bip39 = require('bip39');
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
-const useMountEffect = (fun) => React.useEffect(fun, [])
+export const useMountEffect = (fun) => React.useEffect(fun, []);
 
 //TODO: Move these values to REACT_ENV variables
 const environmentVariables = {
     NETWORK_ID: 1,
     BLOCKCHAIN_ID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
     AVA_NODE_IP: "guavanode.ngrok.io"
-}
+};
 
 const useWallet = () => {
     const INTERVAL_IN_MILISECONDS = 10000;
@@ -33,10 +32,9 @@ const useWallet = () => {
     const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
     let avalancheInstance = new Avalanche(AVA_NODE_IP, 443, "https", NETWORK_ID, BLOCKCHAIN_ID);
     let xchain = avalancheInstance.XChain();
-    const isIdle = useIdle({ timeToIdle: 1000 });
+
     const [loading, setLoading] = React.useState(true);
     const [wallet, setWallet] = React.useState(false);
-    const [fiatPrice, setFiatPrice] = React.useState(0);
     const { encryptionStatus, encrypt, decrypt, setEncryptionStatus } = useEncryption();
 
     const createWallet = importMnemonic => {
@@ -131,21 +129,19 @@ const useWallet = () => {
             setLoading(false);
         })();
         
-    }; 
-
-    const fetchFiatPrice = async () => {
-        const fetchedPriceObject= await axios.get(currency.priceApi);
-        setFiatPrice(fetchedPriceObject.data["usd"]);
     };
-
+    
     useMountEffect(setExistingWalletOnFirstMount);
+
 
     useAsyncTimeout(async () => {
         try {
         const responseFromLocalStorage = await getWalletFromLocalStorage();
-        if (responseFromLocalStorage) {
-            setWallet(responseFromLocalStorage);
-        }
+            if (responseFromLocalStorage) {
+                if (wallet && responseFromLocalStorage.avaxBalance !== wallet.avaxBalance){
+                    setWallet(responseFromLocalStorage);                
+                }
+            }
         } catch(error){
             notification.error({
             message: 'Network Error',
@@ -159,10 +155,6 @@ const useWallet = () => {
 
 
         }
-    }, INTERVAL_IN_MILISECONDS);
-
-    useAsyncTimeout(async () => {
-        fetchFiatPrice();
     }, INTERVAL_IN_MILISECONDS);
 
     useAsyncTimeout(async () => {
@@ -185,7 +177,6 @@ const useWallet = () => {
         wallet,
         setWallet,
         tokens: [],
-        fiatPrice,
         encryptionStatus,
         encrypt,
         decrypt
