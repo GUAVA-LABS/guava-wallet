@@ -6,6 +6,10 @@ import { OnBoarding } from '@components/OnBoarding/OnBoarding';
 import { QRCode } from '@components/Common/QRCode';
 import { Link } from 'react-router-dom';
 
+const BalanceColor = styled.h1`
+    color:#FFFFFF;
+`
+
 export const LoadingCtn = styled.div`
     width: 100%;
     display: flex;
@@ -148,7 +152,7 @@ const WalletInfo = () => {
     const AddressAndBalance = ({ address, avaxBalance }) => {
         
         return (<>
-            <h1>{avaxBalance ? avaxBalance : 0} AVAX</h1>
+            <BalanceColor>{avaxBalance ? avaxBalance : 0} AVAX</BalanceColor>
             {address && <>
                       
                             <QRCode

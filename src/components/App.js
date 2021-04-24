@@ -18,7 +18,7 @@ import {
     useHistory,
 } from 'react-router-dom';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
-import GuavaHeaderImg from '@assets/guavaheader.png';
+import GuavaHeaderImg from '@assets/guavaheader.svg';
 import MenuItems from '@components/Common/MenuItems';
 import ErrorBoundary from '@components/ErrorBoundary';
 import dynamicContent from '@utils/dynamicContent';
@@ -109,7 +109,7 @@ export const HeaderCtn = styled.div`
     padding: 20px 0 30px;
     margin-bottom: 20px;
     justify-content: space-between;
-    border-bottom: 1px solid #e2e2e2;
+    
     a {
         color: #848484;
         :hover {
