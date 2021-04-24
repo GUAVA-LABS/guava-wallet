@@ -7,20 +7,15 @@ import { Event } from '@utils/GoogleAnalytics';
 
 export const StyledRawQRCode = styled(RawQRCode)`
     cursor: pointer;
-    border-radius: 23px;
     background: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.01) 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 4px 8px,
-        rgba(0, 0, 0, 0.04) 0px 16px 24px, rgba(0, 0, 0, 0.01) 0px 24px 32px;
     margin-bottom: 10px;
-    border: 1px solid #e9eaed;
-    path:first-child {
-        fill: #fff;
-    }
+   
+    
     :hover {
         border-color: ${({ bch = 0 }) => (bch === 1 ? '#ff8d00;' : '#5ebd6d')};
     }
     @media (max-width: 768px) {
-        border-radius: 18px;
+        
         width: 170px;
         height: 170px;
     }
@@ -45,7 +40,7 @@ const Copied = styled.div`
 
 const CustomInput = styled.div`
     font-size: 12px;
-    color: #8e8e8e;
+    color: #ffffff;
     text-align: center;
     cursor: pointer;
     margin-bottom: 15px;
@@ -167,6 +162,8 @@ export const QRCode = ({
                     bch={address && address.includes('bitcoin') ? 1 : 0}
                     renderAs={'svg'}
                     includeMargin
+                    bgColor="#D2007D"
+                    fgColor="#FFFFFF"
                     imageSettings={{
                         src:
                             currency.tokenLogo,

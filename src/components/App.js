@@ -28,7 +28,7 @@ import FormPassword from '@components/OnBoarding/formPassword'
 const CustomApp = styled.div`
     text-align: center;
     font-family: 'Gilroy', sans-serif;
-    background-color: #fbfbfd;
+    background-color: #d2007d;
     
 `;
 
@@ -86,10 +86,10 @@ export const WalletBody = styled.div`
 export const WalletCtn = styled.div`
     position: relative;
     width: 500px;
-    background-color: #fff;
+    background-color: #d2007d;
     min-height: 100vh;
     padding: 10px 30px 120px 30px;
-    background: #fff;
+    background: #d2007d;
     -webkit-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);
     -moz-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);
     box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);
