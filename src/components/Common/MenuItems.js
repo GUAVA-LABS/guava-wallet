@@ -18,11 +18,9 @@ export default ({ selectedKey, currentPage, handleClick }) => (
     <Swiper
       spaceBetween={0}
       slidesPerView={1}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
       navigation
     >
-      <SwiperSlide key={0}>
+      
         <NavButton
           active={selectedKey === "wallet"}
           onClick={() => handleClick("/wallet")}
@@ -53,7 +51,7 @@ export default ({ selectedKey, currentPage, handleClick }) => (
           <SettingFilled />
           Settings
         </NavButton>
-      </SwiperSlide>
+      
     </Swiper>
   </Footer>
 );
