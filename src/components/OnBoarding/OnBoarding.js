@@ -73,15 +73,10 @@ export const OnBoarding = ({ history }) => {
 
             <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
-                Guava is an{' '}
-                <WelcomeLink
-                    
-                    target="_blank"
-                    rel="noreferrer"
-                    
-                >
+                Guava is an
+                
                     open source,
-                </WelcomeLink>{' '}
+                
                 non-custodial web wallet for {currency.name}.
                 <br />
                 <br />
