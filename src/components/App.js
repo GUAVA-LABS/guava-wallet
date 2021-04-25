@@ -19,6 +19,7 @@ import {
 } from 'react-router-dom';
 import GuavaMarketPlaceholderImgSrc from '@assets/guavamarket.png';
 import GuavaHeaderImg from '@assets/guavaheader.svg';
+import GuavaWhiteHeaderImg from '@assets/guavaheader.png';
 import MenuItems from '@components/Common/MenuItems';
 import ErrorBoundary from '@components/ErrorBoundary';
 import dynamicContent from '@utils/dynamicContent';
@@ -86,10 +87,9 @@ export const WalletBody = styled.div`
 export const WalletCtn = styled.div`
     position: relative;
     width: 500px;
-    background-color: #d2007d;
+    background-color: ${props => props.primary ? '#d2007d' : '#fff'};
     min-height: 100vh;
     padding: 10px 30px 120px 30px;
-    background: #d2007d;
     -webkit-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);
     -moz-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);
     box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);
@@ -171,14 +171,16 @@ const App = () => {
   const selectedKey =
     location && location.pathname ? location.pathname.substr(1) : "";
 
+  const isPrimary = selectedKey === 'wallet';
+
   return (
     <ErrorBoundary>
       <ThemeProvider theme={theme}>
         <CustomApp>
           <WalletBody>
-            <WalletCtn>
+            <WalletCtn primary={isPrimary}>
               <HeaderCtn>
-                <GuavaHeader src={GuavaHeaderImg} alt="Guava Wallet" />
+                <GuavaHeader src={isPrimary ? GuavaHeaderImg : GuavaWhiteHeaderImg } alt="Guava Wallet" />
               </HeaderCtn>
 
               <Switch>
