@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const PrimaryButton = styled.button`
     border: none;
     color: #fff;
-    background-color: #D5008C;
+    background-color: #42a240;
     transition: all 0.5s ease;
     background-size: 200% auto;
     font-size: 18px;

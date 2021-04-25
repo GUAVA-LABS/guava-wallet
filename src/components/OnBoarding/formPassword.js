@@ -90,7 +90,7 @@ const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) 
           },
         ]}
       >
-        <Input.Password placeholder="********" {...addonAfter} />
+        <Input.Password placeholder="Password" {...addonAfter} />
       </Form.Item>
       {textSubmit && <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
