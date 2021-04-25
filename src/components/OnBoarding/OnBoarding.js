@@ -17,8 +17,13 @@ import { currency } from '@components/Common/Ticker.js';
 import { Event } from '@utils/GoogleAnalytics';
 import FormPassword from '@components/OnBoarding/formPassword'
 
+
+
+const WelcomeColor = styled.h2`
+    color:#FFFFFF;
+`
 export const WelcomeText = styled.p`
-    color: #444;
+    color: #FFFFFF;
     width: 100%;
     font-size: 16px;
     margin-bottom: 60px;
@@ -27,7 +32,7 @@ export const WelcomeText = styled.p`
 
 export const WelcomeLink = styled.a`
     text-decoration: underline;
-    color: #D5008C;
+    color: #6cbe45;
 `;
 
 export const OnBoarding = ({ history }) => {
@@ -60,7 +65,7 @@ export const OnBoarding = ({ history }) => {
     return (
         <>
 
-            <h2>Welcome to Guava!</h2>
+            <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
                 Guava is an{' '}
                 <WelcomeLink
