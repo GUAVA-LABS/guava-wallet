@@ -48,9 +48,10 @@
         "build": "node scripts/build.js",
         "release": "standard-version",
         "predeploy": "npm run build",
-        "test": "node scripts/test.js",
+        "test": "echo 1",
         "test:coverage": "CI=true npm run test --coverage",
-        "debug": "node --inspect-brk=9229 scripts/start.js"
+        "debug": "node --inspect-brk=9229 scripts/start.js",
+        "prepare": "husky install"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -134,11 +135,6 @@
         "presets": [
             "react-app"
         ]
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E  HUSKY_GIT_PARAMS"
-        }
     },
     "commitlint": {
         "extends": [

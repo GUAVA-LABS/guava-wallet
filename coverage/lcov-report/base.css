@@ -50,7 +50,7 @@ a:hover { text-decoration:underline; }
 }
 
 .quiet {
-  color: #ffffff;
+  color: #7f7f7f;
   color: rgba(0,0,0,0.5);
 }
 .quiet a { opacity: 0.7; }
