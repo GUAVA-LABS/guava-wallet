@@ -22,6 +22,12 @@ import FormPassword from '@components/OnBoarding/formPassword'
 const WelcomeColor = styled.h2`
     color:#FFFFFF;
 `
+
+const WarningColor = styled.h3`
+    color:#FFFFFF;
+`
+
+
 export const WelcomeText = styled.p`
     color: #FFFFFF;
     width: 100%;
@@ -99,7 +105,7 @@ export const OnBoarding = ({ history }) => {
                             }
                             help={
                                 !formData.mnemonic || !isValidMnemonic
-                                    ? 'Valid mnemonic seed phrase required'
+                                    ? <WarningColor>Valid mnemonic seed phrase required</WarningColor>
                                     : ''
                             }
                         >
