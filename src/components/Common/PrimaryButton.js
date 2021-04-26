@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const PrimaryButton = styled.button`
     border: none;
     color: #fff;
-    background-color: #42a240;
+    background-color: #000B43;
     transition: all 0.5s ease;
     background-size: 200% auto;
     font-size: 18px;
@@ -57,7 +57,7 @@ const SmartButton = styled.button`
     background-image: ${({ disabled = false }) =>
         disabled === true
             ? 'none'
-            : 'linear-gradient(270deg, #6cbe45 10%, #42a240 100%);'};
+            : 'linear-gradient(270deg, #000B43 10%, #000B43 100%);'};
     color: ${({ disabled = false }) => (disabled === true ? '#444;' : '#fff;')};
     background: ${({ disabled = false }) =>
         disabled === true ? '#e9eaed;' : ''};

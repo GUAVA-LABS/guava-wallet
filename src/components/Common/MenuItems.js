@@ -19,6 +19,7 @@ export default ({ selectedKey, currentPage, handleClick }) => (
       spaceBetween={0}
       slidesPerView={1}
       navigation
+      
     >
       
         <NavButton
