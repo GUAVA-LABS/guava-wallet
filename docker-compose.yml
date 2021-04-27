@@ -1,12 +1,12 @@
-version: '2'
+version: "2"
 
 services:
-    webserver:
-        container_name: cashtabwebserver
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-            - 8080:80
-        environment:
-            - NODE_ENV=production
+  webserver:
+    container_name: guavawebserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    environment:
+      - NODE_ENV=production
