@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/alcipir/avax-project-placeholder/compare/v1.1.0...v1.1.2) (2021-04-27)
+
+
+### Bug Fixes
+
+* remove slides from swiper ([b42ddf5](https://github.com/alcipir/avax-project-placeholder/commit/b42ddf5710a8b1bdc9564f7ba8d25e6f5d77e74a))
+
 ### 1.1.1 (2021-04-25)
 
 
