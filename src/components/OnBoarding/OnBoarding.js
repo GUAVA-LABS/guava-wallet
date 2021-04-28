@@ -50,6 +50,7 @@ export const OnBoarding = ({ history }) => {
         mnemonic: '',
     });
 
+    const [isSeedPhraseModalVisible, setIsSeedPhraseModalVisible] = useState(false);
     const [seedInput, openSeedInput] = useState(false);
     const [isValidMnemonic, setIsValidMnemonic] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -65,7 +66,9 @@ export const OnBoarding = ({ history }) => {
     };
 
     function showBackupConfirmModal() {
-        setIsModalVisible(true);
+        const wallet = createWallet(false);
+        setFormData(p => ({ ...p, mnemonic: wallet.mnemonic }));
+        setIsSeedPhraseModalVisible(true);
     }
 
     return (
@@ -132,9 +135,22 @@ export const OnBoarding = ({ history }) => {
             locked={true}
             textSubmit={formData.mnenomic ? "Ok, import wallet from seed" : "Ok, make me a wallet"}
             afterSubmit={() => {
-                            setIsModalVisible(false)
+                setIsModalVisible(false);
                           }}
             />
+            </Modal>
+             <Modal 
+       title="Write down your seed phrase" 
+       visible={isSeedPhraseModalVisible} 
+       onCancel={() => setIsSeedPhraseModalVisible(false)}
+       onOk={() => {
+                              setIsModalVisible(true);
+                              setIsSeedPhraseModalVisible(false);
+                          }}
+            >
+            <div>
+                    {formData.mnemonic}
+            </div>
       </Modal>
         </>
     );

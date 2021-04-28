@@ -45,7 +45,6 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
     const wallet = getWallet();
     const { password } = values;
     onConfirmPassword(values);
-
     switch (encryptionStatus) {
       case ENCRYPTION_STATUS_CODE.DECRYPTED:
         const mnemonicCypher = encrypt(password, wallet.mnemonic);
@@ -110,7 +109,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
             required: true,
             message: 'Please confirm your password!',
           },
-             ({ getFieldValue }) => ({
+          ({ getFieldValue }) => ({
             validator(_, value) {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve();
