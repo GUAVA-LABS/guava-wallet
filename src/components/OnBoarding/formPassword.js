@@ -27,7 +27,7 @@ const tailLayout = {
   },
 };
 
-const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) => {
+const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmit, textSubmit }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -35,9 +35,16 @@ const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) 
   const ContextValue = React.useContext(WalletContext);
   const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
 
+  const onConfirmPassword = values => {
+    if (!confirmPassword) return true;
+    if (values.password === values.confirmPassword) return true;
+    return Promise.reject(new Error('The two passwords that you entered do not match!'));
+  }
+
   const onFinish = (values) => {
     const wallet = getWallet();
     const { password } = values;
+    onConfirmPassword(values);
 
     switch (encryptionStatus) {
       case ENCRYPTION_STATUS_CODE.DECRYPTED:
@@ -92,6 +99,29 @@ const FormPassword = ({ children, locked, getWallet, afterSubmit, textSubmit }) 
       >
         <Input.Password placeholder="Password" {...addonAfter} />
       </Form.Item>
+      {confirmPassword &&  <Form.Item
+        
+        name="confirmPassword"
+        align="center"
+        dependencies={["password"]}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+             ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password placeholder="Confirm Password" {...addonAfter} />
+      </Form.Item>}
       {textSubmit && <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           {textSubmit}

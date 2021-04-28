@@ -127,7 +127,8 @@ export const OnBoarding = ({ history }) => {
             <FormPassword getWallet={() => {
                 const wallet = createWallet(formData.mnemonic || false);
                 return wallet;
-            }} 
+                }}
+            confirmPassword={true}
             locked={true}
             textSubmit={formData.mnenomic ? "Ok, import wallet from seed" : "Ok, make me a wallet"}
             afterSubmit={() => {
