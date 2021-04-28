@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/alcipir/guava-wallet/compare/v1.1.4...v1.2.0) (2021-04-28)
+
+
+### Features
+
+* added confirm password ([74e7dd9](https://github.com/alcipir/guava-wallet/commit/74e7dd9db3f2d6413a64859b2623a56e42f6b4d5))
+* added modal for seed phrase and password confirmation ([b10a5ba](https://github.com/alcipir/guava-wallet/commit/b10a5ba06e7a744925592e0176987fab90136634))
+
 ### [1.1.4](https://github.com/alcipir/avax-project-placeholder/compare/v1.1.3...v1.1.4) (2021-04-27)
 
 ### [1.1.3](https://github.com/alcipir/avax-project-placeholder/compare/v1.1.0...v1.1.3) (2021-04-27)
