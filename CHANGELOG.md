@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/alcipir/guava-wallet/compare/v1.2.1...v1.2.2) (2021-04-30)
+
+
+### Bug Fixes
+
+* change image heigth on news ([69ddb9a](https://github.com/alcipir/guava-wallet/commit/69ddb9ab7d5fddfadfed728cc953e41018dbdfb9))
+* took out margin from QR code ([5aaf5e9](https://github.com/alcipir/guava-wallet/commit/5aaf5e9607bf54cdcd05a52992b972773ee82ab4))
+
 ### [1.2.1](https://github.com/alcipir/guava-wallet/compare/v1.2.0...v1.2.1) (2021-04-29)
 
 
