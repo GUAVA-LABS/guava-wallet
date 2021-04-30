@@ -161,7 +161,7 @@ export const QRCode = ({
                     size={size}
                     bch={address && address.includes('bitcoin') ? 1 : 0}
                     renderAs={'svg'}
-                    includeMargin
+                    //includeMargin
                     bgColor="#D2007D"
                     fgColor="#FFFFFF"
                     imageSettings={{
