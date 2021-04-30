@@ -27,6 +27,8 @@ const tailLayout = {
   },
 };
 
+const MIN_LENGTH = 8;
+
 const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmit, textSubmit }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -88,12 +90,21 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
         
         name="password"
         align="center"
-
+        hasFeedback
         rules={[
           {
             required: true,
             message: 'Please input your password!',
           },
+          () => ({
+            validator(_, value) {
+               if (value.length < MIN_LENGTH) {
+                return Promise.reject(new Error(`Password should have at least ${MIN_LENGTH} characters`));
+               }
+
+               return Promise.resolve();
+            },
+          }),
         ]}
       >
         <Input.Password placeholder="Password" {...addonAfter} />
@@ -104,6 +115,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
         align="center"
         dependencies={["password"]}
         hasFeedback
+        
         rules={[
           {
             required: true,

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const NewsWrapper = styled.div`
     display: block;
-    max-height: 375px;
+    max-height: 700px;
     overflow-y: scroll;
 `
 
