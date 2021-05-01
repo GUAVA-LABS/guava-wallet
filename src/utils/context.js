@@ -33,8 +33,8 @@ const useWallet = () => {
     NETWORK_ID,
     BLOCKCHAIN_ID
   );
-  let xchain = avalancheInstance.XChain();
 
+  const [xchain] = React.useState(avalancheInstance.XChain());
   const [loading, setLoading] = React.useState(true);
   const [wallet, setWallet] = React.useState(false);
   const {
@@ -49,6 +49,7 @@ const useWallet = () => {
     const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
     const keychainInstance = importedKeychainInstance(privateKey);
     const addressStrings = keychainInstance.getAddressStrings();
+    console.log(addressStrings);
     return { mnemonic, address: addressStrings[0], avaxBalance: 0 };
   };
 
