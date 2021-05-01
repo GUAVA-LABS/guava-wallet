@@ -1,4 +1,4 @@
-name: Production workflow
+name: Develop workflow
 
 # When workflow is triggered
 on:
