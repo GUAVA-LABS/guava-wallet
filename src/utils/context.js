@@ -14,11 +14,10 @@ const bip39 = require("bip39");
 // eslint-disable-next-line react-hooks/exhaustive-deps
 export const useMountEffect = (fun) => React.useEffect(fun, []);
 
-//TODO: Move these values to REACT_ENV variables
 const environmentVariables = {
-  NETWORK_ID: 1,
-  BLOCKCHAIN_ID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
-  AVA_NODE_IP: "guavanode.ngrok.io",
+  NETWORK_ID: Number(process.env.REACT_APP_NETWORK_ID),
+  BLOCKCHAIN_ID: `${process.env.REACT_APP_BLOCKCHAIN_ID}`,
+  AVA_NODE_IP: `${process.env.REACT_APP_AVA_NODE_IP}`,
 };
 
 const useWallet = () => {
@@ -58,18 +57,33 @@ const useWallet = () => {
     setWallet(false);
   };
 
-  const derivePrivateKeyFromMnemonic = (mnemonic) => {
+  const generateMasterKeyFromSeed = (mnemonic) => {
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     const masterHdKey = HDKey.fromMasterSeed(seed);
-    const accountHdKey = masterHdKey.derive(`${AVA_ACCOUNT_PATH}`);
-    const externalHdKey = accountHdKey.derive("m/0/0");
-    return externalHdKey.privateKey;
+    return function getPrivateKeyBuffer(derivationPath) {
+      const accountHdKey = masterHdKey.derive(`${AVA_ACCOUNT_PATH}`);
+      if (!derivationPath) return accountHdKey.privateKey;
+      const derivedHdKey = accountHdKey.derive(derivationPath);
+      return derivedHdKey.privateKey;
+    };
+  };
+
+  const derivePrivateKeyFromMnemonic = (mnemonic) => {
+    const derivationPath =
+      process.env.REACT_APP_ENVIRONMENT === "development" ? false : `m/0/0`;
+    const getPrivateKeyBuffer = generateMasterKeyFromSeed(mnemonic);
+    return getPrivateKeyBuffer(derivationPath);
   };
 
   const importedKeychainInstance = (privateKeyBuffer) => {
     const keychainInstance = xchain.keyChain();
     keychainInstance.importKey(privateKeyBuffer);
     return keychainInstance;
+  };
+
+  const getKeychainInstance = (mnemonic) => {
+    const privateKeyBuffer = derivePrivateKeyFromMnemonic(mnemonic);
+    return importedKeychainInstance(privateKeyBuffer);
   };
 
   const parseWalletFromLocalStorage = () => {
@@ -98,19 +112,17 @@ const useWallet = () => {
 
   const sendAssetXChain = async (amount, destinationAddress) => {
     Big.NE = -(9 - 1);
-    console.log(amount);
     const sendAmount = new BN(
       new Big(amount).times(Big(Math.pow(10, 9))).toString()
     );
 
-    console.log(sendAmount);
-    const { keychainInstance, xchain } = await getWalletFromLocalStorage();
     const txFee = xchain.getTxFee();
     const sendAmountWithTxFee = sendAmount.add(txFee);
-    const addressesFromSender = keychainInstance.getAddressStrings();
+    const addressesFromSender = [wallet.address];
 
     const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
     const avaxAssetIDBuffer = await xchain.getAVAXAssetID();
+    const keychainInstance = getKeychainInstance(wallet.mnemonic);
     const baseTransactionOptions = {
       utxoset: responseFromUTXOFetch.utxos,
       amount: sendAmount,
@@ -119,7 +131,6 @@ const useWallet = () => {
       fromAddresses: addressesFromSender,
       changeAddresses: addressesFromSender,
     };
-    console.log(baseTransactionOptions);
 
     const {
       utxoset,
@@ -148,7 +159,6 @@ const useWallet = () => {
       setWallet({ ...walletFromLocalStorage, mnemonic: false });
     }
   };
-  // yarn add activity-detector
 
   const setExistingWalletOnFirstMount = () => {
     (async () => {
