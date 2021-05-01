@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.0...v1.3.1) (2021-05-01)
+
+
+### Bug Fixes
+
+* fix in correct address ([81443d7](https://github.com/alcipir/avax-project-placeholder/commit/81443d7227b37ef10931031a22dee74cbefc0601))
+
 ## [1.3.0](https://github.com/alcipir/avax-project-placeholder/compare/v1.1.4...v1.3.0) (2021-05-01)
 
 
