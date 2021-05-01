@@ -1,24 +1,19 @@
-quit
-zone
-cricket
-obtain
-mercy
-wine
-awesome
-thunder
-sad
-spirit
-fetch
-neutral
-coach
-gadget
-town
-enrich
-custom
-wire
-develop
-swarm
-quarter
-sting
-toast
-letter
+# Guava Wallet
+
+## Development
+
+```
+npm install
+npm start
+```
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
+
+## Links
+
+- [Kanban Board](https://airtable.com/shrLn9IMXPu9IBmPB)
+- Latest build status: [![Netlify Status](https://api.netlify.com/api/v1/badges/27fb8a72-6498-4b8f-bbeb-c692ed4de251/deploy-status)](https://app.netlify.com/sites/guavawallet/deploys)
