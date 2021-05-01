@@ -2,13 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<<<<<<< HEAD
 ### [1.2.2](https://github.com/alcipir/guava-wallet/compare/v1.2.1...v1.2.2) (2021-04-30)
+=======
+### [1.3.1](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.0...v1.3.1) (2021-05-01)
+>>>>>>> d903e940ab34d6f24be5a8f0f4694cbffc2a0c04
 
 
 ### Bug Fixes
 
+<<<<<<< HEAD
 * change image heigth on news ([69ddb9a](https://github.com/alcipir/guava-wallet/commit/69ddb9ab7d5fddfadfed728cc953e41018dbdfb9))
 * took out margin from QR code ([5aaf5e9](https://github.com/alcipir/guava-wallet/commit/5aaf5e9607bf54cdcd05a52992b972773ee82ab4))
+=======
+* fix in correct address ([81443d7](https://github.com/alcipir/avax-project-placeholder/commit/81443d7227b37ef10931031a22dee74cbefc0601))
+
+## [1.3.0](https://github.com/alcipir/avax-project-placeholder/compare/v1.1.4...v1.3.0) (2021-05-01)
+
+
+### Features
+
+* added confirm password ([74e7dd9](https://github.com/alcipir/avax-project-placeholder/commit/74e7dd9db3f2d6413a64859b2623a56e42f6b4d5))
+* added modal for seed phrase and password confirmation ([b10a5ba](https://github.com/alcipir/avax-project-placeholder/commit/b10a5ba06e7a744925592e0176987fab90136634))
+
+
+### Bug Fixes
+
+* change image heigth on news ([69ddb9a](https://github.com/alcipir/avax-project-placeholder/commit/69ddb9ab7d5fddfadfed728cc953e41018dbdfb9))
+* hd wallet derivation path ([0fc6bf4](https://github.com/alcipir/avax-project-placeholder/commit/0fc6bf44923d580d46abdb696fc7de90b02db7d6))
+* hd wallet index ([ac7d280](https://github.com/alcipir/avax-project-placeholder/commit/ac7d28068ebd701e9a1d0fb02c53a0d74cd577f0))
+* image on news ([da090c7](https://github.com/alcipir/avax-project-placeholder/commit/da090c7ef889615d974f051abb1594371a33c9d2))
+* took out margin from QR code ([5aaf5e9](https://github.com/alcipir/avax-project-placeholder/commit/5aaf5e9607bf54cdcd05a52992b972773ee82ab4))
+>>>>>>> d903e940ab34d6f24be5a8f0f4694cbffc2a0c04
 
 ### [1.2.1](https://github.com/alcipir/guava-wallet/compare/v1.2.0...v1.2.1) (2021-04-29)
 

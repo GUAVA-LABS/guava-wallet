@@ -23,7 +23,7 @@ const environmentVariables = {
 
 const useWallet = () => {
   const INTERVAL_IN_MILISECONDS = 10000;
-  const AVA_ACCOUNT_PATH = `m/44'/9000'/0'/0'`;
+  const AVA_ACCOUNT_PATH = `m/44'/9000'/0'`;
   const bintools = BinTools.getInstance();
   const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
   let avalancheInstance = new Avalanche(
@@ -61,7 +61,7 @@ const useWallet = () => {
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     const masterHdKey = HDKey.fromMasterSeed(seed);
     const accountHdKey = masterHdKey.derive(`${AVA_ACCOUNT_PATH}`);
-    const externalHdKey = masterHdKey.derive("m/0/0");
+    const externalHdKey = accountHdKey.derive("m/0/0");
     return externalHdKey.privateKey;
   };
 
