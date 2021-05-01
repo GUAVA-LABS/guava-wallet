@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.7...v1.4.0) (2021-05-01)
+
+
+### Features
+
+* **derivationPath-env:** add env variables and change derivation path temporarily according to env ([7f3d23b](https://github.com/alcipir/avax-project-placeholder/commit/7f3d23b5c72a5f692939868880bdc3a18546c123))
+
 ### [1.3.7](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.6...v1.3.7) (2021-05-01)
 
 ### [1.3.6](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.5...v1.3.6) (2021-05-01)
