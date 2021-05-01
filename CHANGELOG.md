@@ -3,8 +3,18 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### [1.2.2](https://github.com/alcipir/guava-wallet/compare/v1.2.1...v1.2.2) (2021-04-30)
 =======
+=======
+### [1.3.2](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.1...v1.3.2) (2021-05-01)
+
+
+### Bug Fixes
+
+* hd wallet state ([e267332](https://github.com/alcipir/avax-project-placeholder/commit/e26733275cd5f0f83907374ac12b6bc0043f02e0))
+
+>>>>>>> 11f52f6f799820432ee281dd4ed76528585784fb
 ### [1.3.1](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.0...v1.3.1) (2021-05-01)
 >>>>>>> d903e940ab34d6f24be5a8f0f4694cbffc2a0c04
 
