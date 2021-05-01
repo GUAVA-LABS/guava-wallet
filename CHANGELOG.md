@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.3](https://github.com/alcipir/guava-wallet/compare/v1.2.2...v1.3.3) (2021-05-01)
+
+
+### Bug Fixes
+
+* fix in correct address ([81443d7](https://github.com/alcipir/guava-wallet/commit/81443d7227b37ef10931031a22dee74cbefc0601))
+* hd wallet derivation path ([0fc6bf4](https://github.com/alcipir/guava-wallet/commit/0fc6bf44923d580d46abdb696fc7de90b02db7d6))
+* hd wallet index ([ac7d280](https://github.com/alcipir/guava-wallet/commit/ac7d28068ebd701e9a1d0fb02c53a0d74cd577f0))
+* hd wallet state ([e267332](https://github.com/alcipir/guava-wallet/commit/e26733275cd5f0f83907374ac12b6bc0043f02e0))
+* resolve merge ([a13f6d8](https://github.com/alcipir/guava-wallet/commit/a13f6d8c9d1a42fb1e0ba00f6a368f1eea84f115))
+* resolved merge ([ce7d9e3](https://github.com/alcipir/guava-wallet/commit/ce7d9e34d9e13d7149428aa3bf35feb30cb2c084))
+
+### [1.2.2](https://github.com/alcipir/guava-wallet/compare/v1.2.1...v1.2.2) (2021-04-30)
+=======
+=======
 ### [1.3.2](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.1...v1.3.2) (2021-05-01)
 
 
@@ -9,11 +24,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 * hd wallet state ([e267332](https://github.com/alcipir/avax-project-placeholder/commit/e26733275cd5f0f83907374ac12b6bc0043f02e0))
 
+>>>>>>> 11f52f6f799820432ee281dd4ed76528585784fb
 ### [1.3.1](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.0...v1.3.1) (2021-05-01)
+>>>>>>> d903e940ab34d6f24be5a8f0f4694cbffc2a0c04
 
 
 ### Bug Fixes
 
+<<<<<<< HEAD
+* change image heigth on news ([69ddb9a](https://github.com/alcipir/guava-wallet/commit/69ddb9ab7d5fddfadfed728cc953e41018dbdfb9))
+* took out margin from QR code ([5aaf5e9](https://github.com/alcipir/guava-wallet/commit/5aaf5e9607bf54cdcd05a52992b972773ee82ab4))
+=======
 * fix in correct address ([81443d7](https://github.com/alcipir/avax-project-placeholder/commit/81443d7227b37ef10931031a22dee74cbefc0601))
 
 ## [1.3.0](https://github.com/alcipir/avax-project-placeholder/compare/v1.1.4...v1.3.0) (2021-05-01)
@@ -32,6 +53,7 @@ All notable changes to this project will be documented in this file. See [standa
 * hd wallet index ([ac7d280](https://github.com/alcipir/avax-project-placeholder/commit/ac7d28068ebd701e9a1d0fb02c53a0d74cd577f0))
 * image on news ([da090c7](https://github.com/alcipir/avax-project-placeholder/commit/da090c7ef889615d974f051abb1594371a33c9d2))
 * took out margin from QR code ([5aaf5e9](https://github.com/alcipir/avax-project-placeholder/commit/5aaf5e9607bf54cdcd05a52992b972773ee82ab4))
+>>>>>>> d903e940ab34d6f24be5a8f0f4694cbffc2a0c04
 
 ### [1.2.1](https://github.com/alcipir/guava-wallet/compare/v1.2.0...v1.2.1) (2021-04-29)
 
