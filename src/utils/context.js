@@ -49,7 +49,7 @@ const useWallet = () => {
     const privateKey = derivePrivateKeyFromMnemonic(mnemonic);
     const keychainInstance = importedKeychainInstance(privateKey);
     const addressStrings = keychainInstance.getAddressStrings();
-    return { mnemonic, address: addressStrings[1], avaxBalance: 0 };
+    return { mnemonic, address: addressStrings[0], avaxBalance: 0 };
   };
 
   const deleteWallet = () => {
