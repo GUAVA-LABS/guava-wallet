@@ -2,8 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+### [1.3.3](https://github.com/alcipir/guava-wallet/compare/v1.2.2...v1.3.3) (2021-05-01)
+
+
+### Bug Fixes
+
+* fix in correct address ([81443d7](https://github.com/alcipir/guava-wallet/commit/81443d7227b37ef10931031a22dee74cbefc0601))
+* hd wallet derivation path ([0fc6bf4](https://github.com/alcipir/guava-wallet/commit/0fc6bf44923d580d46abdb696fc7de90b02db7d6))
+* hd wallet index ([ac7d280](https://github.com/alcipir/guava-wallet/commit/ac7d28068ebd701e9a1d0fb02c53a0d74cd577f0))
+* hd wallet state ([e267332](https://github.com/alcipir/guava-wallet/commit/e26733275cd5f0f83907374ac12b6bc0043f02e0))
+* resolve merge ([a13f6d8](https://github.com/alcipir/guava-wallet/commit/a13f6d8c9d1a42fb1e0ba00f6a368f1eea84f115))
+* resolved merge ([ce7d9e3](https://github.com/alcipir/guava-wallet/commit/ce7d9e34d9e13d7149428aa3bf35feb30cb2c084))
+
 ### [1.2.2](https://github.com/alcipir/guava-wallet/compare/v1.2.1...v1.2.2) (2021-04-30)
 =======
 =======
