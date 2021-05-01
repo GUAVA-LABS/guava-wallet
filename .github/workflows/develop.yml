@@ -3,7 +3,7 @@ name: Develop workflow
 # When workflow is triggered
 on:
   push:
-    branchs:
+    branches:
       - develop
 env:
   REACT_APP_API_AIRTABLE_KEY: ${{ secrets.REACT_APP_API_AIRTABLE_KEY }}
