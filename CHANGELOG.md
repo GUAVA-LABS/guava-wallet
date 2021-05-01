@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/alcipir/avax-project-placeholder/compare/v1.3.2...v1.3.4) (2021-05-01)
+
+
+### Bug Fixes
+
+* resolve merge ([a13f6d8](https://github.com/alcipir/avax-project-placeholder/commit/a13f6d8c9d1a42fb1e0ba00f6a368f1eea84f115))
+* resolved merge ([ce7d9e3](https://github.com/alcipir/avax-project-placeholder/commit/ce7d9e34d9e13d7149428aa3bf35feb30cb2c084))
+
 ### [1.3.3](https://github.com/alcipir/guava-wallet/compare/v1.2.2...v1.3.3) (2021-05-01)
 
 
