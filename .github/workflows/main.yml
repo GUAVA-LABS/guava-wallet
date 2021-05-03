@@ -11,6 +11,7 @@ env:
   REACT_APP_API_AIRTABLE_URL: ${{ secrets.REACT_APP_API_AIRTABLE_URL }}
   REACT_APP_AVA_NODE_IP: ${{ secrets.REACT_APP_AVA_NODE_IP }}
   REACT_APP_ENVIRONMENT: production
+
 # Jobs to carry out
 jobs:
   deploy:
@@ -38,4 +39,3 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=dist --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
