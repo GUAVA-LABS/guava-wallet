@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/alcipir/avax-project-placeholder/compare/v1.4.4...v1.4.5) (2021-05-03)
+
+
+### Bug Fixes
+
+* **github:** fix github workflow ([d7ffdf1](https://github.com/alcipir/avax-project-placeholder/commit/d7ffdf184c7edeb3840b39850a964753d6794187))
+
 ### [1.4.4](https://github.com/alcipir/avax-project-placeholder/compare/v1.4.3...v1.4.4) (2021-05-03)
 
 
