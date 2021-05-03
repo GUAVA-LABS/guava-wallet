@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.4](https://github.com/alcipir/avax-project-placeholder/compare/v1.4.3...v1.4.4) (2021-05-03)
+
+
+### Bug Fixes
+
+* **github:** add .env.local and fix secrets paramaters on main workflow ([e461fcf](https://github.com/alcipir/avax-project-placeholder/commit/e461fcf3273fb2ee7bae3119974739821b63ff8e))
+* **github:** remove wrong parameter secrets from develop ([6cb4896](https://github.com/alcipir/avax-project-placeholder/commit/6cb4896d303be1605512fbf51abc80c8bb9e52bf))
+
 ### [1.4.3](https://github.com/alcipir/avax-project-placeholder/compare/v1.4.2...v1.4.3) (2021-05-01)
 
 
