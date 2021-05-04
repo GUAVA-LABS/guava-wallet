@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Collapse, Spin, Alert } from "antd";
+import { Collapse, Spin, Alert, Modal } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { WalletContext } from "@utils/context";
 import { StyledCollapse } from "@components/Common/StyledCollapse";
@@ -11,6 +11,10 @@ import {
 } from "@components/Common/CustomIcons";
 
 const { Panel } = Collapse;
+
+
+
+
 const StyledConfigure = styled.div`
   h2 {
     color: #444;
@@ -23,6 +27,14 @@ const StyledConfigure = styled.div`
 const Configure = () => {
   const ContextValue = React.useContext(WalletContext);
   const { wallet, deleteWallet } = ContextValue;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+ 
+  function showDeleteModal() {
+    setIsModalVisible(true)
+
+  }
+  
+
 
   return (
     <Spin spinning={false} indicator={CashLoadingIcon}>
@@ -52,13 +64,31 @@ const Configure = () => {
             showIcon
           />
             <StyledCollapse>
-              <SecondaryButton onClick={() => deleteWallet()}>
+              <SecondaryButton onClick={() => showDeleteModal()}>
                 Delete Wallet
               </SecondaryButton>
             </StyledCollapse>
         </StyledConfigure>
-      
+        
+        <Modal 
+        title="Are you sure you want to delete it?" 
+        visible={isModalVisible} 
+        onCancel={() => setIsModalVisible(false)}
+        onOk={() => {
+                           deleteWallet();
+                           
+                       }}
+                       >
+                       <div>
+                               {"When you delete your wallet you loose everything. Make sure you have the backup and/or the seed phrase."}
+                       </div>
+        </Modal>
     </Spin>
+   
+
+
+
+
   );
 };
 
