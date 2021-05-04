@@ -75,7 +75,7 @@ const useWallet = () => {
   };
 
   const importedKeychainInstance = (privateKeyBuffer) => {
-    const keychainInstance = xchain.keyChain();
+    const keychainInstance = xchain.newKeyChain();
     keychainInstance.importKey(privateKeyBuffer);
     return keychainInstance;
   };
