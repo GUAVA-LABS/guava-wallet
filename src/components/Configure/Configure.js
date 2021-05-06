@@ -9,11 +9,8 @@ import {
   CashLoadingIcon,
   ThemedCopyOutlined,
 } from "@components/Common/CustomIcons";
-
+import FormPassword from '@components/OnBoarding/formPassword'
 const { Panel } = Collapse;
-
-
-
 
 const StyledConfigure = styled.div`
   h2 {
@@ -50,7 +47,12 @@ const Configure = () => {
           />
             <StyledCollapse>
               <Panel header="Click to reveal seed phrase" key="1">
-                <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
+		  <FormPassword
+                    getWallet={() => wallet}
+                    textSubmit="Reveal Seed"
+                  >
+			<p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
+		</FormPassword>
               </Panel>
             </StyledCollapse>
 
