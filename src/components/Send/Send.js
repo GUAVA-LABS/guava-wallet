@@ -253,18 +253,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
 
     return (
         <>
-                <Modal
-                    title="Confirm Send"
-                    visible={isModalVisible}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                    
-                >
-                    <p>
-                        Are you sure you want to send {formData.value}{' '}
-                        {currency.ticker} to {formData.address}?
-                    </p>
-                </Modal>
                 {!avaxBalance ? (
                     <ZeroBalanceHeader>
                         You currently have 0 {currency.ticker}
