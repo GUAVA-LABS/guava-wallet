@@ -77,11 +77,13 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
 
     const { avaxBalance } = wallet;
     const [fiatPrice, setFiatPrice] = React.useState(0);
+    const [loadingFiatPrice, setLoadingFiatPrice] = React.useState(true);
     const INTERVAL_IN_MILISECONDS = 1000;
 
     const fetchFiatPrice = async () => {
         const fetchedPriceObject= await axios.get(currency.priceApi);
         setFiatPrice(fetchedPriceObject.data["usd"]);
+	setLoadingFiatPrice(false);
     };
 
     
@@ -92,8 +94,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
     useAsyncTimeout(async () => {
         await fetchFiatPrice();
     }, INTERVAL_IN_MILISECONDS);
-
-
 
     const [formData, setFormData] = useState({
         dirty: true,
@@ -251,6 +251,8 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
         setFormData(p => ({ ...p, [name]: value }));
     };
 
+    const showFiatPrice = avaxBalance => !loadingFiatPrice && <span>{fiatPrice * avaxBalance}</span>;
+
     return (
         <>
                 {!avaxBalance ? (
@@ -266,7 +268,9 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                             <h3>
                                 {avaxBalance}{' '}
                                 {currency.ticker}
+				
                             </h3>
+			    <p>({showFiatPrice(avaxBalance)} USD)</p>
                         </BalanceHeader>
                     
                     </>
