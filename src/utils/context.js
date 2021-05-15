@@ -115,10 +115,7 @@ const useWallet = () => {
       new Big(amount).times(Big(Math.pow(10, 9))).toString()
     );
 
-    const txFee = xchain.getTxFee();
-    const sendAmountWithTxFee = sendAmount.add(txFee);
     const addressesFromSender = [wallet.address];
-
     const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
     const avaxAssetIDBuffer = await xchain.getAVAXAssetID();
     const keychainInstance = getKeychainInstance(wallet.mnemonic);
@@ -140,7 +137,7 @@ const useWallet = () => {
     } = baseTransactionOptions;
     const unsignedTransaction = await xchain.buildBaseTx(
       utxoset,
-      sendAmountWithTxFee,
+      sendAmount,
       assetID,
       [toAddress],
       fromAddresses,
