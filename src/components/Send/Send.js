@@ -256,7 +256,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
         setFormData(p => ({ ...p, [name]: value }));
     };
 
-    const showFiatPrice = avaxBalance => !loadingFiatPrice && <span>{fiatPrice * avaxBalance}</span>;
+    const showFiatPrice = avaxBalance => !loadingFiatPrice && <span>{(fiatPrice * avaxBalance).toFixed(2)}</span>;
 
     return (
         <>
