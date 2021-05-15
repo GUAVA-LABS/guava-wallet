@@ -68,11 +68,16 @@ const ConvertAmount = styled.div`
     }
 `;
 
+const NetworkFee = styled.p`
+   margin: 0;
+`;
+
 const SendBCH = ({ filledAddress, callbackTxId }) => {
     const {
         wallet,
         sendAssetXChain,
         apiError,
+        txFee,
     } = React.useContext(WalletContext);
 
     const { avaxBalance } = wallet;
@@ -308,6 +313,10 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                                     }}
                                 ></FormItemWithQRCodeAddon>
                                 <SendBchInput
+                                    onMax={() => setFormData({
+                                    ...formData,
+                                            value: avaxBalance,
+                                    })}
                                     validateStatus={
                                         sendAvaxAmountError ? 'error' : ''
                                     }
@@ -330,6 +339,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                                             handleSelectedCurrencyChange(e),
                                     }}
                                 ></SendBchInput>
+                                <NetworkFee>Network Fee: {txFee ? txFee : ''}</NetworkFee>
                             
                                 <div style={{ paddingTop: '12px' }}>
                                     {!avaxBalance ||

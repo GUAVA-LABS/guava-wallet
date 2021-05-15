@@ -36,6 +36,8 @@ const useWallet = () => {
   const [xchain] = React.useState(avalancheInstance.XChain());
   const [loading, setLoading] = React.useState(true);
   const [wallet, setWallet] = React.useState(false);
+  const [txFee, setTxFee] = React.useState(false);
+
   const {
     encryptionStatus,
     encrypt,
@@ -111,9 +113,16 @@ const useWallet = () => {
 
   const sendAssetXChain = async (amount, destinationAddress) => {
     Big.NE = -(9 - 1);
-    const sendAmount = new BN(
+    let sendAmount = new BN(
       new Big(amount).times(Big(Math.pow(10, 9))).toString()
     );
+    const currentBalance  = new BN(
+      new Big(wallet.avaxBalance).times(Big(Math.pow(10, 9))).toString()
+    );
+
+    if (sendAmount.eq(currentBalance)) {
+       sendAmount = sendAmount.sub(xchain.getTxFee());
+    }
 
     const addressesFromSender = [wallet.address];
     const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
@@ -194,6 +203,14 @@ const useWallet = () => {
     await setWalletAndEncrypt();
   }, INTERVAL_IN_MILISECONDS * 30);
 
+  useAsyncTimeout(async () => {
+          if (xchain) {
+                  const txFee = xchain.getTxFee(); 
+                  setTxFee(bnToBig(txFee, 9).toString())
+          }
+    
+  }, INTERVAL_IN_MILISECONDS * 600);
+
   React.useEffect(() => {
     if (wallet) {
       window.localStorage.setItem(
@@ -220,6 +237,7 @@ const useWallet = () => {
     encryptionStatus,
     encrypt,
     decrypt,
+    txFee,
   };
 };
 
