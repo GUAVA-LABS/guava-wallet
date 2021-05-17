@@ -70,8 +70,7 @@ const useWallet = () => {
   };
 
   const derivePrivateKeyFromMnemonic = (mnemonic) => {
-    const derivationPath =
-      process.env.REACT_APP_ENVIRONMENT === "development" ? false : `m/0/0`;
+    const derivationPath = `m/0/0`;
     const getPrivateKeyBuffer = generateMasterKeyFromSeed(mnemonic);
     return getPrivateKeyBuffer(derivationPath);
   };
