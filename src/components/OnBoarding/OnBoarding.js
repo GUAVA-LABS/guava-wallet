@@ -16,8 +16,7 @@ import PrimaryButton, {
 import { currency } from '@components/Common/Ticker.js';
 import { Event } from '@utils/GoogleAnalytics';
 import FormPassword from '@components/OnBoarding/formPassword'
-
-
+const bip39 = require('bip39');
 
 const WelcomeColor = styled.h2`
     color:#FFFFFF;
@@ -44,7 +43,7 @@ export const WelcomeLink = styled.a`
 export const OnBoarding = ({ history }) => {
     const ContextValue = React.useContext(WalletContext);
     const { createWallet } = ContextValue;
-    const validateMnemonic = () => true; // TODO: Mnemonic validation on AVA
+    const validateMnemonic = bip39.validateMnemonic; // TODO: Mnemonic validation on AVA
     const [formData, setFormData] = useState({
         dirty: true,
         mnemonic: '',
@@ -116,7 +115,7 @@ export const OnBoarding = ({ history }) => {
                                 required
                             />
                         </Form.Item>
-                        <SmartButton onClick={() => setIsModalVisible(true)}>
+                        <SmartButton disabled={!isValidMnemonic} onClick={() => setIsModalVisible(true)}>
                             Import
                         </SmartButton>
                     </Form>
