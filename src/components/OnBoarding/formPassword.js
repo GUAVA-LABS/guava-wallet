@@ -36,37 +36,48 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
 
   const ContextValue = React.useContext(WalletContext);
   const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
-
+  const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
+  React.useEffect(() => {
+    (async () => {
+      if (callAfterSubmit) await afterSubmit();
+      setCalldAfterSubmit(false);
+    })();
+  }, [callAfterSubmit, afterSubmit]);
   const onConfirmPassword = values => {
     if (!confirmPassword) return true;
     if (values.password === values.confirmPassword) return true;
     return Promise.reject(new Error('The two passwords that you entered do not match!'));
   }
 
-  const onFinish = (values) => {
+  const onFinish =  (values) => {
     const wallet = getWallet();
     const { password } = values;
+    console.log('password', password);
+    console.log('current encryption status', encryptionStatus);
     onConfirmPassword(values);
     switch (encryptionStatus) {
       case ENCRYPTION_STATUS_CODE.DECRYPTED:
         const mnemonicCypher = encrypt(password, wallet.mnemonic);
+        console.log('mnemonic cypher objects', password, wallet, mnemonicCypher);
         setWallet({
           ...wallet,
           mnemonicCypher,
           mnemonic: false
-        })
+        });
+        setCalldAfterSubmit(true)
         break;
       case ENCRYPTION_STATUS_CODE.ENCRYPTED:
+        console.log('decrypt', password, wallet);
         const decryptedMnemonic = decrypt(password, wallet.mnemonicCypher);
+        console.log(decryptedMnemonic);
         setWallet({
           ...wallet,
           mnemonic: decryptedMnemonic,
-        })
+        });
+        setCalldAfterSubmit(true)
         break;
       default:
     }
-
-    afterSubmit();
   }
 
   const showForm = locked || encryptionStatus === ENCRYPTION_STATUS_CODE.ENCRYPTED;
