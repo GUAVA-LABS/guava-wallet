@@ -8,6 +8,7 @@ export const ENCRYPTION_STATUS_CODE = {
 }
 
 const getInitialState = (mnemonicCypher) => {
+    console.log(mnemonicCypher);
     if (!mnemonicCypher) {
         return ENCRYPTION_STATUS_CODE.DECRYPTED;
     }

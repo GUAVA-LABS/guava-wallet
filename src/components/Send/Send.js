@@ -162,7 +162,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
             ...formData,
             dirty: false,
         });
-
         if (
             !formData.address ||
             !formData.value ||
@@ -257,9 +256,28 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
     };
 
     const showFiatPrice = avaxBalance => !loadingFiatPrice && <span>{(fiatPrice * avaxBalance).toFixed(2)}</span>;
+   
+ 
 
     return (
         <>
+           <Modal 
+       title="Confirm your password!" 
+       visible={isModalVisible} 
+       onCancel={() => setIsModalVisible(false)}
+       footer={null}>
+            <FormPassword getWallet={() => {
+                return wallet;
+                }}
+            confirmPassword={false}
+            locked={true}
+            textSubmit={formData.mnenomic ? "Ok, make transaction" : "Ok, make me a wallet"}
+            afterSubmit={() => {
+                submit(); 
+                setIsModalVisible(false);
+                          }}
+            />
+    </Modal>
                 {!avaxBalance ? (
                     <ZeroBalanceHeader>
                         You currently have 0 {currency.ticker}
@@ -349,19 +367,13 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                                         <SecondaryButton>Send</SecondaryButton>
                                     ) : (
                                         <>
-                                            {txInfoFromUrl ? (
+                                          
                                                 <PrimaryButton
-                                                    onClick={() => showModal()}
+                                                    onClick={() => setIsModalVisible(true)}
                                                 >
                                                     Send
                                                 </PrimaryButton>
-                                            ) : (
-                                                <PrimaryButton
-                                                    onClick={() => submit()}
-                                                >
-                                                    Send
-                                                </PrimaryButton>
-                                            )}
+                                            
                                         </>
                                     )}
                                 </div>

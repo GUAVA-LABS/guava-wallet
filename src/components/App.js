@@ -188,12 +188,7 @@ const App = () => {
                   <Wallet />
                 </Route>
                 <Route path="/send">
-                  <FormPassword
-                    getWallet={() => wallet}
-                    textSubmit="Unlock Wallet"
-                  >
                     <Send />
-                  </FormPassword>
                 </Route>
                 <Route path="/configure">
                   {!wallet && <Redirect exact from="/configure" to="/" />}
