@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/alcipir/guava-wallet/compare/v1.11.1...v1.12.0) (2021-05-19)
+
+
+### Features
+
+* ask password on send ([6398b26](https://github.com/alcipir/guava-wallet/commit/6398b26420faa087fa62aa320513a61d3a58ad76))
+
 ### 1.11.1 (2021-05-18)
 
 
