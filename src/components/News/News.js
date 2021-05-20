@@ -41,6 +41,7 @@ const News = () => {
         {news.map(newsItem => (<NewsItem key={newsItem.fields.Title}>
             <h3>{newsItem.fields.Title}</h3>
             {newsItem.fields.Image && <NewsImage src={newsItem.fields.Image[0].url} />}
+            
                 <ReactMarkdown children={newsItem.fields.Post} /> 
             </NewsItem>))}
         </NewsWrapper>
