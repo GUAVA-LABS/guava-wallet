@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/alcipir/guava-wallet/compare/v1.13.0...v1.13.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* fixed formdata on modal ([483193e](https://github.com/alcipir/guava-wallet/commit/483193ea86b49b9c41dde923054bf6c8263100a4))
+
 ## [1.13.0](https://github.com/alcipir/guava-wallet/compare/v1.12.0...v1.13.0) (2021-05-20)
 
 
