@@ -271,7 +271,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 }}
             confirmPassword={false}
             locked={true}
-            textSubmit={"Enter password to confirm"}
+            textSubmit={formData.mnenomic = "Enter password to confirm"}
             afterSubmit={() => {
                 submit(); 
                 setIsModalVisible(false);
