@@ -271,7 +271,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 }}
             confirmPassword={false}
             locked={true}
-            textSubmit={formData.mnenomic ? "Ok, make transaction" : "Ok, make me a wallet"}
+            textSubmit={"Enter password to confirm"}
             afterSubmit={() => {
                 submit(); 
                 setIsModalVisible(false);

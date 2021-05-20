@@ -75,11 +75,9 @@ export const OnBoarding = ({ history }) => {
 
             <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
-                Guava is an
-                
-                    open source,
-                
-                non-custodial web wallet for {currency.name}.
+            Guava is a non-custodial web wallet for AVAX on the X-Chain of Avalalabs.
+
+<p>Guava Wallet is in the beta testing phase. Please limit your use to small amounts of AVAX until this notice is changed.</p>
                 <br />
                 <br />
             </WelcomeText>
