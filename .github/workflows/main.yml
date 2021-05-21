@@ -35,6 +35,6 @@ jobs:
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_SITE_ID: 6dfea479-ae15-48dc-9c7b-cd4a5361f0a7
         with:
           args: deploy --dir=dist --prod
