@@ -262,7 +262,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
     return (
         <>
            <Modal 
-       title="Confirm your password!" 
+       title="Enter password to confirm send" 
        visible={isModalVisible} 
        onCancel={() => setIsModalVisible(false)}
        footer={null}>
@@ -271,7 +271,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 }}
             confirmPassword={false}
             locked={true}
-            textSubmit={formData.mnenomic = "Enter password to confirm"}
+            textSubmit={formData.mnenomic = "Confirm"}
             afterSubmit={() => {
                 submit(); 
                 setIsModalVisible(false);
