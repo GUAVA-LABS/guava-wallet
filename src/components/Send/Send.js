@@ -266,6 +266,13 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
        visible={isModalVisible} 
        onCancel={() => setIsModalVisible(false)}
        footer={null}>
+            <h3>Transaction Summary</h3>
+            <ul>
+                <li>Sending to: {formData.address}</li>
+                <li>Amount: {formData.value} AVAX</li>
+                <li>Network Fee: {txFee} AVAX</li>
+                <li>Total: {formData.value + txFee}</li>
+            </ul>
             <FormPassword getWallet={() => {
                 return wallet;
                 }}
