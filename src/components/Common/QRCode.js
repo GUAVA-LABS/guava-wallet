@@ -78,14 +78,14 @@ const CustomInput = styled.div`
     @media (max-width: 768px) {
         font-size: 11px;
         span {
-            font-size: 16px;
+            font-size: 12px;
         }
         input {
             font-size: 11px;
             margin-bottom: 10px;
         }
     }
-    @media (max-width: 340px) {
+    @media (max-width: 360px) {
         font-size: 10px;
         span {
             font-size: 11px;
