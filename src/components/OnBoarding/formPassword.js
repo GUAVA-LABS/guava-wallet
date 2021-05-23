@@ -39,7 +39,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
   const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
   React.useEffect(() => {
     (async () => {
-      if (callAfterSubmit) await afterSubmit();
+      if (callAfterSubmit && afterSubmit) await afterSubmit();
       setCalldAfterSubmit(false);
     })();
   }, [callAfterSubmit, afterSubmit]);
