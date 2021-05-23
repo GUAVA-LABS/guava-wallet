@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/alcipir/guava-wallet/compare/v1.14.0...v1.15.0) (2021-05-23)
+
+
+### Features
+
+* **app:** splash screen ([cf8c1c9](https://github.com/alcipir/guava-wallet/commit/cf8c1c97bf626e19dc663a03afdf35af09a9de91))
+* **send:** add transaction summary ([c8af72b](https://github.com/alcipir/guava-wallet/commit/c8af72bb4eed6a4a36623037661d74afdb33ba22))
+
+
+### Bug Fixes
+
+* remove gif for now ([4487726](https://github.com/alcipir/guava-wallet/commit/4487726c9c0d51d42fd3fce4594843265652aca7))
+* update news, onboarding and fix mobile menu ([e7cb1f0](https://github.com/alcipir/guava-wallet/commit/e7cb1f0b002de3a3a3adbf735132390b98e8170d))
+
 ## 1.14.0 (2021-05-21)
 
 ### 1.13.2 (2021-05-21)
