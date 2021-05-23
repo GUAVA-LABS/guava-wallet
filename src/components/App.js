@@ -40,7 +40,7 @@ export const Footer = styled.div`
   bottom: 0;
   width: 440px;
   @media (max-width: 768px) {
-    width: 100%;
+    width: auto;
   }
   border-top: 1px solid #e2e2e2;
 `;

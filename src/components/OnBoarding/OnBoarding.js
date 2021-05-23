@@ -75,9 +75,7 @@ export const OnBoarding = ({ history }) => {
 
             <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
-            Guava is a non-custodial web wallet for AVAX on the X-Chain of Avalalabs.
-
-<p>Guava Wallet is in the beta testing phase. Please limit your use to small amounts of AVAX until this notice is changed.</p>
+            Guava is a non-custodial web wallet for AVAX on the X-Chain of Avalalabs. Guava Wallet is in the beta testing phase. Please limit your use to small amounts of AVAX until this notice is changed.
                 <br />
                 <br />
             </WelcomeText>
