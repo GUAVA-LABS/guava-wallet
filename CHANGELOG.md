@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.4](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.3...v1.15.4) (2021-05-23)
+
+
+### Bug Fixes
+
+* fix font size for small resolutions ([1a7720f](https://github.com/GUAVA-LABS/guava-wallet/commit/1a7720f0f8746580966ffb426b4bfa8f7b53557b))
+
 ### [1.15.3](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.2...v1.15.3) (2021-05-23)
 
 
