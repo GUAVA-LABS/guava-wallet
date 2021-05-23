@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.1](https://github.com/alcipir/guava-wallet/compare/v1.15.0...v1.15.1) (2021-05-23)
+
+
+### Bug Fixes
+
+* fix afterSubmit breaking reveal seed ([6d80075](https://github.com/alcipir/guava-wallet/commit/6d80075a68a873d0bfca914b720ce55b2ab533c2))
+* menu for small resolutions ([509a800](https://github.com/alcipir/guava-wallet/commit/509a8006e7746aa648675b4db3f6c9e1fcdd122f))
+
 ## [1.15.0](https://github.com/alcipir/guava-wallet/compare/v1.14.0...v1.15.0) (2021-05-23)
 
 
