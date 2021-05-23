@@ -200,14 +200,14 @@ const App = () => {
                 <Redirect exact from="/" to="/wallet" />
                 <Route component={NotFound} />
               </Switch>
-              {wallet ? (
+            </WalletCtn>
+            {wallet ? (
                 <MenuItems
                   selectedKey={selectedKey}
                   currentPage={0}
                   handleClick={history.push}
                 />
               ) : null}
-            </WalletCtn>
           </WalletBody>
         </CustomApp>
       </ThemeProvider>
