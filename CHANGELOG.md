@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.3](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.2...v1.15.3) (2021-05-23)
+
+
+### Bug Fixes
+
+* fix splash screen and loading improvements ([caa43c4](https://github.com/GUAVA-LABS/guava-wallet/commit/caa43c4b606148d8d0256580c8a11a040e7c8ea2))
+
 ### [1.15.2](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.1...v1.15.2) (2021-05-23)
 
 
