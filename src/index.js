@@ -21,9 +21,6 @@ ReactDOM.render(
     <Suspense
       fallback={
         <LoadingBody>
-          <video loop>
-            <source src={LoadingLoop} type="video/mp4" />
-          </video>
         </LoadingBody>
       }
     >
