@@ -33,7 +33,8 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
+  const [form] = Form.useForm();
+  form.resetFields = () => false;
   const ContextValue = React.useContext(WalletContext);
   const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
   const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
@@ -89,16 +90,18 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
 
   const LockedForm = () =>
     <Form
+      form={form}
       {...layout}
       name="basic"
       initialValues={{
         remember: true,
       }}
+
+      resetFields={() =>false}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
-        
         name="password"
         align="center"
         hasFeedback
