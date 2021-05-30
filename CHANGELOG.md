@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.5](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.4...v1.15.5) (2021-05-30)
+
 ### [1.15.4](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.3...v1.15.4) (2021-05-23)
 
 
