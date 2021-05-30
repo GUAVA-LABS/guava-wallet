@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.15.7](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.6...v1.15.7) (2021-05-30)
+
+
+### Bug Fixes
+
+* fix AVA_NODE_IP ([6d85833](https://github.com/GUAVA-LABS/guava-wallet/commit/6d8583334f4ba298e6d69c4cc30ae6182761f512))
+
 ### [1.15.6](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.5...v1.15.6) (2021-05-30)
 
 ### [1.15.5](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.15.4...v1.15.5) (2021-05-30)
