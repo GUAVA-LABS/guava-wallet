@@ -93,7 +93,7 @@ const TransactionHistory = ({ address }) => {
         limit: $limit
         offset: $offset
         address: $address
-        orderBy: { acceptedAt: "desc" }
+        orderBy: { acceptedAt: "asc" }
       ) {
         count
         results {
@@ -132,11 +132,11 @@ const TransactionHistory = ({ address }) => {
         renderItem={(item) => (
           <List.Item>
             {item.inputs[0].credentials.address === address ? (
-              <MinusSquareFilled />
-            ) : (
               <PlusSquareFilled
                 style={{ color: "#68C740", paddingRight: "10px" }}
               />
+            ) : (
+              <MinusSquareFilled />
             )}
             {bnToBig(item.outputs[0].amount, 9).toString()} AVAX -{" "}
             {new Date(item.acceptedAt).toLocaleDateString()}
