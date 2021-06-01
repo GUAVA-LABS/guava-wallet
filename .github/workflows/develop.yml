@@ -8,7 +8,7 @@ on:
 env:
   REACT_APP_API_AIRTABLE_KEY: ${{ secrets.REACT_APP_API_AIRTABLE_KEY }}
   REACT_APP_API_AIRTABLE_URL: ${{ secrets.REACT_APP_API_AIRTABLE_URL }}
-  REACT_APP_AVA_NODE_IP: ${{ secrets.REACT_APP_AVA_NODE_IP }}
+  REACT_APP_AVA_NODE_IP: guavanode.herokuapp.com
   REACT_APP_ENVIRONMENT: development
 
 # Jobs to carry out
