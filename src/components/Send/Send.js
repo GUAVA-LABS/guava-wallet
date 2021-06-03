@@ -8,12 +8,12 @@ import {
   Spin,
   Modal,
   Alert,
-  List,
+  Table,
   Typography,
   Divider,
 } from "antd";
 import { CashLoader, CashLoadingIcon } from "@components/Common/CustomIcons";
-import { Row, Col } from "antd";
+import { Row, Col, Tooltip, Tag } from "antd";
 import Paragraph from "antd/lib/typography/Paragraph";
 import PrimaryButton, {
   SecondaryButton,
@@ -29,13 +29,11 @@ import { shouldRejectAmountInput, fiatToCrypto } from "@utils/validation";
 import FormPassword from "@components/OnBoarding/formPassword";
 import useAsyncTimeout from "@hooks/useAsyncTimeout";
 import axios from "axios";
-import { ApolloProvider } from "@apollo/client/react";
-import { ApolloClient, InMemoryCache, useQuery, gql } from "@apollo/client";
 import { PlusSquareFilled, MinusSquareFilled } from "@ant-design/icons";
 import { bnToBig } from "@utils/helpers";
-const explorerURI = "https://graphql.avascan.info/";
-const apolloCache = new InMemoryCache();
-const apolloClient = new ApolloClient({ uri: explorerURI, cache: apolloCache });
+import fetch from "node-fetch";
+import { selectHttpOptionsAndBody } from "@apollo/client";
+const EXPLORER_API = "https://explorerapi.avax.network/v2/";
 export const BalanceHeader = styled.div`
   p {
     color: #444;
@@ -87,61 +85,120 @@ const NetworkFee = styled.p`
 `;
 
 const TransactionHistory = ({ address }) => {
-  const fetchTransactionsQuery = gql`
-    query Transactions($address: String, $limit: Int, $offset: Int) {
-      transactions(
-        limit: $limit
-        offset: $offset
-        address: $address
-        orderBy: { acceptedAt: "asc" }
-      ) {
-        count
-        results {
-          ... on XBaseTransaction {
-            acceptedAt
-            inputs {
-              credentials {
-                address
-              }
-            }
-            outputs {
-              amount
-              addresses
-
-              type
-            }
-          }
-        }
+  const [txHistory, setTxHistory] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(false);
+  const LIMIT = 4;
+  const fetchTxHistory = async (addr, offset, currentPage) => {
+    setLoading(true);
+    const address = addr.replace("X-", "");
+    try {
+      const response = await fetch(
+        `${EXPLORER_API}transactions?address=${address}&sort=timestamp-desc&limit=${LIMIT}&offset=${offset}`
+      );
+      const data = await response.json();
+      const transactions = data.transactions.map((tx) => {
+        const inputAddress = tx.inputs[0].credentials[0].address;
+        const outputAddress = tx.outputs[0].addresses[0];
+        const isSend = inputAddress === address;
+        const outputsForAddress = tx.outputs.filter((output) => {
+          const hasDesiredAddress = output.addresses.includes(outputAddress);
+          return hasDesiredAddress;
+        });
+        const amount = outputsForAddress.reduce(
+          (accumulator, output) => accumulator + output.amount,
+          0
+        );
+        const date = new Date(tx.timestamp).toLocaleDateString();
+        return {
+          address: isSend ? outputAddress : inputAddress,
+          type: isSend,
+          amount: `${bnToBig(amount, 9).toString()} AVAX`,
+          date,
+        };
+      });
+      const newTxHistory = [...txHistory, ...transactions];
+      if (transactions.length < LIMIT) {
+        if (!total) setTotal(newTxHistory.length);
       }
+      setTxHistory(newTxHistory);
+    } catch (e) {
+      setError("Error occured. Try again later.");
     }
-  `;
-  const { loading, error, data } = useQuery(fetchTransactionsQuery, {
-    variables: { address: address, offset: 0, limit: 3 },
-  });
+    setLoading(false);
+  };
 
-  if (loading) return "Loading...";
-  if (error) return `Error: ${error}`;
-  console.log("data", data);
+  const handleTableChange = async (pagination, filters, sorter) => {
+    const previousPage = pagination.current - 1;
+    if (!total && previousPage * 3 >= txHistory.length - 3)
+      await fetchTxHistory(
+        address,
+        (pagination.current - 1) * 3 + 1,
+        pagination.current
+      );
+  };
+
+  React.useEffect(() => {
+    if (address) fetchTxHistory(address, 0);
+  }, [address]);
+
+  const columns = [
+    {
+      title: "",
+      dataIndex: "type",
+      key: "type",
+      render: (type) => (
+        <>
+          {type && <Tag color="volcano">SENT</Tag>}
+          {!type && <Tag color="green">RECEIVED</Tag>}
+        </>
+      ),
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      width: 100,
+      ellipsis: true,
+      render: (address) => (
+        <Tooltip placement="topLeft" title={address}>
+          {address}
+        </Tooltip>
+      ),
+      key: "address",
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+    },
+  ];
 
   return (
     <>
       <Divider orientation="center">Transaction History</Divider>
-      <List
-        bordered
-        dataSource={data.transactions.results}
-        renderItem={(item) => (
-          <List.Item>
-            {item.inputs[0].credentials.address === address ? (
-              <PlusSquareFilled
-                style={{ color: "#68C740", paddingRight: "10px" }}
-              />
-            ) : (
-              <MinusSquareFilled />
-            )}
-            {bnToBig(item.outputs[0].amount, 9).toString()} AVAX -{" "}
-            {new Date(item.acceptedAt).toLocaleDateString()}
-          </List.Item>
-        )}
+      <Table
+        loading={loading}
+        dataSource={txHistory}
+        columns={columns}
+        onChange={handleTableChange}
+        pagination={{
+          total,
+          pageSize: 3,
+          showSizeChanger: false,
+          disabled: loading,
+          showTitle: false,
+          itemRender: (current, type, originalElement) => {
+            console.log(type);
+
+            return originalElement;
+          },
+        }}
       />
     </>
   );
@@ -446,9 +503,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 </>
               )}
             </Form>
-            <ApolloProvider client={apolloClient}>
-              <TransactionHistory address={wallet.address} />
-            </ApolloProvider>
+            <TransactionHistory address={wallet.address} />
           </Spin>
         </Col>
       </Row>

@@ -93,6 +93,8 @@ const useWallet = () => {
 
   const fetchAllBalancesFromAddress = async (address) => {
     let balances = await xchain.getAllBalances(address);
+    const utxos = await xchain.getUTXOs(address);
+    console.log("utxos", utxos);
     const avaxBalance = balances.filter((x) => x.asset === "AVAX").pop();
     const avaxBalanceValue = avaxBalance
       ? bnToBig(avaxBalance.balance, 9).toString()
@@ -115,12 +117,12 @@ const useWallet = () => {
     let sendAmount = new BN(
       new Big(amount).times(Big(Math.pow(10, 9))).toString()
     );
-    const currentBalance  = new BN(
+    const currentBalance = new BN(
       new Big(wallet.avaxBalance).times(Big(Math.pow(10, 9))).toString()
     );
 
     if (sendAmount.eq(currentBalance)) {
-       sendAmount = sendAmount.sub(xchain.getTxFee());
+      sendAmount = sendAmount.sub(xchain.getTxFee());
     }
 
     const addressesFromSender = [wallet.address];
@@ -203,11 +205,10 @@ const useWallet = () => {
   }, INTERVAL_IN_MILISECONDS * 30);
 
   useAsyncTimeout(async () => {
-          if (xchain) {
-                  const txFee = xchain.getTxFee(); 
-                  setTxFee(bnToBig(txFee, 9).toString())
-          }
-    
+    if (xchain) {
+      const txFee = xchain.getTxFee();
+      setTxFee(bnToBig(txFee, 9).toString());
+    }
   }, INTERVAL_IN_MILISECONDS * 600);
 
   React.useEffect(() => {
