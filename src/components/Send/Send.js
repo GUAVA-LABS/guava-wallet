@@ -222,13 +222,11 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
   const INTERVAL_IN_MILISECONDS = 1000;
 
   const fetchFiatPrice = async () => {
+    if (isModalVisible) return fiatPrice;
     const fetchedPriceObject = await axios.get(currency.priceApi);
     setFiatPrice(fetchedPriceObject.data["usd"]);
     setLoadingFiatPrice(false);
   };
-
-  const { width } = useWindowDimensions();
-  const scannerSupported = width < 769 && isMobile && !(isIOS && !isSafari);
 
   useAsyncTimeout(async () => {
     await fetchFiatPrice();
@@ -247,6 +245,9 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
   const [selectedCurrency, setSelectedCurrency] = useState(currency.ticker);
   const [txInfoFromUrl, setTxInfoFromUrl] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const { width } = useWindowDimensions(isModalVisible);
+  const scannerSupported = width < 769 && isMobile && !(isIOS && !isSafari);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -384,34 +385,14 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
   const showFiatPrice = (avaxBalance) =>
     !loadingFiatPrice && <span>{(fiatPrice * avaxBalance).toFixed(2)}</span>;
 
+  const getWallet = () => wallet;
+  const afterSubmit = () => {
+    submit();
+    setIsModalVisible(false);
+  };
+
   return (
     <>
-      <Modal
-        title="Enter password to confirm send"
-        visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        footer={null}
-      >
-        <h3>Transaction Summary</h3>
-        <ul>
-          <li>Sending to: {formData.address}</li>
-          <li>Amount: {formData.value} AVAX</li>
-          <li>Network Fee: {txFee} AVAX</li>
-          <li>Total: {formData.value + txFee}</li>
-        </ul>
-        <FormPassword
-          getWallet={() => {
-            return wallet;
-          }}
-          confirmPassword={false}
-          locked={true}
-          textSubmit={(formData.mnenomic = "Confirm")}
-          afterSubmit={() => {
-            submit();
-            setIsModalVisible(false);
-          }}
-        />
-      </Modal>
       {!avaxBalance ? (
         <ZeroBalanceHeader>
           You currently have 0 {currency.ticker}
@@ -514,6 +495,28 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
           </Spin>
         </Col>
       </Row>
+      <Modal
+        title="Enter password to confirm send"
+        visible={isModalVisible}
+        style={{ top: width < 769 ? 0 : "100px" }}
+        onCancel={() => setIsModalVisible(false)}
+        footer={null}
+      >
+        <h3>Transaction Summary</h3>
+        <ul>
+          <li>Sending to: {formData.address}</li>
+          <li>Amount: {formData.value} AVAX</li>
+          <li>Network Fee: {txFee} AVAX</li>
+          <li>Total: {formData.value + txFee}</li>
+        </ul>
+        <FormPassword
+          getWallet={getWallet}
+          confirmPassword={false}
+          locked={true}
+          textSubmit={(formData.mnenomic = "Confirm")}
+          afterSubmit={afterSubmit}
+        />
+      </Modal>
     </>
   );
 };
