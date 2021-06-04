@@ -416,7 +416,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
           <Spin spinning={loading} indicator={CashLoadingIcon}>
             <Form style={{ width: "auto" }}>
               <FormItemWithQRCodeAddon
-                loadWithCameraOpen={scannerSupported}
+                loadWithCameraOpen={false}
                 disabled={Boolean(filledAddress)}
                 validateStatus={""}
                 help={sendAvaxAddressError ? sendAvaxAddressError : ""}
