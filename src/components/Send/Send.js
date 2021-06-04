@@ -84,6 +84,13 @@ const NetworkFee = styled.p`
   margin: 0;
 `;
 
+const StyledTable = styled(Table)`
+  .ant-table-thead > tr > th {
+    color: #fff;
+    background-color: #000b43;
+  }
+`;
+
 const TransactionHistory = ({ address }) => {
   const [txHistory, setTxHistory] = useState([]);
   const [error, setError] = useState(false);
@@ -182,7 +189,7 @@ const TransactionHistory = ({ address }) => {
   return (
     <>
       <Divider orientation="center">Transaction History</Divider>
-      <Table
+      <StyledTable
         loading={loading}
         dataSource={txHistory}
         columns={columns}
