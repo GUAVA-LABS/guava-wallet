@@ -1,6 +1,6 @@
 {
     "name": "guava-wallet",
-    "version": "1.17.2",
+    "version": "1.17.3",
     "private": true,
     "dependencies": {
         "@ant-design/icons": "^4.3.0",
