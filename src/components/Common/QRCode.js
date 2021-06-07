@@ -9,7 +9,8 @@ export const StyledRawQRCode = styled(RawQRCode)`
   cursor: pointer;
   background: #ffffff;
   margin-bottom: 10px;
-
+  border-radius: 15px;
+  box-shadow: 5px -5px 10px #a80064, -5px 5px 10px #fc0096;
   :hover {
     border-color: ${({ bch = 0 }) => (bch === 1 ? "#ff8d00;" : "#5ebd6d")};
   }
@@ -97,7 +98,7 @@ const CustomInput = styled.div`
 
 export const QRCode = ({
   address,
-  size = 210,
+  size = 230,
   onClick = () => null,
   ...otherProps
 }) => {
@@ -160,7 +161,7 @@ export const QRCode = ({
           bch={address && address.includes("avax") ? 1 : 0}
           renderAs={"svg"}
           includeMargin
-          bgColor="#D2007D"
+          bgColor="#FFFFFF"
           fgColor="#000B43"
           imageSettings={{
             src: currency.tokenLogo,
