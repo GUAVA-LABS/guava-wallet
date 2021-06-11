@@ -137,10 +137,10 @@ const useWallet = () => {
   const getWalletFromLocalStorage = async () => {
     const wallet = parseWalletFromLocalStorage();
     if (wallet && wallet.address) {
-      const { avaxBalanceValue, assets } = await fetchAllBalancesFromAddress(
+      const { avaxBalance, assets } = await fetchAllBalancesFromAddress(
         wallet.address
       );
-      return { ...wallet, assets, avaxBalance: avaxBalanceValue };
+      return { ...wallet, assets, avaxBalance };
     }
   };
 
