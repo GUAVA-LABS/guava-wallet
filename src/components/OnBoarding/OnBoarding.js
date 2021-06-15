@@ -75,7 +75,7 @@ export const OnBoarding = ({ history }) => {
 
             <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
-            Guava is a non-custodial web wallet for AVAX on the X-Chain of Avalalabs. Guava Wallet is in the beta testing phase. Limit your use to small amounts of AVAX until this notice is changed.
+            Guava is a non-custodial web wallet for the Avalanche blockchain. Guava is still in its testing phases. Be careful, things might and will break sometimes! Only operate with small amounts to avoid losses.
                 <br />
                 <br />
             </WelcomeText>
