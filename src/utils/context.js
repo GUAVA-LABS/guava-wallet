@@ -90,25 +90,57 @@ const useWallet = () => {
     const wallet = window.localStorage.getItem("guava-wallet");
     return JSON.parse(wallet);
   };
+  const fetchAssetsDescriptions = async (assetBalances) => {
+    let assetsOnWallet = wallet.assets || {};
+    const assets = await Promise.all(
+      assetBalances.map(async (balance) => {
+        const assetDetails = assetsOnWallet[balance.asset];
+        if (assetDetails) {
+          return {
+            ...assetDetails,
+            balance: bnToBig(balance.balance, 9).toString(),
+          };
+        } else {
+          const assetDescription = await xchain.getAssetDescription(
+            balance.asset
+          );
+          console.log(assetDescription);
+          return {
+            id: assetDescription.assetID.toString(),
+            name: assetDescription.name,
+            ticker: assetDescription.symbol,
+            balance: bnToBig(
+              balance.balance,
+              assetDescription.denomination
+            ).toString(),
+          };
+        }
+      })
+    );
+    return assets;
+  };
 
   const fetchAllBalancesFromAddress = async (address) => {
     let balances = await xchain.getAllBalances(address);
     const utxos = await xchain.getUTXOs(address);
     console.log("utxos", utxos);
+    console.log("balances", balances);
+    const assetBalances = balances.filter((x) => x.asset !== "AVAX");
+    const assets = await fetchAssetsDescriptions(assetBalances);
     const avaxBalance = balances.filter((x) => x.asset === "AVAX").pop();
     const avaxBalanceValue = avaxBalance
       ? bnToBig(avaxBalance.balance, 9).toString()
       : "0";
-    return avaxBalanceValue;
+    return { avaxBalance: avaxBalanceValue, assets };
   };
 
   const getWalletFromLocalStorage = async () => {
     const wallet = parseWalletFromLocalStorage();
     if (wallet && wallet.address) {
-      const avaxBalanceValue = await fetchAllBalancesFromAddress(
+      const { avaxBalance, assets } = await fetchAllBalancesFromAddress(
         wallet.address
       );
-      return { ...wallet, avaxBalance: avaxBalanceValue };
+      return { ...wallet, assets, avaxBalance };
     }
   };
 

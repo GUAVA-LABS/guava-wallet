@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.17.3...v1.18.0) (2021-06-15)
+
+
+### Features
+
+* token list ([1865a57](https://github.com/GUAVA-LABS/guava-wallet/commit/1865a570800b232ea52cf7eea6d6a95b710dda09))
+
+
+### Bug Fixes
+
+* AVAX balance ([ca7b9d4](https://github.com/GUAVA-LABS/guava-wallet/commit/ca7b9d4167d34651058fd1b48e1a069fae44af31))
+* change text ([9cef977](https://github.com/GUAVA-LABS/guava-wallet/commit/9cef977128113aab9d4d79a30624c16c20fa08d0))
+
 ### 1.17.3 (2021-06-07)
 
 
