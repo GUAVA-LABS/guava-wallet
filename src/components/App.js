@@ -171,7 +171,10 @@ const App = () => {
   const selectedKey =
     location && location.pathname ? location.pathname.substr(1) : "";
 
-  const isPrimary = selectedKey === 'wallet';
+  const isPrimary = (selectedKey === 'wallet' || selectedKey === 'configure');
+  // if(selectedKey === 'news'){
+  //   window.location.href = 'https://www.guavawallet.com/news'
+  // }
 
   return (
     <ErrorBoundary>

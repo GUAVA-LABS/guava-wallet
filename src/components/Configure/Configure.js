@@ -10,6 +10,8 @@ import {
   ThemedCopyOutlined,
 } from "@components/Common/CustomIcons";
 import FormPassword from '@components/OnBoarding/formPassword'
+import InfoBar from "@components/Common/InfoBar"
+import PassCheck from "@components/Common/PassCheck";
 const { Panel } = Collapse;
 
 const StyledConfigure = styled.div`
@@ -36,7 +38,7 @@ const Configure = () => {
   return (
     <Spin spinning={false} indicator={CashLoadingIcon}>
       <StyledConfigure>
-          <h2>
+          {/* <h2>
             <ThemedCopyOutlined /> Backup your wallet
           </h2>
           <Alert
@@ -44,19 +46,21 @@ const Configure = () => {
             description="Your seed phrase is the only way to restore your wallet. Write it down. Keep it safe."
             type="warning"
             showIcon
-          />
-            <StyledCollapse>
-              <Panel header="Click to reveal seed phrase" key="1">
-		  <FormPassword
-                    getWallet={() => wallet}
-                    textSubmit="Reveal Seed"
-                  >
-			<p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
-		</FormPassword>
-              </Panel>
-            </StyledCollapse>
+          /> */}
+          <InfoBar title='Backup your wallet' droppable='true' content={<PassCheck />}/>
+          <InfoBar title='Websites (FAQ)' content='WEBSITES CONTENT' link='https://guavawallet.com/news/'/>
+          <InfoBar title='Documentation'/>
+          <InfoBar title='User Agreement (TOS) and Privacy Statement'/>
+          <InfoBar title='Games and other external'/>
+          <InfoBar title='NFT Marketplace (Inside or out)'/>
 
-          <h2 style={{ marginTop: "12px" }}>
+            {/* <StyledCollapse>
+              <Panel header="Click to reveal seed phrase" key="1">
+
+              </Panel>
+            </StyledCollapse> */}
+
+          {/* <h2 style={{ marginTop: "12px" }}>
             <DeleteOutlined /> Remove wallet
           </h2>
           <Alert
@@ -69,7 +73,7 @@ const Configure = () => {
               <SecondaryButton onClick={() => showDeleteModal()}>
                 Delete Wallet
               </SecondaryButton>
-            </StyledCollapse>
+            </StyledCollapse> */}
         </StyledConfigure>
         
         <Modal 

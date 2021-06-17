@@ -39,7 +39,7 @@ export default ({ selectedKey, currentPage, handleClick }) => (
         </NavButton>
         <NavButton
           active={selectedKey === "news"}
-          onClick={() => handleClick("/news")}
+          onClick={() => window.open('https://www.guavawallet.com/news', '_blank')}
         >
           <SnippetsFilled />
           News
