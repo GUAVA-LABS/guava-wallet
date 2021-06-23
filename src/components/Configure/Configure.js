@@ -10,6 +10,7 @@ import {
   ThemedCopyOutlined,
 } from "@components/Common/CustomIcons";
 import FormPassword from '@components/OnBoarding/formPassword'
+import InfoBar from '@components/Common/InfoBar'
 const { Panel } = Collapse;
 
 const StyledConfigure = styled.div`
@@ -35,10 +36,22 @@ const Configure = () => {
 
   return (
     <Spin spinning={false} indicator={CashLoadingIcon}>
+      <InfoBar 
+        title='Backup your wallet'
+        droppable='true' 
+        content={
+          <FormPassword
+            getWallet={() => wallet}
+            textSubmit="Send"
+          >
+            <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
+          </FormPassword>}
+      />
       <StyledConfigure>
-          <h2>
+          {/* <h2>
             <ThemedCopyOutlined /> Backup your wallet
           </h2>
+
           <Alert
             style={{ marginBottom: "12px" }}
             description="Your seed phrase is the only way to restore your wallet. Write it down. Keep it safe."
@@ -54,10 +67,10 @@ const Configure = () => {
 			<p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
 		</FormPassword>
               </Panel>
-            </StyledCollapse>
+            </StyledCollapse> */}
 
           <h2 style={{ marginTop: "12px" }}>
-            <DeleteOutlined /> Remove wallet
+            {/* <DeleteOutlined /> Remove wallet */}
           </h2>
           <Alert
             style={{ marginBottom: "12px" }}
@@ -65,13 +78,10 @@ const Configure = () => {
             type="error"
             showIcon
           />
-            <StyledCollapse>
-              <SecondaryButton onClick={() => showDeleteModal()}>
+              <SecondaryButton style={delete_btn_style} onClick={() => showDeleteModal()}>
                 Delete Wallet
               </SecondaryButton>
-            </StyledCollapse>
-        </StyledConfigure>
-        
+        </StyledConfigure>        
         <Modal 
         title="Are you sure you want to delete it?" 
         visible={isModalVisible} 
@@ -93,6 +103,14 @@ const Configure = () => {
 
   );
 };
+
+const delete_btn_style = {
+  backgroundColor: 'white',
+  margin: 'auto',
+  boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.16)',
+  fontSize: '20px',
+  fontWeight: '600',
+}
 
 export default Configure;
     

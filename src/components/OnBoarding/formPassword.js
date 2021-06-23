@@ -12,6 +12,7 @@ export const StyledButton = styled(Button)`
 `;
 
 const layout = {
+  
   labelCol: {
     span: 8,
   },
@@ -90,6 +91,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
 
   const LockedForm = () =>
     <Form
+    style={form_style}
       form={form}
       {...layout}
       name="basic"
@@ -121,7 +123,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
           }),
         ]}
       >
-        <Input.Password placeholder="Password" {...addonAfter} />
+        <Input.Password placeholder="Password" {...addonAfter}/>
       </Form.Item>
       {confirmPassword &&  <Form.Item
         
@@ -160,5 +162,13 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
   </>)
 
 };
+
+const form_style = {
+  margin: 'auto',
+  marginTop:'20px',
+  display: 'inline-block',
+  alignItems: 'center'
+}
+
 
 export default FormPassword;
