@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { RiArrowDropRightLine } from 'react-icons/ri';
+import { CaretRightOutlined } from '@ant-design/icons';
 // import PassCheck from './PassCheck';
 
 
@@ -23,11 +23,12 @@ const InfoBar = (props) => {
         overflow: 'hidden'
     });
     const [iconAnimation, setIconAnimation] = useState({
-        fontSize: '36px',
+        fontSize: '16px',
         color: '#DC1199',
         marginLeft: '8px',
         transform: '',
-        transition: 'transform .3s ease'
+        transition: 'transform .3s ease',
+        padding: '10px'
     });
     let dropDown = props.droppable;
     if(isDroppable){
@@ -44,7 +45,7 @@ const InfoBar = (props) => {
     return(
         <>
         <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.location.href = link}>
-            {show.height == '0px' ? <RiArrowDropRightLine style={iconAnimation} /> : <RiArrowDropRightLine style={iconAnimation} />
+            {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
             }
             {barTitle}
         </div>
