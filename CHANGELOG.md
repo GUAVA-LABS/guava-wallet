@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.3](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.18.4...v1.18.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* change news to div ([f68a1c6](https://github.com/GUAVA-LABS/guava-wallet/commit/f68a1c63c47dce078e4483e03227049106702fb7))
+* change text ([09efaee](https://github.com/GUAVA-LABS/guava-wallet/commit/09efaeeffa02772d1edbc09b4e4f2a7abdb4e3f6))
+
 ### 1.18.2 (2021-06-18)
 
 ### 1.18.3 (2021-06-18)
