@@ -32,7 +32,15 @@ export const WelcomeText = styled.p`
     width: 100%;
     font-size: 16px;
     margin-bottom: 60px;
-    text-align: left;
+    text-align: justify;
+`;
+
+export const Warning = styled.p`
+    color: #FFFFFF;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 60px;
+    text-align: justify;
 `;
 
 export const WelcomeLink = styled.a`
@@ -75,7 +83,9 @@ export const OnBoarding = ({ history }) => {
 
             <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
-            Guava is a non-custodial web wallet for the Avalanche blockchain. Guava is still in its testing phases. Be careful, things might and will break sometimes! Only operate with small amounts to avoid losses.
+            Guava is a non-custodial web wallet for the Avalanche blockchain. Currently only AVAX transactions on the x-chain are supported. More functionality is being worked on by the Guava Wallet Dev Team.
+
+To avoid loss of access to keys and coins, it is essential to back up your 24 word seed phrase in a secure way before using the application. 
                 <br />
                 <br />
             </WelcomeText>
@@ -147,6 +157,10 @@ export const OnBoarding = ({ history }) => {
                     {formData.mnemonic}
             </div>
       </Modal>
+                          <Warning>
+                          Warning:
+                          This is new technology and software under development. Use of this wallet is at your own risk. Web wallets are convenient but not advisable for high value coin transaction or storage
+                          </Warning>
         </>
     );
 };

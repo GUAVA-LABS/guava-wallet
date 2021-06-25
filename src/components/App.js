@@ -171,7 +171,7 @@ const App = () => {
   const selectedKey =
     location && location.pathname ? location.pathname.substr(1) : "";
 
-  const isPrimary = selectedKey === 'wallet';
+  const isPrimary = (selectedKey === 'wallet' || selectedKey === 'configure');
 
   return (
     <ErrorBoundary>
