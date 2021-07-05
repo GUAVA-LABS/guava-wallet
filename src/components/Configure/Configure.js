@@ -31,9 +31,6 @@ const Configure = () => {
     setIsModalVisible(true)
 
   }
-  
-
-
   return (
     <Spin spinning={false} indicator={CashLoadingIcon}>
       <InfoBar 
@@ -42,11 +39,16 @@ const Configure = () => {
         content={
           <FormPassword
             getWallet={() => wallet}
-            textSubmit="Send"
+            textSubmit="Show"
           >
             <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
           </FormPassword>}
       />
+      <div onClick={() => showDeleteModal()}>
+        <InfoBar 
+          delete
+        />
+      </div>
       <StyledConfigure>
           {/* <h2>
             <ThemedCopyOutlined /> Backup your wallet
@@ -68,19 +70,12 @@ const Configure = () => {
 		</FormPassword>
               </Panel>
             </StyledCollapse> */}
-
-          <h2 style={{ marginTop: "12px" }}>
-            {/* <DeleteOutlined /> Remove wallet */}
-          </h2>
-          <Alert
+          {/* <Alert
             style={{ marginBottom: "12px" }}
             description="Your data will be totally erased. Remember to backup your seed before deleting your wallet."
             type="error"
             showIcon
-          />
-              <SecondaryButton style={delete_btn_style} onClick={() => showDeleteModal()}>
-                Delete Wallet
-              </SecondaryButton>
+          /> */}
         </StyledConfigure>        
         <Modal 
         title="Are you sure you want to delete it?" 
@@ -103,13 +98,21 @@ const Configure = () => {
 
   );
 };
-
 const delete_btn_style = {
+  width: '100%',
+  padding: '10px',
+  color: '#011437',
   backgroundColor: 'white',
+  border: 'none',
   margin: 'auto',
+  borderRadius: '6px',
   boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.16)',
-  fontSize: '20px',
   fontWeight: '600',
+  fontSize:'11pt',
+  margin:'auto',
+  textAlign:'left',
+  fontWeight:'600',
+  marginTop:'10px',
 }
 
 export default Configure;
