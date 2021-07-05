@@ -43,17 +43,27 @@ const InfoBar = (props) => {
         }
     }
     return(
-        <>
-        <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.location.href = link}>
-            {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
-            }
-            {barTitle}
-        </div>
-        <div style={show}>
-            {/* <PassCheck advice='Write your password to reveal the seed phrase'/> */}
-            {content}
-        </div>
-        </>
+        !props.delete ?
+            <>
+            <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.location.href = link}>
+                {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
+                }
+                {barTitle}
+            </div>
+            <div style={show}>
+                {/* <PassCheck advice='Write your password to reveal the seed phrase'/> */}
+                {content}
+            </div>
+            </>
+        :
+            <>
+                <div style={info_bar_style} >
+                    {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
+                    }
+                    Delete Wallet
+                </div> 
+            </>
+        
     )
 
 }
@@ -68,7 +78,7 @@ const info_bar_style = {
     width: '100%',
     backgroundColor:'red',
     textAlign:'left',
-    padding:'4px',
+    padding:'10px',
     fontWeight:'600',
     color:'#011437',
     backgroundColor: 'white',
