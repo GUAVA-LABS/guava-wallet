@@ -35,6 +35,7 @@ const useWallet = () => {
 
   const [xchain] = React.useState(avalancheInstance.XChain());
   const [loading, setLoading] = React.useState(true);
+  const [sendingAssetXChain, setSendingAssetXChain] = React.useState(false);
   const [wallet, setWallet] = React.useState(false);
   const [txFee, setTxFee] = React.useState(false);
 
@@ -145,6 +146,8 @@ const useWallet = () => {
   };
 
   const sendAssetXChain = async (amount, destinationAddress) => {
+    setSendingAssetXChain(true);
+    try { 
     Big.NE = -(9 - 1);
     let sendAmount = new BN(
       new Big(amount).times(Big(Math.pow(10, 9))).toString()
@@ -187,12 +190,21 @@ const useWallet = () => {
     );
     const signedTransaction = unsignedTransaction.sign(keychainInstance);
     const issuedTransactionID = await xchain.issueTx(signedTransaction);
+    await setWalletAndEncrypt();
+    setSendingAssetXChain(false);
+    
     return issuedTransactionID;
+
+    } catch (e) {
+      console.error(e);
+      await setWalletAndEncrypt();
+      setSendingAssetXChain(false);
+    }
   };
 
   const setWalletAndEncrypt = async () => {
     const walletFromLocalStorage = await getWalletFromLocalStorage();
-    if (walletFromLocalStorage && walletFromLocalStorage.mnemonicCypher) {
+    if (walletFromLocalStorage && walletFromLocalStorage.mnemonicCypher && !sendingAssetXChain) {
       setEncryptionStatus(ENCRYPTION_STATUS_CODE.ENCRYPTED);
       setWallet({ ...walletFromLocalStorage, mnemonic: false });
     }
@@ -259,6 +271,7 @@ const useWallet = () => {
 
   return {
     sendAssetXChain,
+    sendingAssetXChain,
     getWalletFromLocalStorage,
     deleteWallet,
     createWallet,
