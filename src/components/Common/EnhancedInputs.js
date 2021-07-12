@@ -51,7 +51,6 @@ export const SendBchInput = ({
             value: currency.ticker,
             label: currency.ticker,
         },
-        { value: 'USD', label: 'USD' },
     ];
     const currencyOptions = currencies.map(currency => {
         return (
