@@ -201,8 +201,6 @@ const TransactionHistory = ({ address }) => {
           disabled: loading,
           showTitle: false,
           itemRender: (current, type, originalElement) => {
-            console.log(type);
-
             return originalElement;
           },
         }}
@@ -507,7 +505,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
           <li>Sending to: {formData.address}</li>
           <li>Amount: {formData.value} AVAX</li>
           <li>Network Fee: {txFee} AVAX</li>
-          <li>Total: {formData.value + txFee}</li>
+          <li>Total: {Number(formData.value) + Number(txFee)}</li>
         </ul>
         <FormPassword
           getWallet={getWallet}
