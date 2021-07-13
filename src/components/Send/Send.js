@@ -210,7 +210,7 @@ const TransactionHistory = ({ address }) => {
 };
 
 const SendBCH = ({ filledAddress, callbackTxId }) => {
-  const { wallet, sendingAssetXChain, sendAssetXChain, apiError, txFee } = React.useContext(
+  const { wallet, sendAssetXChain, apiError, txFee } = React.useContext(
     WalletContext
   );
 
@@ -463,7 +463,6 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
               <div style={{ paddingTop: "12px" }}>
                 {!avaxBalance ||
                 apiError ||
-                sendingAssetXChain || 
                 sendAvaxAmountError ||
                 sendAvaxAddressError ? (
                   <SecondaryButton>Send</SecondaryButton>
@@ -506,7 +505,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
           <li>Sending to: {formData.address}</li>
           <li>Amount: {formData.value} AVAX</li>
           <li>Network Fee: {txFee} AVAX</li>
-          <li>Total: {Number(formData.value) + Number(txFee)}</li>
+          <li>Total: {(Number(formData.value) + Number(txFee)).toFixed(3)}</li>
         </ul>
         <FormPassword
           getWallet={getWallet}
