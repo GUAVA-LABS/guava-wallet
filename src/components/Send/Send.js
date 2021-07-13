@@ -91,7 +91,7 @@ const StyledTable = styled(Table)`
   }
 `;
 
-const TransactionHistory = ({ address }) => {
+const TransactionHistory = ({ address, avaxBalance }) => {
   const [txHistory, setTxHistory] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -147,8 +147,10 @@ const TransactionHistory = ({ address }) => {
   };
 
   React.useEffect(() => {
+    setTxHistory([]);
+    setTotal(false);
     if (address) fetchTxHistory(address, 0);
-  }, [address]);
+  }, [address, avaxBalance]);
 
   const columns = [
     {
@@ -489,7 +491,7 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 </>
               )}
             </Form>
-            <TransactionHistory address={wallet.address} />
+            <TransactionHistory address={wallet.address} avaxBalance={avaxBalance} />
           </Spin>
         </Col>
       </Row>
