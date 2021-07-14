@@ -97,6 +97,11 @@ const TransactionHistory = ({ address, avaxBalance }) => {
   const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(false);
   const LIMIT = 4;
+
+  const getOutputs = (outputs, isSend, address) => {
+    return outputs.filter(output => isSend ? !output.addresses.includes(address) : output.addresses.includes(address));
+  }
+
   const fetchTxHistory = async (addr, offset, currentPage) => {
     setLoading(true);
     const address = addr.replace("X-", "");
@@ -107,19 +112,15 @@ const TransactionHistory = ({ address, avaxBalance }) => {
       const data = await response.json();
       const transactions = data.transactions.map((tx) => {
         const inputAddress = tx.inputs[0].credentials[0].address;
-        const outputAddress = tx.outputs[0].addresses[0];
         const isSend = inputAddress === address;
-        const outputsForAddress = tx.outputs.filter((output) => {
-          const hasDesiredAddress = output.addresses.includes(outputAddress);
-          return hasDesiredAddress;
-        });
+        const outputsForAddress = getOutputs(tx.outputs, isSend, address);
         const amount = outputsForAddress.reduce(
-          (accumulator, output) => accumulator + output.amount,
-          0
+          (accumulator, output) => accumulator.plus(output.amount),
+          bnToBig(0, 9)
         );
         const date = new Date(tx.timestamp).toLocaleDateString();
         return {
-          address: isSend ? outputAddress : inputAddress,
+          address: isSend ? outputsForAddress[0].addresses[0] : inputAddress,
           type: isSend,
           amount: `${bnToBig(amount, 9).toString()} AVAX`,
           date,
@@ -149,7 +150,8 @@ const TransactionHistory = ({ address, avaxBalance }) => {
   React.useEffect(() => {
     setTxHistory([]);
     setTotal(false);
-    if (address) fetchTxHistory(address, 0);
+    console.log('refetching....');
+    if (address) fetchTxHistory(address, 0, 0);
   }, [address, avaxBalance]);
 
   const columns = [
