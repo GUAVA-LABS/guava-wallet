@@ -29,7 +29,7 @@ import { shouldRejectAmountInput, fiatToCrypto } from "@utils/validation";
 import FormPassword from "@components/OnBoarding/formPassword";
 import useAsyncTimeout from "@hooks/useAsyncTimeout";
 import axios from "axios";
-import { PlusSquareFilled, MinusSquareFilled } from "@ant-design/icons";
+import { PlusSquareFilled, MinusSquareFilled, SyncOutlined } from "@ant-design/icons";
 import { bnToBig } from "@utils/helpers";
 import fetch from "node-fetch";
 import { selectHttpOptionsAndBody } from "@apollo/client";
@@ -152,6 +152,12 @@ const TransactionHistory = ({ address, avaxBalance }) => {
     setTotal(false);
     console.log('refetching....');
     if (address) fetchTxHistory(address, 0, 0);
+
+    return () => {
+        setTxHistory([]);
+        setTotal(false);
+    }
+
   }, [address, avaxBalance]);
 
   const columns = [
@@ -192,7 +198,6 @@ const TransactionHistory = ({ address, avaxBalance }) => {
 
   return (
     <>
-      <Divider orientation="center">Transaction History</Divider>
       <StyledTable
         loading={loading}
         dataSource={txHistory}
@@ -247,6 +252,12 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
   const [selectedCurrency, setSelectedCurrency] = useState(currency.ticker);
   const [txInfoFromUrl, setTxInfoFromUrl] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showTxHist, setShowTxHist] = useState(true);
+
+  const refreshTxHistory = () => {
+      setShowTxHist(false);
+      setTimeout(() => { setShowTxHist(true); }, 1000);
+  }
 
   const { width } = useWindowDimensions(isModalVisible);
   const scannerSupported = width < 769 && isMobile && !(isIOS && !isSafari);
@@ -493,7 +504,10 @@ const SendBCH = ({ filledAddress, callbackTxId }) => {
                 </>
               )}
             </Form>
-            <TransactionHistory address={wallet.address} avaxBalance={avaxBalance} />
+
+      <Divider orientation="center">Transaction History</Divider>
+      <Tag color="#000b43" style={{ marginBottom: 20 }} onClick={refreshTxHistory} icon={<SyncOutlined spin={!showTxHist}/>}>Refresh</Tag>
+            { showTxHist && <TransactionHistory address={wallet.address} avaxBalance={avaxBalance} /> }
           </Spin>
         </Col>
       </Row>
