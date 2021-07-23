@@ -22,7 +22,7 @@ ReactDOM.render(
         <Suspense
       fallback={
         <LoadingBody>
-           <video loop autoPlay>
+           <video loop autoPlay muted>
             <source src={LoadingLoop} type="video/mp4" />
           Loading Guava...
           </video>
