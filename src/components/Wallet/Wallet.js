@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import TokenList from "./TokenList";
 
 const BalanceColor = styled.h1`
-  color: #ffffff;
+  color: #fff;
 `;
 
 export const LoadingCtn = styled.div`
@@ -155,12 +155,27 @@ const WalletInfo = () => {
     return (
       <>
         <BalanceColor>{avaxBalance ? avaxBalance : 0} AVAX</BalanceColor>
-        {address && (
-          <>
-            <QRCode id="borderedQRCode" address={address} />
-          </>
-        )}
-        <TokenList tokens={wallet.assets || []} />
+        <div style={{
+          background: '#fff',
+          margin: 'auto',
+          width: '100%',
+          height: '76%',
+          padding: '0px',
+          position: 'absolute',
+          left: '0',
+          bottom: '0',
+          borderTopRightRadius: '30px',
+          borderTopLeftRadius: '30px',
+          }}>
+          <br/>
+          <br/>
+          {address && (
+            <>
+              <QRCode id="borderedQRCode" address={address} />
+            </>
+          )}
+          <TokenList tokens={wallet.assets || []} />
+        </div>
       </>
     );
   };
