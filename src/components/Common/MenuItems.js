@@ -10,6 +10,10 @@ import {
   ShopFilled,
   SnippetsFilled,
 } from "@ant-design/icons";
+import {IoLogoGameControllerB} from 'react-icons/io'
+import gameIcon from '../../assets/game-icon.svg'
+// import { ReactComponent as YourSvg } from './your-svg.svg';
+
 import { Footer, NavButton } from "@components/App.js";
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -38,11 +42,14 @@ export default ({ selectedKey, currentPage, handleClick }) => (
           Send
         </NavButton>
         <NavButton
-          active={selectedKey === "news"}
-          onClick={() => window.open('https://www.guavawallet.com/news', '_blank')}
+          active={selectedKey === "games"}
+          onClick={() => handleClick("/games")}
         >
-          <SnippetsFilled />
-          News
+          <div style={{display:'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center', justifyContent: 'center', marginBottom: '6px'}}>
+          <IoLogoGameControllerB style={{fontSize: '30px'}}/>
+
+          </div> 
+          Games
         </NavButton>
 
         <NavButton
@@ -56,3 +63,5 @@ export default ({ selectedKey, currentPage, handleClick }) => (
     </Swiper>
   </Footer>
 );
+
+

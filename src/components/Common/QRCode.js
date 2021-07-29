@@ -10,7 +10,7 @@ export const StyledRawQRCode = styled(RawQRCode)`
   background: #ffffff;
   margin-bottom: 10px;
   border-radius: 15px;
-  box-shadow: 5px -5px 10px #a80064, -5px 5px 10px #fc0096;
+  box-shadow: 0px 0px 13px 3px rgba(0,0,0,0.15);
   :hover {
     border-color: ${({ bch = 0 }) => (bch === 1 ? "#ff8d00;" : "#5ebd6d")};
   }
@@ -39,7 +39,7 @@ const Copied = styled.div`
 
 const CustomInput = styled.div`
   font-size: 12px;
-  color: #ffffff;
+  color: #07074F;
   text-align: center;
   cursor: pointer;
   margin-bottom: 15px;
