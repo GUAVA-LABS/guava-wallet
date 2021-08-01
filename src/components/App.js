@@ -87,7 +87,7 @@ export const WalletBody = styled.div`
 export const WalletCtn = styled.div`
     position: relative;
     width: 500px;
-    background-color: ${props => props.primary ? '#07074F' : '#fff'};
+    background-color: ${props => props.primary ? '#d2007d' : '#fff'};
     min-height: 100vh;
     padding: 10px 30px 120px 30px;
     -webkit-box-shadow: 0px 0px 24px 1px rgba(0, 0, 0, 1);

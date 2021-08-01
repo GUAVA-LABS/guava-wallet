@@ -175,6 +175,7 @@ export const QRCode = ({
 
         {address && (
           <CustomInput>
+            <br/>
             <input
               ref={txtRef}
               readOnly

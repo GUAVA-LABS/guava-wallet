@@ -16,6 +16,7 @@ import PrimaryButton, {
 import { currency } from '@components/Common/Ticker.js';
 import { Event } from '@utils/GoogleAnalytics';
 import FormPassword from '@components/OnBoarding/formPassword'
+import logoIcon from '../../assets/guava-logo-landing.png'
 const bip39 = require('bip39');
 
 const WelcomeColor = styled.h2`
@@ -83,11 +84,9 @@ export const OnBoarding = ({ history }) => {
 
             <WelcomeColor>Welcome to Guava!</WelcomeColor>
             <WelcomeText>
-            Guava is a non-custodial web wallet for the Avalanche blockchain. Currently only AVAX transactions on the x-chain are supported. More functionality is being worked on by the Guava Wallet Dev Team.
-
-To avoid loss of access to keys and coins, it is essential to back up your 24 word seed phrase in a secure way before using the application. 
-                <br />
-                <br />
+            <p style={{marginBottom: '-40px'}}>Guava is a non-custodial web wallet for the Avalanche blockchain. Currently only AVAX transactions on the x-chain are supported. More functionality is being worked on by the Guava Wallet Dev Team.
+            To avoid loss of access to keys and coins, it is essential to back up your 24 word seed phrase in a secure way before using the application. 
+            </p>
             </WelcomeText>
 
             <PrimaryButton onClick={() => showBackupConfirmModal()}>
@@ -157,10 +156,11 @@ To avoid loss of access to keys and coins, it is essential to back up your 24 wo
                     {formData.mnemonic}
             </div>
       </Modal>
-                          <Warning>
-                          Warning:
-                          This is new technology and software under development. Use of this wallet is at your own risk. Web wallets are convenient but not advisable for high value coin transaction or storage
-                          </Warning>
+            <Warning>
+            Warning:
+            This is new technology and software under development. Use of this wallet is at your own risk. Web wallets are convenient but not advisable for high value coin transaction or storage
+            </Warning>
+            <img src={logoIcon} width='60px'/>
         </>
     );
 };
