@@ -1,0 +1,16 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap'); */
+*{
+    font-family: 'Nunito Sans', sans-serif;
+}
+:root {
+    --pink-1: #D2007d;
+    --blue-1: #07084F;
+}
+.text-pink-1 {
+    color: var(--pink-1)
+}
+
+.bg-pink-1 {
+    background-color: var(--pink-1)
+
+}

@@ -1,0 +1,56 @@
+.table{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+.col-icon{
+    width: 20vw;
+}
+.col-1{
+    width: 40vw;
+    text-align: left;
+}
+.col-2{
+    width: 40vw;
+    text-align: end;
+}
+.mr-15{
+    margin-right: 15px;
+}
+.historyIcon{
+    display: flex;
+    text-align: left;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+}
+
+.primary-info{
+color: var(--blue-1);
+}
+.secondary-info{
+color: gray;
+}
+
+
+@media (min-width:768px){
+    .col-icon{
+        width: 10vw;
+    }
+    .col-1{
+        width: 45vw;
+        text-align: left;
+    }
+    .col-2{
+        width: 45vw;
+        text-align: end;
+    }
+}
