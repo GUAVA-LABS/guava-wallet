@@ -1,0 +1,172 @@
+@media (min-width:768px){  
+    h1, h3{
+        margin: 0px !important;
+    }  
+    .box-complete {
+        width: 100%;
+        height: 120px;
+    }
+    .logo{
+        text-align: right;
+        width: 160px;
+        margin-right: 80px;
+        vertical-align: middle;
+        height: 100%;
+        margin-top: -5px;
+    }
+    div .header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .balance-usd{
+        text-align: center;
+    }
+    .balance-avax{
+        text-align: center;
+        color: rgb(255, 203, 229);
+    }
+    .info{
+        margin-left: 80px;
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+    .logo{
+        order: 2;
+    }
+
+
+    .transactions{
+        display: flex;
+        order: 1;
+        align-items: center;
+        /* background-color: white; */
+        align-content: center;
+        padding: 0;
+        border-radius: 10px;
+        /* box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2); */
+    }
+    .vline{
+        width: 2.3px;
+        height: 100%;
+        background-color: var(--pink-1);
+    }
+    .transaction-button{
+        background-color: white;
+        color: var(--blue-1) !important;
+        padding: 3px 0 3px 0;
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+        width: 140px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        height: 25px;
+    }
+    .btn-send{
+        border-radius:10px 0 0 10px;
+    }
+    .btn-receive{
+        border-radius:0 10px 10px 0;
+    }
+    .transaction-button:hover{
+        background-color: rgb(253, 220, 243);
+        transition: ease-in-out 0.1s;
+    }
+    .bg{
+        background-color: var(--pink-1);
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        
+    }
+    .transIcon{
+        width: 23px;
+        height: 23px;
+    }
+}
+
+@media (max-width:769px){    
+    .box-complete {
+        width: 100%;
+        /* height: 120px; */
+    }
+    img{
+        width: 120px;
+        /* margin-top: -25px; */
+    }
+    div .header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        height: 240px;
+        align-items: center;
+        justify-content: center;
+    }
+    .balance-usd{
+        margin-top: 23px;
+        color: white;
+        font-size: 32px;
+        font-weight: 700 !important;
+    }
+    .balance-avax{
+        margin-top: -20px;
+        color: rgb(255, 203, 229);
+        font-size: 16px;
+        font-weight: 600 !important;
+    }
+    .transactions{
+        display: flex;
+        /* background-color: white; */
+        align-content: center;
+        padding: 0;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2);
+    }
+    .vline{
+        width: 2.3px;
+        height: 100%;
+        background-color: var(--pink-1);
+    }
+    .transaction-button{
+        background-color: white;
+        color: var(--blue-1) !important;
+        padding: 3px 0 3px 0;
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+        width: 140px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        height: 100%;
+    }
+    .btn-send{
+        border-radius:10px 0 0 10px;
+    }
+    .btn-receive{
+        border-radius:0 10px 10px 0;
+    }
+    .transaction-button:hover{
+        background-color: rgb(253, 220, 243);
+        transition: ease-in-out 0.1s;
+    }
+    .bg{
+        background-color: var(--pink-1);
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+    }
+    .transIcon{
+        width: 23px;
+        height: 23px;
+    }
+}

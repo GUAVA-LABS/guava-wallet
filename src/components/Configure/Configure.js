@@ -44,6 +44,10 @@ const Configure = () => {
             <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
           </FormPassword>}
       />
+      <InfoBar
+        title='Documentation'
+        link='https://docs.guavawallet.com'
+      />
       <div onClick={() => showDeleteModal()}>
         <InfoBar 
           delete

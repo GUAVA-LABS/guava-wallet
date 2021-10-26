@@ -12,7 +12,7 @@ const InfoBar = (props) => {
         display: 'flex',
         margin:'auto',
         textAlign: 'center',
-        width: '96%',
+        width: '88%',
         maxHeight: '0px',
         backgroundColor: 'white',
         color: '#011437',
@@ -45,7 +45,7 @@ const InfoBar = (props) => {
     return(
         !props.delete ?
             <>
-            <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.location.href = link}>
+            <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.open(link, '_blank')}>
                 {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
                 }
                 {barTitle}
@@ -75,7 +75,7 @@ const info_bar_style = {
     display: 'flex',
     margin:'auto',
     alignItems: 'center',
-    width: '100%',
+    width: '85%',
     backgroundColor:'red',
     textAlign:'left',
     padding:'10px',
