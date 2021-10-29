@@ -28,7 +28,7 @@ const WarningColor = styled.h3`
 `
 
 
-export const WelcomeText = styled.p`
+export const WelcomeText = styled.div`
     color: #FFFFFF;
     width: 100%;
     font-size: 16px;

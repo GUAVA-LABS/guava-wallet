@@ -10,6 +10,7 @@ import {
     useHistory,
 } from 'react-router-dom';
 import ErrorBoundary from '@components/ErrorBoundary';
+import "./App.css";
 
 
 import Home from '@components/Screens/Home/Home';
