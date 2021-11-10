@@ -13,7 +13,8 @@ export const currency = {
     defaultFee: 5.01,
     dust: '0.001', // The minimum amount of BCHA that can be sent by the app
     cashDecimals: 8,
-    priceApi: 'https://wallet.avax.network/api/price',
+    // priceApi: 'https://wallet.avax.network/api/price',
+    priceApi: 'https://avascan.info/api/v2/price',
     blockExplorerUrl: 'https://explorer.bitcoinabc.org',
     blockExplorerUrlTestnet: 'https://texplorer.bitcoinabc.org',
     tokenName: 'Tokens',

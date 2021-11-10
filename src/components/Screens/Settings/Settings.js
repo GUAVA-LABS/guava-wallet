@@ -16,25 +16,25 @@ const Settings = () => {
     return (
       <>
         <div className='container'>
-        <InfoBar 
-          title='Backup your wallet'
-          droppable='true' 
-          content={
-            <FormPassword
-              getWallet={() => wallet}
-              textSubmit="Show"
-            >
-              <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
-            </FormPassword>}
-        />
-        <InfoBar
-          title='Documentation'
-          link='https://docs.guavawallet.com'
-        />
-        <div onClick={() => showDeleteModal()}>
           <InfoBar 
-            delete
+            title='Backup your wallet'
+            droppable='true' 
+            content={
+              <FormPassword
+                getWallet={() => wallet}
+                textSubmit="Show"
+              >
+                <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
+              </FormPassword>}
           />
+          <InfoBar
+            title='Documentation'
+            link='https://docs.guavawallet.com'
+          />
+          <div onClick={() => showDeleteModal()}>
+            <InfoBar 
+              delete
+            />
         </div>        
         {/* <Modal 
           title="Are you sure you want to delete it?" 

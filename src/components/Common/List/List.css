@@ -1,8 +1,8 @@
-.table{
-    margin-top: 30px;
+.transaction-line{
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 3px 0;
 }
 .row{
     display: flex;
@@ -17,6 +17,10 @@
 .col-1{
     width: 40vw;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
 }
 .col-2{
     width: 40vw;
@@ -34,7 +38,7 @@
 }
 
 .primary-info{
-color: var(--blue-1);
+    color: var(--blue-1);
 }
 .secondary-info{
 color: gray;
@@ -48,6 +52,10 @@ color: gray;
     .col-1{
         width: 45vw;
         text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 600px;
     }
     .col-2{
         width: 45vw;

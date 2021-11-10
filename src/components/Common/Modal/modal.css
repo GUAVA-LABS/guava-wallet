@@ -1,5 +1,5 @@
     .card {
-    position: absolute;
+    position: relative;
     left: calc(50% - 250px);
     top: calc(50% - 325px);
     width: 500px;
@@ -11,9 +11,8 @@
     background-clip: border-box;
     border: none;
     box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.16);
-    z-index: 1;
+    z-index: 3;
     border-radius: 25px;
-    transition: max-height ease-in-out 1s;
   }
 
   .cancelIcon {
@@ -43,7 +42,7 @@
     flex-direction: column;
     width: 90%;
     margin: 5% 5%;
-    height: 85%;
+    height: 65%;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
@@ -52,75 +51,92 @@
     overflow-y: scroll; */
   }
 
-
-
-/* start state */
-.mfp-zoom-out {
-	/* animate in */
-	/* animate out */
-}
- .mfp-zoom-out .mfp-with-anim {
-	 opacity: 0;
-	 transition: all 0.3s ease-in-out;
-	 transform: scale(1.3);
-}
- .mfp-zoom-out.mfp-bg {
-	 opacity: 0;
-	 transition: all 0.3s ease-out;
-}
- .mfp-zoom-out.mfp-ready .mfp-with-anim {
-	 opacity: 1;
-	 transform: scale(1);
-}
- .mfp-zoom-out.mfp-ready.mfp-bg {
-	 opacity: 0.8;
-}
- .mfp-zoom-out.mfp-removing .mfp-with-anim {
-	 transform: scale(1.3);
-	 opacity: 0;
-}
- .mfp-zoom-out.mfp-removing.mfp-bg {
-	 opacity: 0;
-}
 @media (max-width:769px){
   .card{
-    position: absolute;
-    top: 10%;
+    position: relative;
+    top: auto;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 0;
-    height: 100%;
+    z-index: 3;
+    height: 570px;
   }
+
   .card-bg{
     position: absolute;
-    top: 0;
+    /* top: 0; */
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+    background: transparent;
+    height: 70%;
+    /* backdrop-filter: blur(0px); */
     width: 100vw;
-    height: 100%;
+    overflow: hidden;
+
   }
   img .cancelIcon{
     margin-right: 0 !important;
   }
 }
+
+
+
+/* ANIMATION */
+@media (max-width:769px){
+
+  .card-up{
+    animation: MoveUp .2s linear;
+  }
+  .card-down{
+    position: absolute;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 3;
+    height: 570px;
+    animation: MoveDown .2s linear;
+    animation-fill-mode: forwards;
+  }
+  @keyframes MoveUp {
+    0% {
+      bottom: -50%;
+    }
+    100%{
+      bottom: 0%;
+    }
+  }
+  @keyframes MoveDown {
+    0% {
+      bottom: 0%;
+    }
+
+    100%{
+      bottom: -100%;
+    }
+  }
+
+
+}
+
+
+
 @media (min-width:768px){
   img .cancelIcon{
     margin-right: 0 !important;
   }
+  
   .card-bg{
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+    background: transparent;
+    /* backdrop-filter: blur(0px); */
     width: 100vw;
-    height: 100%;
+    height: 0px;
   }
 }

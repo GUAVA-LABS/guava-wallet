@@ -10,6 +10,7 @@ const InfoBar = (props) => {
     const isDroppable = props.droppable;
     const [show, showState] = useState({
         display: 'flex',
+        position: 'relative',
         margin:'auto',
         textAlign: 'center',
         width: '88%',
@@ -18,7 +19,7 @@ const InfoBar = (props) => {
         color: '#011437',
         borderRadius: '0 0 6px 6px',
         boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.16)',
-        zIndex:'1',
+        zIndex:'-1',
         transition: 'max-height .5s ease',
         overflow: 'hidden'
     });
@@ -71,7 +72,7 @@ const InfoBar = (props) => {
 
 const info_bar_style = {
     fontSize:'11pt',
-    position:'relative',
+    // position:'relative',
     display: 'flex',
     margin:'auto',
     alignItems: 'center',

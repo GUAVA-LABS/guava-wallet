@@ -19,10 +19,10 @@ import NavBar from '@components/Common/NavBar/NavBar';
 import Header from '@components/Common/Header/Header';
 import Configure from '@components/Configure/Configure'
 // import { WalletInfo } from '@components/Wallet/Wallet'
-
+import './App.css'
 
 import FormPassword from '@components/OnBoarding/formPassword'
-import { OnBoarding } from "./OnBoarding/OnBoarding";
+import OnBoarding from "@components/Screens/OnBoarding/OnBoarding";
 
 
 const App = () => {
@@ -48,7 +48,7 @@ const App = () => {
                 </Route>
                 <Route path="/settings">
                   {/* {!wallet && <Redirect exact from="/settings" to="/" />} */}
-                    <Settings />
+                  <Settings />
 
                 </Route>
                 <Route path="/games">

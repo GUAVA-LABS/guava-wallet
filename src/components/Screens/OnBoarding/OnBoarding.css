@@ -1,0 +1,306 @@
+@media (max-width:769px){
+    .slide-content{
+        display: flex;
+        flex-direction: column ;
+        width: 80%;
+        /* margin: 0 10%; */
+    }
+    .onboarding{
+        background-color: var(--white-1);
+        width: 100%;
+        height: 100vh;
+    }
+    .onboarding-item{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    .logo-guava{
+        margin-top: 40px;
+        width: 50%;
+    }
+    .ob-img{
+        margin-top: 40px;
+        width: 80%;
+    }
+    .h1-title{
+        /* padding: 0; */
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--blue-1);
+        text-align: center;
+        width: 80%;
+    }
+    .p-warning{
+        text-align: center;
+        width: 80%;
+    }
+    .seed-phrase-container{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        margin-right: 10%;
+        margin-left: 10%;
+        background: white;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 2px solid var(--blue-1);
+
+    }
+    .seed-phrase{
+        font-size: 12px;
+        padding: 10px 5px;
+        margin: 10px 5px;
+    }
+    .onboarding-btn{
+        color: white;
+        font-weight: 700;
+        margin-top: 14px;
+        width: 80%;
+        padding: 20px 0;
+        border-radius: 8px;
+    }
+    .onboarding-btn:hover{
+        transform: scale(1.01);
+        box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.1);
+        transition: 0.2s;
+    }
+    .onboarding-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ml-5{
+        margin-left: 8px;
+    }
+    .footer{
+        display: none;
+    }
+}
+
+@media (min-width: 1031px) {
+    .onboarding{
+        background: url('../../../assets/guava-onboarding-bg.jpg');
+        background-color: var(--white-1);
+        background-position: 80%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100vh;
+    }
+    .onboarding-item{
+        display: flex;
+        width: 100%;
+        justify-content: end;
+        text-align: center;
+    }
+    .content-center{
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .logo-guava{
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        width: 10%;
+    }
+    .ob-img{
+        display: none;
+        margin-top: 40px;
+        width: 20%;
+    }
+    .h1-title{
+        /* padding: 0; */
+        margin-top: 20px;
+        font-size: 38px;
+        font-weight: 900;
+        color: var(--blue-1);
+        text-align: center;
+        width: 60%;
+        margin-right: 5%;
+    }
+    .p-warning{
+        text-align: center;
+        width: 60%;
+        margin-right: 5%;
+    }
+    .onboarding-btn{
+        color: white;
+        font-weight: 700;
+        margin-top: 14px;
+        width: 60%;
+        padding: 20px 0;
+        border-radius: 8px;
+        margin-right: 5%;
+    }
+    .onboarding-btn:hover{
+        transform: scale(1.005);
+        box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.1);
+        transition: 0.2s;
+    }
+    .onboarding-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ml-5{
+        margin-left: 8px;
+    }
+}
+
+@media (min-width:768px){
+    .onboarding{
+        background: url('../../../assets/guava-onboarding-bg.jpg');
+        background-color: var(--white-1);
+        background-position: 70%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100vh;
+    }
+    .onboarding-item{
+        display: flex;
+        width: 100%;
+        justify-content: end;
+        text-align: center;
+    }
+    .content-center{
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .logo-guava{
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        width: 10%;
+    }
+    .ob-img{
+        display: none;
+        margin-top: 40px;
+        width: 20%;
+    }
+    .h1-title{
+        /* padding: 0; */
+        margin-top: 20px;
+        font-size: 38px;
+        font-weight: 900;
+        color: var(--blue-1);
+        text-align: center;
+        width: 60%;
+        margin-right: 5%;
+    }
+    .p-warning{
+        text-align: center;
+        width: 60%;
+        margin-right: 5%;
+    }
+
+    .seed-phrase-container{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 60%;
+        margin-right: 5%;
+        background: white;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        border: 2px solid var(--blue-1);
+    }
+    .seed-phrase{
+        padding: 20px 10px;
+        margin: 20px 10px;
+    }
+    .slide-content{
+        display: flex;
+        flex-direction: column ;
+        width: 60%;
+        margin-right: 5%;
+        margin-top: 20px;
+        margin-bottom: 20px;    
+    }
+    .onboarding-btn{
+        color: white;
+        font-weight: 700;
+        margin-top: 14px;
+        width: 60%;
+        padding: 20px 0;
+        border-radius: 8px;
+        margin-right: 5%;
+    }
+    .onboarding-btn:hover{
+        transform: scale(1.005);
+        box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.1);
+        transition: 0.2s;
+    }
+    .onboarding-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ml-5{
+        margin-left: 8px;
+    }
+    .footer{
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+        color: var(--blue-1);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .footer a:link{
+        color: var(--blue-1);
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 1070px){
+    .onboarding{
+        background-position: 100%;
+    }
+    .h1-title{
+        width: 50%;
+    }
+    .p-warning{
+        width: 50%;
+    }
+    .onboarding-btn{
+        width: 50%;
+    }
+    .seed-phrase-container{
+        width: 50%;
+    }
+    .slide-content{
+        width: 50%;
+    }
+}
+@media (min-width: 1470px){
+    .h1-title{
+        width: 40%;
+    }
+    .p-warning{
+        width: 40%;
+    }
+    .onboarding-btn{
+        width: 40%;
+    }
+    .seed-phrase-container{
+        width: 40%;
+    }
+    .slide-content{
+        width: 40%;
+    }
+}
+    
