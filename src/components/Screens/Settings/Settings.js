@@ -31,7 +31,7 @@ const Settings = () => {
             title='Documentation'
             link='https://docs.guavawallet.com'
           />
-          <div onClick={() => showDeleteModal()}>
+          <div onClick={() => deleteWallet()}>
             <InfoBar 
               delete
             />

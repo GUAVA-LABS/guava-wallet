@@ -7,6 +7,12 @@ import logoGuava from '@assets/guavaheader.png'
 import { WalletContext } from '@utils/context';
 import { doExpression } from '@babel/types'
 import { doc } from 'prettier'
+import FormPassword from './formPassword'
+import FirstContent from './FirstContent'
+import SecondContent from './SecondContent'
+import ThirdContent from './ThirdContent'
+
+
 const bip39 = require('bip39');
 
 
@@ -30,13 +36,18 @@ export default function OnBoarding() {
     const [setUp, setSetUp] = useState(true);
 
     const handleChange = e => {
+        console.log(e)
         const { value, name } = e.target;
-
+        console.log(name)
         // Validate mnemonic on change
         // Import button should be disabled unless mnemonic is valid
         setIsValidMnemonic(validateMnemonic(value));
 
-        setFormData(p => ({ ...p, [name]: value }));
+        setFormData({
+            ...formData.mnemonic, [name]: value 
+        })
+        // setFormData(p => ({ ...p, [name]: value }));
+
     };
 
     function showBackupConfirmModal(setUp) {
@@ -44,6 +55,7 @@ export default function OnBoarding() {
         setFormData(p => ({ ...p, mnemonic: wallet.mnemonic }));
         setIsSeedPhraseModalVisible(true);
         console.log('CREATING')
+
         if(slider == 0 || slider == 1){
             setSlide(slider+1);
             console.log(slider)
@@ -53,121 +65,6 @@ export default function OnBoarding() {
         }
         setSetUp(setUp)
     }
-    const FirstContent = (props) => {
-        return(
-            <div className='content-center'>
-                <div className='onboarding-item'>
-                    <img className='ob-img' src={onboardingImg} />
-                </div>
-                <div className='onboarding-item'>
-                    <span className='h1-title'>
-                        Welcome to Guava
-                    </span>
-                </div>
-                <div className='onboarding-item'>
-                    <p className='p-warning'>
-                        Guava is a non-custodial web wallet for the Avalanche blockchain. Guava is still in its testing phases. Be careful, things might and will break sometimes! Only operate with small amounts to avoid losses.
-                    </p>
-                </div>
-                <div className='onboarding-item'>
-                    <a className='onboarding-btn bg-pink-1 onboarding-buttons' onClick={() => showBackupConfirmModal(true)}>
-                        <NewWalletIcon color='white' size='18px' /> 
-                        <span className='ml-5'>
-                            New Wallet
-                        </span>
-                    </a>
-                </div>
-                <div className='onboarding-item'>
-                    <a className='onboarding-btn bg-blue-1 onboarding-buttons' onClick={() => showBackupConfirmModal(false)}>
-                        <ImportWalletIcon color='white' size='18px' />
-                        <span className='ml-5'>
-                            Import Wallet
-                        </span>
-                    </a>
-                </div>
-            </div>
-        )
-    }
-    const SecondContent = (props) => {
-        return(
-            <div className='content-center'>
-                <div className='onboarding-item'>
-                    <img className='ob-img' src={onboardingImg} />
-                </div>
-                <div className='onboarding-item'>
-                    <span className='h1-title'>
-                        {setUp ? 'Copy your Mnemonic Seed Phrase' : 'Write down your Seed Phrase'}
-                    </span>
-                </div>
-                <div className='onboarding-item'>
-                    {setUp ? 
-                    <div className='seed-phrase-container'>
-                        <p className='seed-phrase'>
-                            witch collapse practice feed shame open despair road again ice least witch collapse practice feed shame open despair road again ice least practice feed
-                        </p>
-                    </div>
-                        :
-                        <div className='slide-content'>
-                            <input type='text' placeholder='Seed Phrase'/>
-                        </div>
-                    }
-                </div>
-                <div className='onboarding-item'>
-                    <a className='onboarding-btn bg-pink-1 onboarding-buttons' onClick={() => setSlide(slider+1)}>
-                        {/* <NewWalletIcon color='white' size='18px' />  */}
-                        <span className='ml-5'>
-                            Next
-                        </span>
-                    </a>
-                </div>
-                <div className='onboarding-item'>
-                    <a className='onboarding-btn bg-blue-1 onboarding-buttons' onClick={() => setSlide(slider-1)}>
-                        {/* <ImportWalletIcon color='white' size='18px' /> */}
-                        <span className='ml-5'>
-                            Go Back
-                        </span>
-                    </a>
-                </div>
-            </div>
-        )
-    }
-    const ThirdContent = (props) => {
-        return(
-            <div className='content-center'>
-                <div className='onboarding-item'>
-                    <img className='ob-img' src={onboardingImg} />
-                </div>
-                <div className='onboarding-item'>
-                    <span className='h1-title'>
-                        Create your Wallet Password
-                    </span>
-                </div>
-                <div className='onboarding-item'>
-                    <div className='slide-content'>
-                        <input type='text' placeholder='Password'/>
-                        <input type='text' placeholder='Confirm password'/>
-                    </div>
-                </div>
-                <div className='onboarding-item'>
-                    <a className='onboarding-btn bg-pink-1 onboarding-buttons' onClick={() => setSlide(0)}>
-                        {/* <NewWalletIcon color='white' size='18px' />  */}
-                        <span className='ml-5'>
-                            { setUp ? 'Create my Wallet' : 'Import my Wallet'}
-                        </span>
-                    </a>
-                </div>
-                <div className='onboarding-item'>
-                    <a className='onboarding-btn bg-blue-1 onboarding-buttons' onClick={() => setSlide(slider-1)}>
-                        {/* <ImportWalletIcon color='white' size='18px' /> */}
-                        <span className='ml-5'>
-                            Go Back
-                        </span>
-                    </a>
-                </div>
-            </div>
-        )
-    }
-
 
     return (
         <div className='onboarding'>
@@ -175,9 +72,9 @@ export default function OnBoarding() {
                 <div className='onboarding-item'>
                     <img className='logo-guava' src={logoGuava}/>
                 </div>
-                { slider == 0 ? <FirstContent /> : null}
-                { slider == 1 ? <SecondContent /> : null}
-                { slider == 2 ? <ThirdContent /> : null}
+                { slider == 0 ? <FirstContent showBackupConfirmModal={showBackupConfirmModal} slider={slider} setSlide={setSlide} setUp={setUp} setSetUp={setSetUp}/> : null}
+                { slider == 1 ? <SecondContent handleChange={handleChange} formData={formData} slider={slider} setSlide={setSlide} setUp={setUp} setSetUp={setSetUp}/> : null}
+                { slider == 2 ? <ThirdContent createWallet={createWallet} formData={formData} setIsModalVisible={setIsModalVisible} slider={slider} setSlide={setSlide} setUp={setUp}/> : null}
             </div>
             <div className='footer'>
                 <a href='https://www.guavawallet.com' target='_blank'>

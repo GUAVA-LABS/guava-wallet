@@ -150,7 +150,7 @@ const TransactionHistory = ({ address, avaxBalance }) => {
   
     return (
       <div style={{marginTop: '8px'}}>
-        {txHistory.map( item => <List data={item} />)}
+        { txHistory.length > 0 ? txHistory.map( item => <List data={item} />) : <div className='tx-history'> You don't have transactions yet</div>}
 
 
         {/* <StyledTable
