@@ -56,7 +56,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
   const onFinish =  (values) => {
     const wallet = getWallet();
     const { password } = values;
-    console.log('password', password);
+    console.log('password is working', password);
     console.log('current encryption status', encryptionStatus);
     onConfirmPassword(values);
     switch (encryptionStatus) {

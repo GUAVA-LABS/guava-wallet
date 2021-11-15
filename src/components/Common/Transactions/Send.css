@@ -24,11 +24,11 @@
 
 }
 @media (min-width:769px){
-    input{
-        padding: 10px 30px;
+    .send-input{
+        padding: 20px 20px;
         border: 2.5px solid var(--blue-1);
-        border-radius: 5px;
-        margin: 10px 30px;
+        border-radius: 8px;
+        margin: 10px 30px !important;
     }
     .send{
         margin-top:25px ;
@@ -39,10 +39,11 @@
         justify-content: center;
     }
     .send-btn{
-        padding: 10px 30px;
+        font-size: 16px;
+        padding: 20px 0px;
         background-color:var(--pink-1);
-        border-radius: 5px;
-        margin: 10px 30px;
+        border-radius: 8px;
+        margin: 10px 30px !important;
         color: white;
         border: none;
         font-weight: 700;

@@ -37,8 +37,6 @@
     .logo{
         order: 2;
     }
-
-
     .transactions{
         display: flex;
         order: 1;
@@ -50,7 +48,7 @@
         /* box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.2); */
     }
     .vline{
-        width: 2.3px;
+        width: 3.8px;
         height: 100%;
         background-color: var(--pink-1);
     }

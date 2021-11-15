@@ -10,8 +10,8 @@ const Send = () => {
                 <input type='text' placeholder='AVAX Address'/>
                 <a>QR</a>
             </div> */}
-            <input type='text' placeholder='AVAX Address'/>
-            <input type='text' placeholder='Amount' />
+            <input className='send-input' type='text' placeholder='AVAX Address'/>
+            <input className='send-input' type='text' placeholder='Amount' />
             <input className='send-btn' type='Button' value='Send' />
         </div>
     )

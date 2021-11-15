@@ -19,7 +19,7 @@ import NavBar from '@components/Common/NavBar/NavBar';
 import Header from '@components/Common/Header/Header';
 import Configure from '@components/Configure/Configure'
 // import { WalletInfo } from '@components/Wallet/Wallet'
-import './App.css'
+// import './App.css'
 
 import FormPassword from '@components/OnBoarding/formPassword'
 import OnBoarding from "@components/Screens/OnBoarding/OnBoarding";
