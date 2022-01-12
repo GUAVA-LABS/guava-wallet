@@ -10,16 +10,11 @@ const Settings = () => {
     const { wallet, deleteWallet } = ContextValue;
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isOpenDelete, setIsOpenDelete] = useState(false);
-
-    // function showDeleteModal() {
-    //   setIsModalVisible(true)
   
-    // }    
     const confirmDelete = () => {
 
       setIsOpenDelete(!isOpenDelete);
       console.log(isOpenDelete);
-      // window.confirm('Are you sure you want to delete your wallet?');
     }
     const[open, setOpen] = useState({
       open: false
@@ -58,19 +53,6 @@ const Settings = () => {
             />
         </div>
          { open.open ? <DeleteModal isOpenDelete={isOpenDelete} open={open} setOpen={setOpen} deleteWallet={deleteWallet} /> : null }
-        {/* <Modal 
-          title="Are you sure you want to delete it?" 
-          visible={isModalVisible} 
-          onCancel={() => setIsModalVisible(false)}
-          onOk={() => {
-                             deleteWallet();
-                             
-                         }}
-                         >
-                         <div>
-                                 {"When you delete your wallet you loose everything. Make sure you have the backup and/or the seed phrase."}
-                         </div>
-          </Modal> */}
           </div>
       </>
      

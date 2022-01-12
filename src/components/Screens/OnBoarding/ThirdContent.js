@@ -14,6 +14,7 @@ const ThirdContent = (props) => {
     const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
     const confirmPassword = true;
     const [pass, setPass] = useState('');
+    const [confirmPass, setConfirm] = useState('');
 
     const handleChange = e => {
         console.log(e)
@@ -21,6 +22,13 @@ const ThirdContent = (props) => {
         console.log(name)
         setPass(value)
         console.log(pass)
+    };
+    const handleConfirm = e => {
+        console.log(e)
+        const { value, name } = e.target;
+        console.log(name)
+        setConfirm(value)
+        console.log(confirmPass)
     };
 
     const getWallet = () => {
@@ -94,12 +102,12 @@ const ThirdContent = (props) => {
             </div>
             <div className='onboarding-item'>
                 <div className='slide-content'>
-                    <input type='text' placeholder='Password' onChange={e => handleChange(e)}/>
-                    <input type='text' placeholder='Confirm password'/>
+                    <input type='text' placeholder='Password' onChange={e => handleChange(e)} type='password'/>
+                    <input type='text' placeholder='Confirm password' onChange={e => handleConfirm(e)} type='password'/>
                 </div>
             </div>
             <div className='onboarding-item'>
-                <a className='onboarding-btn bg-pink-1 onboarding-buttons' onClick={() => onFinish(pass)}>
+                <a className='onboarding-btn bg-pink-1 onboarding-buttons' onClick={() => pass == confirmPass && pass.length >= 8 ? onFinish(pass) : window.alert('You need to confirm your password and have at least 8 characters')}>
                     {/* <NewWalletIcon color='white' size='18px' />  */}
                     <span className='ml-5'>
                         { props.setUp ? 'Make me a Wallet' : 'Import my Wallet'}

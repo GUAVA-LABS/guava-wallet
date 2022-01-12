@@ -51,7 +51,7 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
     return Promise.reject(new Error('The two passwords that you entered do not match!'));
   }
 
-  const onFinish =  (values) => {
+  function onFinish (values){
     const wallet = getWallet();
     const { password } = values;
     console.log('password', password);

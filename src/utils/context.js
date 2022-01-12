@@ -186,7 +186,9 @@ const useWallet = () => {
       changeAddresses
     );
     const signedTransaction = unsignedTransaction.sign(keychainInstance);
+    console.log('signedTransaction',signedTransaction);
     const issuedTransactionID = await xchain.issueTx(signedTransaction);
+    console.log(issuedTransactionID);
     await setWalletAndEncrypt();
     return issuedTransactionID;
   };

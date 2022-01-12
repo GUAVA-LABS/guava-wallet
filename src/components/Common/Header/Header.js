@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import '../../../global.css'
 import './Header.css'
 import logoPinkBg from '../../../assets/guavaheader.svg'
-import { Modal } from "@components/Common/Modal/modal"
+// import { Modal } from "@components/Common/Modal/modal"
 import { List } from "@components/Common/List/List"
 import sendIcon from '../../../assets/send-icon.png'
 import receiveIcon from '../../../assets/receive-icon.png'
@@ -11,20 +11,16 @@ import { currency } from '@components/Common/Ticker'
 
 export default function Header(props) {
 
-    // const[open, setOpen] = useState(false);
-    // const[action, setAction] = useState('receive');
     const[open, setOpen] = useState({
         open: false,
-        action: 'receive'
+        action: ''
     });
 
     useEffect(() => {
-        console.log('working')
-        console.log(open)
-
     }, [open])
 
     function handleOpen(action) {
+        // if(action == '')
         setOpen({open:!open.open, action: action})
         // getAvaxPrice()
         // setOpen(!open)
@@ -79,12 +75,9 @@ export default function Header(props) {
                         </a>
                     </div>
                     {
-                        open.open ? <Transactions open={open.open} action={open.action} setOpen={setOpen}/> : null
+                        open.open ? <Transactions open={open.open} action={open.action} setOpen={setOpen} handleOpen={handleOpen}/> : null
                     }
-                        {/* {<Modal name={open.name} close={handleClose} title={open.title} open={open.open}/>} */}
             </div>
-                    {/* <div className='bg'>
-                    </div> */}
         </>
 
     )

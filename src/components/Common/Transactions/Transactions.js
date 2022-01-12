@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Receive from './Receive'
 import Send from './Send'
+import ConfirmSend from './ConfirmSend'
 import './Transactions.css'
 import closeIcon from '../../../assets/close-icon.png'
-
 
 export default function Transactions(props) {
 
@@ -12,22 +12,12 @@ export default function Transactions(props) {
         move: true
     });
 
-    // const handleShow = () => {
-    //     setState({
-    //         open: props.open,
-    //         move: !state.move
-    //     })
-    // }
     const handleClose = () => {
         setState({...state, open:false, move:false})
         setTimeout(() => {
-            props.setOpen({...props.open, open:false, action:'receive'})
+            props.setOpen({...props.open, open:false, action:''})
         }, 220);
     }
-    // useEffect(() => {
-        
-    // }, [state, props])
-
 
     return (
         <>
@@ -37,7 +27,8 @@ export default function Transactions(props) {
                 </a>
                 <div className='trans-card'>
                     {props.action == 'receive' ? <Receive /> : null}
-                    {props.action == 'send' ? <Send /> : null}
+                    {props.action == 'send' ? <Send handleOpen={props.handleOpen} /> : null}
+                    {props.action == 'confirm' ? <ConfirmSend /> : null}
                 </div>
             </div>
         </>

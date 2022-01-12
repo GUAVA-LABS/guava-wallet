@@ -2,7 +2,7 @@ import { WalletContext } from "@utils/context";
 import React, { useEffect, useState } from 'react'
 import './Home.css'
 import { OnBoarding } from "@components/OnBoarding/OnBoarding";
-import { Modal } from "@components/Common/Modal/modal"
+// import { Modal } from "@components/Common/Modal/modal"
 import { List } from "@components/Common/List/List"
 
 // HISTORY IMPORTS
