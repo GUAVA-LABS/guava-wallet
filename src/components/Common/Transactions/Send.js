@@ -1,16 +1,19 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import './Send.css'
 import { WalletContext } from "@utils/context";
-import FormPassword from "@components/OnBoarding/formPassword";
-import Modal from "@components/Common/Modal/Modal";
+// import FormPassword from "@components/OnBoarding/formPassword";
+import Modal from "../../../components/Common/Modal/modal";
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 
 
 const Send = ({ filledAddress, callbackTxId }) => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, sendAssetXChain, apiError, txFee } = React.useContext(
+    const { wallet, sendAssetXChain/*, apiError, txFee*/ } = React.useContext(
       WalletContext
     );
+
+    const getWallet = () => wallet;
+
     const { avaxBalance } = wallet;
     const [formData, setFormData] = useState({
       dirty: true,
@@ -53,30 +56,34 @@ const Send = ({ filledAddress, callbackTxId }) => {
       setOpen({open:!open.open})
   };
 
-    async function submit() {
-      setFormData({
-        ...formData,
-        dirty: false,
-      });
-      if (formData.address == '' || Number(formData.amount) <= 0) {
-        return;
-      }
-  
-        let avaxAmount;
-        const { address, amount } = formData;
-
-        if (wallet.mnemonic) {try {
-            console.log('mnemonicSubmit:', wallet.mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
-            console.log('amountSubmitFunction:',amount, 'addressSubmitFunction:',address)
-            const link = await sendAssetXChain(amount, address);
-            console.log("txid", link);
-        } catch (e) {
-            console.log(e);
-            console.error(e);
-        }}
+  const submit = useCallback(async({wallet}) => {
+    setFormData({
+      ...formData,
+      dirty: false,
+    });
+    if (formData.address === '' || Number(formData.amount) <= 0) {
+      return;
     }
 
-    async function sendConfirmation(){
+      const { address, amount } = formData;
+      console.log('submited');
+      if (wallet.mnemonic) {
+        console.log('onIf');
+        try {
+          console.log('mnemonic on Submit Function:', wallet.mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
+          console.log('amountSubmitFunction:',amount, 'addressSubmitFunction:',address)
+          const link = await sendAssetXChain(amount, address);
+          console.log("txid", link);
+        } catch (e) {
+          console.log(e);
+          console.error(e);
+        }
+      }else{
+        console.log('failed');
+      }
+  }, [formData, sendAssetXChain]);
+
+    const sendConfirmation = useCallback(async() => {
       const { encrypt, decrypt, encryptionStatus, setWallet } = await ContextValue;
       const wallet = await getWallet();
         const password = await formData.password;
@@ -84,15 +91,16 @@ const Send = ({ filledAddress, callbackTxId }) => {
         switch (encryptionStatus) {
           case ENCRYPTION_STATUS_CODE.DECRYPTED:
             const mnemonicCypher = await encrypt(password, wallet.mnemonic);
-            console.log('mnemonic cypher objects', password, wallet, mnemonicCypher);
+            console.log('mnemonic cypher objects on DECRYPTED case', password, wallet, mnemonicCypher);
             await setWallet({
               ...wallet,
               mnemonicCypher,
               mnemonic: false
             });
             // setCalldAfterSubmit(true)
-            break;
-            case ENCRYPTION_STATUS_CODE.ENCRYPTED:
+          break;
+            
+          case ENCRYPTION_STATUS_CODE.ENCRYPTED:
               console.log('decrypt', password, wallet);
               const decryptedMnemonic = await decrypt(password, wallet.mnemonicCypher);
               console.log('decryptedMnemonic:',decryptedMnemonic);
@@ -100,13 +108,15 @@ const Send = ({ filledAddress, callbackTxId }) => {
                 ...wallet,
                 mnemonic: decryptedMnemonic,
               });
-              console.log('walletDecryptedMnemonic:',wallet)
-              setCalldAfterSubmit(true)
-              break;
-              default:
-              }
-              submit()
-    };
+              console.log('walletDecryptedMnemonic on ENCRYPTED CASE:',wallet);
+              setCalldAfterSubmit(true);
+              submit({wallet:  {...wallet, mnemonic: decryptedMnemonic}});
+          break;
+              
+          default:
+          
+          }
+    }, [ContextValue, formData.password, getWallet, submit]);
   
     const handleAddressChange = (e) => {
       const { value, name } = e.target;
@@ -124,6 +134,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         ...p, [name]: amount }));
         console.log('handleAmountChange:',amount)
     };
+    
     const handlePasswordChange = (e) => {
         const { value, name } = e.target;
         let password = value;
@@ -132,12 +143,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
         console.log('handlePasswordChange:',password)
     };
 
-
-    const getWallet = () => wallet;
-
-    const testFunction = () => {
-      console.log('WORKING REAL')
-  }
 
     return (
       <>
