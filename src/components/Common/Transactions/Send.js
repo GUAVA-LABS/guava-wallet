@@ -21,6 +21,22 @@ const Send = ({ filledAddress, callbackTxId }) => {
     const [isOpenConfirm, setIsOpenConfirm] = useState(false);
     const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
 
+
+    const afterSubmit = () => {
+      console.log('enviando a: '+ formData.address)
+      submit();
+    };
+
+    // React.useEffect(() => {
+    //   (async () => {
+    //     if (callAfterSubmit) {
+    //       console.log('UseEffect callAfterSubmit')
+    //       afterSubmit()};
+    //     setCalldAfterSubmit(false);
+    //   })();
+    // }, [callAfterSubmit, afterSubmit]);
+
+
     const confirmTx = () => {
 
       setIsOpenConfirm(!isOpenConfirm);
@@ -49,7 +65,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         let avaxAmount;
         const { address, amount } = formData;
 
-        try {
+        if (wallet.mnemonic) {try {
             console.log('mnemonicSubmit:', wallet.mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
             console.log('amountSubmitFunction:',amount, 'addressSubmitFunction:',address)
             const link = await sendAssetXChain(amount, address);
@@ -57,7 +73,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         } catch (e) {
             console.log(e);
             console.error(e);
-        }
+        }}
     }
 
     async function sendConfirmation(){
@@ -74,22 +90,22 @@ const Send = ({ filledAddress, callbackTxId }) => {
               mnemonicCypher,
               mnemonic: false
             });
-            setCalldAfterSubmit(true)
+            // setCalldAfterSubmit(true)
             break;
-          case ENCRYPTION_STATUS_CODE.ENCRYPTED:
-            console.log('decrypt', password, wallet);
-            const decryptedMnemonic = await decrypt(password, wallet.mnemonicCypher);
-            console.log('decryptedMnemonic:',decryptedMnemonic);
-            await setWallet({
-              ...wallet,
-              mnemonic: decryptedMnemonic,
-            });
-            console.log('walletDecryptedMnemonic:',wallet)
-            setCalldAfterSubmit(true)
-            break;
-            default:
-            }
-            afterSubmit()
+            case ENCRYPTION_STATUS_CODE.ENCRYPTED:
+              console.log('decrypt', password, wallet);
+              const decryptedMnemonic = await decrypt(password, wallet.mnemonicCypher);
+              console.log('decryptedMnemonic:',decryptedMnemonic);
+              setWallet({
+                ...wallet,
+                mnemonic: decryptedMnemonic,
+              });
+              console.log('walletDecryptedMnemonic:',wallet)
+              setCalldAfterSubmit(true)
+              break;
+              default:
+              }
+              submit()
     };
   
     const handleAddressChange = (e) => {
@@ -116,10 +132,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
         console.log('handlePasswordChange:',password)
     };
 
-    const afterSubmit = () => {
-      console.log('enviando a: '+ formData.address)
-      submit();
-    };
 
     const getWallet = () => wallet;
 
