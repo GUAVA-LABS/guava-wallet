@@ -12,21 +12,21 @@ const Send = ({ filledAddress, callbackTxId }) => {
       WalletContext
     );
 
-    const { avaxBalance } = wallet;
+    // const { avaxBalance } = wallet;
     const [formData, setFormData] = useState({
       dirty: true,
       address: filledAddress || "",
       amount:0,
       password:''
     });
-    const [isOpenConfirm, setIsOpenConfirm] = useState(false);
-    const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
+    const [isOpenConfirm/*, setIsOpenConfirm*/] = useState(false);
+    const [/*callAfterSubmit,*/ setCalldAfterSubmit] = React.useState(false);
 
 
-    const afterSubmit = () => {
-      console.log('enviando a: '+ formData.address)
-      submit();
-    };
+    // const afterSubmit = () => {
+    //   console.log('enviando a: '+ formData.address)
+    //   submit();
+    // };
 
     // React.useEffect(() => {
     //   (async () => {
@@ -38,11 +38,11 @@ const Send = ({ filledAddress, callbackTxId }) => {
     // }, [callAfterSubmit, afterSubmit]);
 
 
-    const confirmTx = () => {
+    // const confirmTx = () => {
+    //   setIsOpenConfirm(!isOpenConfirm);
+    //   console.log(isOpenConfirm);
+    // }
 
-      setIsOpenConfirm(!isOpenConfirm);
-      console.log(isOpenConfirm);
-    }
     const[open, setOpen] = useState({
       open: false
     });
