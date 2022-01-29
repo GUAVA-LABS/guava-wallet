@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import '../../../global.css'
 import closeIcon from '../../../assets/close-icon.png'
-import './Modal.css'
+import './modal.css'
 
 
 export default function Modal(props) {

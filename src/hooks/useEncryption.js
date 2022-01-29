@@ -8,7 +8,7 @@ export const ENCRYPTION_STATUS_CODE = {
 }
 
 const getInitialState = (mnemonicCypher) => {
-    console.log(mnemonicCypher);
+    console.log('mnemonicCypher on getInit() on useEncr.js:', mnemonicCypher);
     if (!mnemonicCypher) {
         return ENCRYPTION_STATUS_CODE.DECRYPTED;
     }
@@ -32,6 +32,16 @@ const useEncryption = (mnemonicCypher) => {
             return decryptedData;
         } catch(e) {
             return false;
+       
+        }
+    }
+
+    const decryptData = (password, cypher) => {
+        try {
+            const decryptedData = JSON.parse(SJCL.decrypt(password, cypher));
+            return decryptedData;
+        } catch(e) {
+            return false;
         }
     }
 
@@ -39,6 +49,7 @@ const useEncryption = (mnemonicCypher) => {
         encryptionStatus,
         encrypt,
         decrypt,
+        decryptData,
         setEncryptionStatus
     }
 }
