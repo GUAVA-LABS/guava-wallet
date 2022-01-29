@@ -113,7 +113,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
           default:
           
           }
-    }, [ContextValue, formData.password, submit]);
+    }, [ContextValue, formData.password, setCalldAfterSubmit, submit, wallet]);
   
     const handleAddressChange = (e) => {
       const { value, name } = e.target;
