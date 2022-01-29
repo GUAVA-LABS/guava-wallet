@@ -1,60 +1,35 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useCallback} from 'react'
 import './Send.css'
 import { WalletContext } from "@utils/context";
-// import FormPassword from "@components/OnBoarding/formPassword";
 import Modal from "../../../components/Common/Modal/modal";
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 
 
-const Send = ({ filledAddress, callbackTxId }) => {
+const Send = ({ filledAddress }) => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, sendAssetXChain/*, apiError, txFee*/ } = React.useContext(
+    const { wallet, sendAssetXChain } = React.useContext(
       WalletContext
     );
+    
+    const { decryptData, encryptionStatus } = ContextValue;
 
-    // const { avaxBalance } = wallet;
+
     const [formData, setFormData] = useState({
       dirty: true,
       address: filledAddress || "",
       amount:0,
       password:''
     });
-    const [isOpenConfirm/*, setIsOpenConfirm*/] = useState(false);
-    // const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
-
-
-    // const afterSubmit = () => {
-    //   console.log('enviando a: '+ formData.address)
-    //   submit();
-    // };
-
-    // React.useEffect(() => {
-    //   (async () => {
-    //     if (callAfterSubmit) {
-    //       console.log('UseEffect callAfterSubmit')
-    //       afterSubmit()};
-    //     setCalldAfterSubmit(false);
-    //   })();
-    // }, [callAfterSubmit, afterSubmit]);
-
-
-    // const confirmTx = () => {
-    //   setIsOpenConfirm(!isOpenConfirm);
-    //   console.log(isOpenConfirm);
-    // }
 
     const[open, setOpen] = useState({
       open: false
     });
-
-    useEffect(() => {
-
-    }, [open])
-    function handleOpen(action) {
+    
+    function handleOpen() {
       setOpen({open:!open.open})
-  };
+    };
 
-  const submit = useCallback(() => {
+  const submit = useCallback(async (mnemonic) => {
     setFormData({
       ...formData,
       dirty: false,
@@ -64,55 +39,56 @@ const Send = ({ filledAddress, callbackTxId }) => {
     }
 
       const { address, amount } = formData;
-      if (wallet.mnemonic) {
+      if (mnemonic) {
         console.log('onI mnemonic');
         try {
-          console.log('mnemonic on Submit Function:', wallet.mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
+          console.log('mnemonic on Submit Function:', mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
           console.log('amountSubmitFunction:',amount, 'addressSubmitFunction:',address)
-          const link = sendAssetXChain(amount, address);
+          const link = await sendAssetXChain(amount, address, mnemonic);
           console.log("txid", link);
+    
         } catch (e) {
           console.log(e);
           console.error(e);
         }
       }else{
-        console.log('if wallet.mnemonic failed');
+        console.log('if wallet.mnemonic failed', mnemonic);
       }
-  }, [formData, sendAssetXChain, wallet.mnemonic, wallet.mnemonicCypher]);
+  }, [formData, sendAssetXChain, wallet]);
 
-    const sendConfirmation = useCallback(() => {
-      const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
+
+    const sendConfirmation = useCallback(async () => {
         const password = formData.password;
         console.log('current encryption status', encryptionStatus);
+        
         switch (encryptionStatus) {
-          case ENCRYPTION_STATUS_CODE.DECRYPTED:
-            const mnemonicCypher = encrypt(password, wallet.mnemonic);
-            console.log('mnemonic cypher objects on DECRYPTED case', password, wallet, mnemonicCypher);
-            setWallet({
-              ...wallet,
-              mnemonicCypher,
-              mnemonic: false
-            });
-            // setCalldAfterSubmit(true)
-          break;
+          
+          // case ENCRYPTION_STATUS_CODE.DECRYPTED:
+          //   const mnemonicCypher = encrypt(password, wallet.mnemonic);
+          //   console.log('mnemonic cypher objects on DECRYPTED case', password, wallet, mnemonicCypher);
+          //   setWallet({
+          //     ...wallet,
+          //     mnemonicCypher,
+          //     mnemonic: false
+          //   });
+          // break;
             
           case ENCRYPTION_STATUS_CODE.ENCRYPTED:
-              console.log('decrypt', password, wallet);
-              const decryptedMnemonic = decrypt(password, wallet.mnemonicCypher);
-              console.log('decryptedMnemonic:',decryptedMnemonic);
-              setWallet({
-                ...wallet,
-                mnemonic: decryptedMnemonic,
-              });
-              console.log('walletDecryptedMnemonic on ENCRYPTED CASE:',wallet);
-              // setCalldAfterSubmit(true);
-              submit();
+              // console.log('decrypt', password, wallet);
+              // const decryptedMnemonic = decrypt(password, wallet.mnemonicCypher);
+              // console.log('decryptedMnemonic:',decryptedMnemonic);
+              const mnemonic = decryptData(password, wallet.mnemonicCypher)
+              console.log(mnemonic, 'mnem DecryptedData');
+              submit( mnemonic );
+
+              // updateMnemonic(decryptedMnemonic);
+              // console.log('walletDecryptedMnemonic on ENCRYPTED CASE:',wallet);
           break;
               
           default:
           
           }
-    }, [ContextValue, formData.password/*, setCalldAfterSubmit*/, submit, wallet]);
+    }, [decryptData, encryptionStatus, formData.password, submit, wallet]);
   
     const handleAddressChange = (e) => {
       const { value, name } = e.target;
@@ -120,7 +96,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
         ...p,
         [name]: value,
       }));
-      // console.log('handleAddressChange:',value)
     };
   
     const handleAmountChange = (e) => {
@@ -128,7 +103,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
         let amount = value;
         setFormData((p) => ({
         ...p, [name]: amount }));
-        // console.log('handleAmountChange:',amount)
     };
     
     const handlePasswordChange = (e) => {
@@ -136,9 +110,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         let password = value;
         setFormData((p) => ({
         ...p, [name]: password }));
-        // console.log('handlePasswordChange:',password)
     };
-
 
     return (
       <>
@@ -149,7 +121,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
             <div className='confirm-send'>
               { open.open ?
                 <Modal
-                  isOpenDelete={isOpenConfirm}
                   open={open}
                   setOpen={setOpen}
                   warning={'Transaction fee: 0.001 AVAX'}
