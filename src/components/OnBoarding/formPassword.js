@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 import { WalletContext } from '@utils/context';
 import { UnlockOutlined } from '@ant-design/icons'
@@ -38,13 +38,16 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
   form.resetFields = () => false;
   const ContextValue = React.useContext(WalletContext);
   const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
+  
   const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
+  
   React.useEffect(() => {
     (async () => {
       if (callAfterSubmit && afterSubmit) await afterSubmit();
       setCalldAfterSubmit(false);
     })();
   }, [callAfterSubmit, afterSubmit]);
+  
   const onConfirmPassword = values => {
     if (!confirmPassword) return true;
     if (values.password === values.confirmPassword) return true;
