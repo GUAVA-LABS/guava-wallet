@@ -65,7 +65,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
 
       const { address, amount } = formData;
       if (wallet.mnemonic) {
-        console.log('onIf');
+        console.log('onI mnemonic');
         try {
           console.log('mnemonic on Submit Function:', wallet.mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
           console.log('amountSubmitFunction:',amount, 'addressSubmitFunction:',address)
@@ -76,7 +76,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
           console.error(e);
         }
       }else{
-        console.log('failed');
+        console.log('if wallet.mnemonic failed');
       }
   }, [formData, sendAssetXChain, wallet.mnemonic, wallet.mnemonicCypher]);
 
