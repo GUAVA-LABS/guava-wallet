@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 import { WalletContext } from '@utils/context';
 import { UnlockOutlined } from '@ant-design/icons'
+import './OnBoarding.css'
+
 
 export const StyledButton = styled(Button)`
   border: 2px solid #D5008C;
@@ -38,26 +40,23 @@ const FormPassword = ({ children, locked, confirmPassword, getWallet, afterSubmi
   form.resetFields = () => false;
   const ContextValue = React.useContext(WalletContext);
   const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
-  
   const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
-  
   React.useEffect(() => {
     (async () => {
       if (callAfterSubmit && afterSubmit) await afterSubmit();
       setCalldAfterSubmit(false);
     })();
   }, [callAfterSubmit, afterSubmit]);
-  
   const onConfirmPassword = values => {
     if (!confirmPassword) return true;
     if (values.password === values.confirmPassword) return true;
     return Promise.reject(new Error('The two passwords that you entered do not match!'));
   }
 
-  function onFinish (values){
+  const onFinish =  (values) => {
     const wallet = getWallet();
     const { password } = values;
-    console.log('password', password);
+    console.log('password is working', password);
     console.log('current encryption status', encryptionStatus);
     onConfirmPassword(values);
     switch (encryptionStatus) {

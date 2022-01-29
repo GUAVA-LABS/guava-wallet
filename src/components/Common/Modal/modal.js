@@ -1,29 +1,47 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../../global.css'
-import { List } from "@components/Common/List/List"
 import closeIcon from '../../../assets/close-icon.png'
 import './modal.css'
 
-export function Modal(props) {
 
-    const handleClose = () => {
-        props.close(false);
-    }
+export default function Modal(props) {
+    const [state, setState] = useState({
+        open: props.open,
+        move: true
+      });
+  
+      const handleClose = () => {
+          setState({...state, open:false, move:false})
+          setTimeout(() => {
+              props.setOpen({...props.open, open:false, action:'receive'})
+          }, 120);
+      }
 
-// PARA USAR EL SWITCH, EL ELEMENTO ITERARDOR ES props.name
+    //   const testFunction = () => {
+    //       console.log('WORKING BUTTON')
+    //   }
     return (
-        <div className='card-bg'>
-            <div className='card'>
-                <div className="cardheader">
-                    <b>{props.title}</b>
-                    <a onClick={handleClose}>
-                        <img className='cancelIcon' src={closeIcon} />
+        <>
+            <div className={state.move ? 'modal-container card-up' : 'modal-container card-down'}>
+                <div className='modal-card' >
+                    <h1 className='modal-title'>
+                        {props.title}
+                    </h1>
+                    <span className='modal-warning'>
+                        {props.warning}
+                    </span>
+                    <div className={'modal-content'}>
+                        {props.content}
+                    </div>
+                    {/* <a className='continue-btn' onClick={props.sendConfirmation}> */}
+                    <a className='continue-btn' onClick={props.sendConfirmation}>
+                        {props.continueBtnTitle} 
+                    </a>
+                    <a className='cancel-btn' onClick={handleClose}>
+                        Cancel
                     </a>
                 </div>
-                <div className="cardbody">
-                    <List/>
-                </div>
-            </div> 
-        </div>
+            </div>
+        </>
     );
 }

@@ -139,9 +139,12 @@ export const QRCode = ({
   return (
     <CopyToClipboard
       style={{
-        display: "inline-block",
+        display: "flex",
+        flexDirection:'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: "100%",
-        position: "relative",
+        position:'relative'
       }}
       text={address}
       onCopy={handleOnCopy}

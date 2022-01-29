@@ -5,6 +5,7 @@
 :root {
     --pink-1: #D2007d;
     --blue-1: #07084F;
+    --white-1: #EDF1F8;
 }
 .text-pink-1 {
     color: var(--pink-1)
@@ -13,4 +14,25 @@
 .bg-pink-1 {
     background-color: var(--pink-1)
 
+}
+.bg-blue-1 {
+    background-color: var(--blue-1)
+
+}
+
+@media (max-width: 769px) {
+    input{
+        /* padding: 10px 30px; */
+        border: 2.5px solid var(--blue-1);
+        border-radius: 5px;
+        margin: 10px 0 !important;
+    }
+}
+@media (min-width: 768px) {
+    input{
+        padding: 10px 30px;
+        border: 2.5px solid var(--blue-1);
+        border-radius: 5px;
+        margin: 10px 0px !important;
+    }
 }

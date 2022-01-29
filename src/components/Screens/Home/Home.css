@@ -2,6 +2,12 @@
     .container{
         width: 100%;
     }
+    .tx-history{
+        color: var(--blue-1);
+        text-align: center;
+        font-weight: 700;
+        margin-top: 15px;
+    }
 }
 
 @media (min-width:768px){
@@ -9,5 +15,13 @@
         display: flex;
         margin: auto;
         width: 50%;
+    }
+    .tx-history{
+        color: var(--blue-1);
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 15px;
+    
     }
 }

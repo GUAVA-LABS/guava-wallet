@@ -1,124 +1,180 @@
-    .card {
-    position: absolute;
-    left: calc(50% - 250px);
-    top: calc(50% - 325px);
-    width: 500px;
-    height: 650px;
-    display: flex;
-    flex-direction: column;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: none;
-    box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.16);
-    z-index: 1;
-    border-radius: 25px;
-    transition: max-height ease-in-out 1s;
-  }
-
-  .cancelIcon {
-    right: 25px;
-    top: 25px;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-  }
-
-  .cardheader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 10%;
-    text-align-last: center;
-    width: 100%;
-    word-wrap: break-word;
-    background-color: transparent;
-    background-clip: border-box;
-    border: none;
-  }
-  .cardbody {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    margin: 5% 5%;
-    height: 85%;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: none;
-    /* display: inline-block;
-    overflow-y: scroll; */
-  }
-
-
-
-/* start state */
-.mfp-zoom-out {
-	/* animate in */
-	/* animate out */
-}
- .mfp-zoom-out .mfp-with-anim {
-	 opacity: 0;
-	 transition: all 0.3s ease-in-out;
-	 transform: scale(1.3);
-}
- .mfp-zoom-out.mfp-bg {
-	 opacity: 0;
-	 transition: all 0.3s ease-out;
-}
- .mfp-zoom-out.mfp-ready .mfp-with-anim {
-	 opacity: 1;
-	 transform: scale(1);
-}
- .mfp-zoom-out.mfp-ready.mfp-bg {
-	 opacity: 0.8;
-}
- .mfp-zoom-out.mfp-removing .mfp-with-anim {
-	 transform: scale(1.3);
-	 opacity: 0;
-}
- .mfp-zoom-out.mfp-removing.mfp-bg {
-	 opacity: 0;
-}
 @media (max-width:769px){
-  .card{
-    position: absolute;
-    top: 10%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 0;
-    height: 100%;
+  .modal-container{
+      position: fixed;
+      bottom: -100%;
+      height: 60vh;
+      width: 90vw;
+      margin-left: 5vw;
+      margin-right: 5vw;
+      margin-bottom: 18vh;
+      overflow: hidden;
+      border-radius: 25px;
+      animation-fill-mode: forwards;
+      background: white;
+      -webkit-box-shadow: 0px 0px 20px 5px rgba(165,165,165,0.65); 
+      box-shadow: 0px 0px 20px 5px rgba(165,165,165,0.65);
   }
-  .card-bg{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--pink-1);
-    width: 100vw;
-    height: 100%;
+  .modal-card{
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; 
+      padding: 30px 30px;
+      background: white;
+  }
+  .modal-title{
+      font-size: 28px;
+      color: var(--blue-1);
+      font-weight: 900;
+  }
+  /* ANIMATION */
+  .card-up{
+      animation: MoveUp .2s linear;
+      animation-fill-mode: forwards;
+
+    }
+  @keyframes MoveUp {
+      0% {
+          bottom: -100%;
+      }
+      100%{
+          bottom: 0%;
+      }
+  }
+  .card-down{
+      animation: MoveDown .2s linear;
+      }
+  @keyframes MoveDown {
+      0% {
+          bottom: 0%;
+      }
+      100%{
+          bottom: -100%;
+      }
   }
   img .cancelIcon{
-    margin-right: 0 !important;
+  margin-right: 0 !important;
   }
+  .continue-btn{
+      width: 100%;
+      padding: 20px 0;
+      background: var(--pink-1);
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      margin: 0 30px;
+      margin-top: 10px;
+  }
+  .cancel-btn{
+      width: 100%;
+      padding: 20px 0;
+      background: #EDF1F8;
+      border-radius: 8px;
+      box-shadow: inset 0px 0px 0px 1px var(--blue-1);
+      color: var(--blue-1);
+      font-weight: 700;
+      margin: 0 30px;
+      margin-top: 10px;
+  }
+  .continue-btn:hover, .cancel-btn:hover{
+      transform: scale(1.005);
+      transition: .3s;
+  }
+  .modal-content{
+    width: 100%;
+    padding: 20px 0;
+}
 }
 @media (min-width:768px){
-  img .cancelIcon{
-    margin-right: 0 !important;
+  .modal-container{
+      position: fixed;
+      bottom: -100%;
+      height: 60vh;
+      width: 500px;
+      margin-left: 0vw;
+      margin-right: 0vw;
+      margin-bottom: 0vh;
+      overflow: hidden;
+      border-radius: 25px;
+      animation-fill-mode: forwards;
+      background: white;
+      -webkit-box-shadow: 0px 0px 20px 5px rgba(165,165,165,0.65); 
+      box-shadow: 0px 0px 20px 5px rgba(165,165,165,0.65);
+      z-index: 3;
   }
-  .card-bg{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--pink-1);
-    width: 100vw;
-    height: 100%;
+  .modal-card{
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; 
+      padding: 70px 50px;
+      background: white;
+  }
+  .modal-title{
+      font-size: 28px;
+      color: var(--blue-1);
+      font-weight: 900;
+  }
+  /* ANIMATION */
+  .card-up{
+      animation: MoveUp .2s linear;
+      animation-fill-mode: forwards;
+
+    }
+  @keyframes MoveUp {
+      0% {
+          bottom: -100%;
+      }
+      100%{
+          bottom: 0%;
+      }
+  }
+  .card-down{
+      animation: MoveDown .2s linear;
+      }
+  @keyframes MoveDown {
+      0% {
+          bottom: 0%;
+      }
+      100%{
+          bottom: -100%;
+      }
+  }
+  img .cancelIcon{
+  margin-right: 0 !important;
+  }
+  .continue-btn{
+      width: 100%;
+      padding: 20px 0;
+      background: var(--pink-1);
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      margin: 0 30px;
+      margin-top: 40px;
+  }
+  .cancel-btn{
+      width: 100%;
+      padding: 20px 0;
+      background: #EDF1F8;
+      border-radius: 8px;
+      box-shadow: inset 0px 0px 0px 1px var(--blue-1);
+      color: var(--blue-1);
+      font-weight: 700;
+      margin: 0 30px;
+      margin-top: 10px;
+  }
+  .continue-btn:hover, .cancel-btn:hover{
+      transform: scale(1.005);
+      transition: .3s;
+  }
+  .modal-warning{
+      margin-top: 30px;
+  }
+  .modal-content{
+      width: 100%;
+      padding: 20px 0;
   }
 }
