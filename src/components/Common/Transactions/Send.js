@@ -20,7 +20,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
       password:''
     });
     const [isOpenConfirm/*, setIsOpenConfirm*/] = useState(false);
-    const [/*callAfterSubmit,*/ setCalldAfterSubmit] = React.useState(false);
+    // const [callAfterSubmit, setCalldAfterSubmit] = React.useState(false);
 
 
     // const afterSubmit = () => {
@@ -106,14 +106,14 @@ const Send = ({ filledAddress, callbackTxId }) => {
                 mnemonic: decryptedMnemonic,
               });
               console.log('walletDecryptedMnemonic on ENCRYPTED CASE:',wallet);
-              setCalldAfterSubmit(true);
+              // setCalldAfterSubmit(true);
               submit({wallet:  {...wallet, mnemonic: decryptedMnemonic}});
           break;
               
           default:
           
           }
-    }, [ContextValue, formData.password, setCalldAfterSubmit, submit, wallet]);
+    }, [ContextValue, formData.password/*, setCalldAfterSubmit*/, submit, wallet]);
   
     const handleAddressChange = (e) => {
       const { value, name } = e.target;
