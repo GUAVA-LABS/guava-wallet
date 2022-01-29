@@ -54,7 +54,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
       setOpen({open:!open.open})
   };
 
-  const submit = useCallback((wallet) => {
+  const submit = useCallback(() => {
     setFormData({
       ...formData,
       dirty: false,
@@ -64,7 +64,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
     }
 
       const { address, amount } = formData;
-      console.log('submited');
       if (wallet.mnemonic) {
         console.log('onIf');
         try {
@@ -79,7 +78,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
       }else{
         console.log('failed');
       }
-  }, [formData, sendAssetXChain]);
+  }, [formData, sendAssetXChain, wallet.mnemonic, wallet.mnemonicCypher]);
 
     const sendConfirmation = useCallback(() => {
       const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
@@ -107,7 +106,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
               });
               console.log('walletDecryptedMnemonic on ENCRYPTED CASE:',wallet);
               // setCalldAfterSubmit(true);
-              submit({wallet:  {...wallet, mnemonic: decryptedMnemonic}});
+              submit();
           break;
               
           default:
@@ -121,7 +120,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         ...p,
         [name]: value,
       }));
-      console.log('handleAddressChange:',value)
+      // console.log('handleAddressChange:',value)
     };
   
     const handleAmountChange = (e) => {
@@ -129,7 +128,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         let amount = value;
         setFormData((p) => ({
         ...p, [name]: amount }));
-        console.log('handleAmountChange:',amount)
+        // console.log('handleAmountChange:',amount)
     };
     
     const handlePasswordChange = (e) => {
@@ -137,7 +136,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         let password = value;
         setFormData((p) => ({
         ...p, [name]: password }));
-        console.log('handlePasswordChange:',password)
+        // console.log('handlePasswordChange:',password)
     };
 
 
