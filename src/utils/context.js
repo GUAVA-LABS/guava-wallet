@@ -1,10 +1,8 @@
 import React from "react";
-import { Avalanche, BN, BinTools } from "avalanche";
+import { Avalanche, BN } from "avalanche";
 import useAsyncTimeout from "@hooks/useAsyncTimeout";
 import HDKey from "hdkey";
 import Big from "big.js";
-import axios from "axios";
-import { currency } from "@components/Common/Ticker";
 import { bnToBig } from "./helpers";
 import { notification } from "antd";
 import Paragraph from "antd/lib/typography/Paragraph";
@@ -23,7 +21,6 @@ const environmentVariables = {
 const useWallet = () => {
   const INTERVAL_IN_MILISECONDS = 10000;
   const AVA_ACCOUNT_PATH = `m/44'/9000'/0'`;
-  const bintools = BinTools.getInstance();
   const { NETWORK_ID, BLOCKCHAIN_ID, AVA_NODE_IP } = environmentVariables;
   let avalancheInstance = new Avalanche(
     AVA_NODE_IP,
@@ -42,6 +39,7 @@ const useWallet = () => {
     encryptionStatus,
     encrypt,
     decrypt,
+    decryptData,
     setEncryptionStatus,
   } = useEncryption();
 
@@ -144,7 +142,7 @@ const useWallet = () => {
     }
   };
 
-  const sendAssetXChain = async (amount, destinationAddress) => {
+  const sendAssetXChain = async (amount, destinationAddress, mnemonic) => {
     Big.NE = -(9 - 1);
     let sendAmount = new BN(
       new Big(amount).times(Big(Math.pow(10, 9))).toString()
@@ -160,7 +158,7 @@ const useWallet = () => {
     const addressesFromSender = [wallet.address];
     const responseFromUTXOFetch = await xchain.getUTXOs(addressesFromSender);
     const avaxAssetIDBuffer = await xchain.getAVAXAssetID();
-    const keychainInstance = getKeychainInstance(wallet.mnemonic);
+    const keychainInstance = getKeychainInstance(mnemonic);
     const baseTransactionOptions = {
       utxoset: responseFromUTXOFetch.utxos,
       amount: sendAmount,
@@ -272,6 +270,7 @@ const useWallet = () => {
     encryptionStatus,
     encrypt,
     decrypt,
+    decryptData,
     txFee,
   };
 };
