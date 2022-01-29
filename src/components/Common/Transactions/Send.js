@@ -81,13 +81,13 @@ const Send = ({ filledAddress, callbackTxId }) => {
       }
   }, [formData, sendAssetXChain]);
 
-    const sendConfirmation = useCallback(async() => {
-      const { encrypt, decrypt, encryptionStatus, setWallet } = await ContextValue;
+    const sendConfirmation = useCallback(() => {
+      const { encrypt, decrypt, encryptionStatus, setWallet } = ContextValue;
         const password = formData.password;
         console.log('current encryption status', encryptionStatus);
         switch (encryptionStatus) {
           case ENCRYPTION_STATUS_CODE.DECRYPTED:
-            const mnemonicCypher = await encrypt(password, wallet.mnemonic);
+            const mnemonicCypher = encrypt(password, wallet.mnemonic);
             console.log('mnemonic cypher objects on DECRYPTED case', password, wallet, mnemonicCypher);
             setWallet({
               ...wallet,
@@ -99,7 +99,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
             
           case ENCRYPTION_STATUS_CODE.ENCRYPTED:
               console.log('decrypt', password, wallet);
-              const decryptedMnemonic = await decrypt(password, wallet.mnemonicCypher);
+              const decryptedMnemonic = decrypt(password, wallet.mnemonicCypher);
               console.log('decryptedMnemonic:',decryptedMnemonic);
               setWallet({
                 ...wallet,
@@ -146,7 +146,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         <div className='send'>
             <input name='address' className='send-input' type='text' placeholder='AVAX Address' onChange={(e) => handleAddressChange(e)}/>
             <input name='amount' className='send-input' type='text' placeholder='Amount' onChange={(e) => handleAmountChange(e)}/>
-            <a className='send-btn' onClick={() => handleOpen('confirm')}>Send</a>
+            <button className='send-btn' onClick={() => handleOpen('confirm')}>Send</button>
             <div className='confirm-send'>
               { open.open ?
                 <Modal
@@ -157,7 +157,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
                   title={'Confirm transaction with password'}
                   continueBtnTitle={'Send'} 
                   content={
-                    <input name='password' className='confirm-input' type='text' placeholder='Password' type='password'
+                    <input name='password' className='confirm-input' placeholder='Password' type='password'
                       onChange={(e) => handlePasswordChange(e)}
                     />
                   }
