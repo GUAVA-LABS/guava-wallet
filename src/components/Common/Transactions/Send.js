@@ -54,7 +54,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
       setOpen({open:!open.open})
   };
 
-  const submit = useCallback(async({wallet}) => {
+  const submit = useCallback((wallet) => {
     setFormData({
       ...formData,
       dirty: false,
@@ -70,7 +70,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
         try {
           console.log('mnemonic on Submit Function:', wallet.mnemonic, 'mnemonicCypher:',wallet.mnemonicCypher)
           console.log('amountSubmitFunction:',amount, 'addressSubmitFunction:',address)
-          const link = await sendAssetXChain(amount, address);
+          const link = sendAssetXChain(amount, address);
           console.log("txid", link);
         } catch (e) {
           console.log(e);
@@ -83,13 +83,13 @@ const Send = ({ filledAddress, callbackTxId }) => {
 
     const sendConfirmation = useCallback(async() => {
       const { encrypt, decrypt, encryptionStatus, setWallet } = await ContextValue;
-        const password = await formData.password;
+        const password = formData.password;
         console.log('current encryption status', encryptionStatus);
         switch (encryptionStatus) {
           case ENCRYPTION_STATUS_CODE.DECRYPTED:
             const mnemonicCypher = await encrypt(password, wallet.mnemonic);
             console.log('mnemonic cypher objects on DECRYPTED case', password, wallet, mnemonicCypher);
-            await setWallet({
+            setWallet({
               ...wallet,
               mnemonicCypher,
               mnemonic: false
