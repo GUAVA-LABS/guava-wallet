@@ -12,8 +12,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
       WalletContext
     );
 
-    const getWallet = () => wallet;
-
     const { avaxBalance } = wallet;
     const [formData, setFormData] = useState({
       dirty: true,
@@ -85,7 +83,6 @@ const Send = ({ filledAddress, callbackTxId }) => {
 
     const sendConfirmation = useCallback(async() => {
       const { encrypt, decrypt, encryptionStatus, setWallet } = await ContextValue;
-      const wallet = await getWallet();
         const password = await formData.password;
         console.log('current encryption status', encryptionStatus);
         switch (encryptionStatus) {
@@ -116,7 +113,7 @@ const Send = ({ filledAddress, callbackTxId }) => {
           default:
           
           }
-    }, [ContextValue, formData.password, getWallet, submit]);
+    }, [ContextValue, formData.password, submit]);
   
     const handleAddressChange = (e) => {
       const { value, name } = e.target;
