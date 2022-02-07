@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 import { WalletContext } from '@utils/context';
 import { UnlockOutlined } from '@ant-design/icons'

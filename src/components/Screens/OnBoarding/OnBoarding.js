@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../../../global.css'
 import './OnBoarding.css'
-import onboardingImg from '@assets/guava-onboarding.png'
+
 import logoGuava from '@assets/guavaheader.png'
 
 import { WalletContext } from '@utils/context';
@@ -78,7 +78,7 @@ export default function OnBoarding() {
             </div>
             <div className='footer'>
                 <a href='https://www.guavawallet.com' target='_blank'>
-                    Click here to visit our website >
+                    {'Click here to visit our website >'}
                 </a>
             </div>
         </div>
