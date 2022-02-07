@@ -1,5 +1,4 @@
 import React from "react";
-import Wallet, { LoadingCtn } from "@components/Wallet/Wallet";
 import NotFound from "@components/NotFound";
 import { WalletContext } from "@utils/context";
 import {
@@ -7,36 +6,27 @@ import {
     Redirect,
     Switch,
     useLocation,
-    useHistory,
 } from 'react-router-dom';
 import ErrorBoundary from '@components/ErrorBoundary';
-import "./App.css";
-
 
 import Home from '@components/Screens/Home/Home';
 import Settings from '@components/Screens/Settings/Settings';
 import Games from '@components/Screens/Games/Games';
 import NavBar from '@components/Common/NavBar/NavBar';
 import Header from '@components/Common/Header/Header';
-import Configure from '@components/Configure/Configure'
-// import { WalletInfo } from '@components/Wallet/Wallet'
-// import './App.css'
 
-import FormPassword from '@components/OnBoarding/formPassword'
 import OnBoarding from "@components/Screens/OnBoarding/OnBoarding";
 
+import "./App.css";
 
 const App = () => {
   const ContextValue = React.useContext(WalletContext);
-  const [marketImage, setMarketImage] = React.useState(false);
 
   const { wallet } = ContextValue;
   const location = useLocation();
-  const history = useHistory();
   const selectedKey =
     location && location.pathname ? location.pathname.substr(1) : "";
 
-  const isPrimary = (selectedKey === 'home' || selectedKey === 'settings' || selectedKey === 'games');
   const WalletInitialized = () => {
     return (
       <>
@@ -69,14 +59,6 @@ const App = () => {
       }
     </ErrorBoundary>
 
-
-
-    // <ErrorBoundary>
-    //   <ThemeProvider theme={theme}>
-    //     <CustomApp>
-    //     </CustomApp>
-    //   </ThemeProvider>
-    // </ErrorBoundary>
   );
 };
 
