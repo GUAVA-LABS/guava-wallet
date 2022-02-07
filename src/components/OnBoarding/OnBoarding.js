@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { WalletContext } from '@utils/context';
 import { Input, Form, Modal } from 'antd';
 import {
-    ExclamationCircleOutlined,
     PlusSquareOutlined,
     LockOutlined,
     ImportOutlined
@@ -13,8 +12,6 @@ import PrimaryButton, {
     SecondaryButton,
     SmartButton,
 } from '@components/Common/PrimaryButton';
-import { currency } from '@components/Common/Ticker.js';
-import { Event } from '@utils/GoogleAnalytics';
 import FormPassword from '@components/OnBoarding/formPassword'
 import logoIcon from '../../assets/guava-logo-landing.png'
 const bip39 = require('bip39');
@@ -160,7 +157,7 @@ export const OnBoarding = ({ history }) => {
             Warning:
             This is new technology and software under development. Use of this wallet is at your own risk. Web wallets are convenient but not advisable for high value coin transaction or storage
             </Warning>
-            <img src={logoIcon} width='60px'/>
+            <img src={logoIcon} alt='guava logo' width='60px'/>
         </>
     );
 };
