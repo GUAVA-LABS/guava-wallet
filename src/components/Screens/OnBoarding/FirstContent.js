@@ -15,7 +15,7 @@ export default function FirstContent({showBackupConfirmModal, setSlide, setSetUp
             </div>
             <div className='onboarding-item'>
                 <p className='p-warning'>
-                    Guava is a non-custodial web wallet for the Avalanche blockchain. Guava is still in its testing phases. Be careful, things might and will break sometimes! Only operate with small amounts to avoid losses.
+                    This Guava product is a non-custodial web wallet for the Avalanche blockchain. Always be careful and record your passphrase and password were you can find them, should you need to recover access. Only hold an amount you feel comfortable with, and store large amounts on a hardware wallet.
                 </p>
             </div>
             <div className='onboarding-item'>
