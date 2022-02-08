@@ -47,7 +47,12 @@ export default function Header(props) {
         <>
             <div className='box-complete bg-pink-1 header'>
 
-                    <img className='logo' src={logoPinkBg}/>
+                    <div className='right_content'>
+                        <img className='logo' src={logoPinkBg}/>
+                        <span className='version'>
+                        Version 2.0
+                        </span>
+                    </div>
                     <div className='info'>
                         <h1 className='balance-usd'>
                             {props.balanceUSD}
