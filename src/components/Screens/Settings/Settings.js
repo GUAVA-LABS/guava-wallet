@@ -28,12 +28,14 @@ const Settings = () => {
       setPassword(e.target.value);
     }, []);
 
-  const handleDecrypt = useCallback(async () => {
-      const data = decryptData(password, wallet.mnemonicCypher);
-      if (data) {
-        setDecrypt(true);
-        setMnemonic(data);
-      }
+  const handleDecrypt = useCallback(async (e) => {
+    e.preventDefault();
+    const data = decryptData(password, wallet.mnemonicCypher);
+    if (data) {
+      setDecrypt(true);
+      setMnemonic(data);
+    }
+    setPassword('');
   }, [decryptData, password, wallet.mnemonicCypher]);
 
     return (
