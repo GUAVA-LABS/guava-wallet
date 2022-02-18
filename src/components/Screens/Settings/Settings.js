@@ -1,65 +1,86 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { WalletContext } from "@utils/context";
-import FormPassword from '@components/OnBoarding/formPassword'
-import InfoBar from '@components/Common/InfoBar'
-import './Settings.css'
-import DeleteModal from './DeleteModal'
+
+import InfoBar from '@components/Common/InfoBar';
+
+import DeleteModal from './DeleteModal';
+
+import './Settings.css';
 
 const Settings = () => {
     const ContextValue = React.useContext(WalletContext);
-    const { wallet, deleteWallet } = ContextValue;
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [isOpenDelete, setIsOpenDelete] = useState(false);
+    const { wallet, deleteWallet, decryptData } = ContextValue;
   
-    const confirmDelete = () => {
-
-      setIsOpenDelete(!isOpenDelete);
-      console.log(isOpenDelete);
-    }
     const[open, setOpen] = useState({
       open: false
     });
 
-    useEffect(() => {
-      console.log('working')
-      console.log(open)
+    const [backup, setBackup] = useState(false);
+    const [password, setPassword] = useState('');
+    const [mnemonic, setMnemonic] = useState(false);
+    const [decpryt, setDecrypt] = useState(false);
 
-    }, [open])
-    function handleOpen(action) {
-      setOpen({open:!open.open})
-  };
+    const handleOpen = useCallback(() => {
+      setOpen({open: !open.open});
+    }, [open.open]);
+
+    const handlePasswordChange = useCallback((e) => {
+      setPassword(e.target.value);
+    }, []);
+
+  const handleDecrypt = useCallback(async (e) => {
+    e.preventDefault();
+    const data = decryptData(password, wallet.mnemonicCypher);
+    if (data) {
+      setDecrypt(true);
+      setMnemonic(data);
+    }
+    setPassword('');
+  }, [decryptData, password, wallet.mnemonicCypher]);
+
     return (
       <>
         <div className='container'>
-          <InfoBar 
-            title='Backup your wallet'
-            droppable='true' 
-            content={
-              <FormPassword
-                getWallet={() => wallet}
-                textSubmit="Show"
-              >
-                <p>{wallet && wallet.mnemonic ? wallet.mnemonic : ""}</p>
-              </FormPassword>}
-          />
+          <div onClick={ () => setBackup(!backup)}>
+            <InfoBar 
+              title='Backup your wallet'
+              droppable='true' 
+              content={
+                  <p>
+                    {decpryt ? 
+                      mnemonic : ""
+                    }
+                  </p>
+              }/>
+          </div>
+
+          { backup && (
+              <form onSubmit={handleDecrypt}>
+              <input name='password' className='confirm-input' placeholder='Password' type='password'
+                onChange={(e) => handlePasswordChange(e)}
+              />
+            </form>
+          )}
+         
+          
+
           <InfoBar
             title='Documentation'
             link='https://docs.guavawallet.com'
           />
-          <div onClick={ () => handleOpen()}
-          >
-            <InfoBar 
-              delete
-            />
-        </div>
-         { open.open ? <DeleteModal isOpenDelete={isOpenDelete} open={open} setOpen={setOpen} deleteWallet={deleteWallet} /> : null }
+          
+          <div onClick={ () => handleOpen()}>
+            <InfoBar delete />
+            { open.open && (
+              <DeleteModal 
+                open={open} 
+                setOpen={setOpen} 
+                deleteWallet={deleteWallet} 
+              />
+            )}
           </div>
-      </>
-     
-  
-  
-  
-  
+        </div>
+      </>       
     );
 };
 
