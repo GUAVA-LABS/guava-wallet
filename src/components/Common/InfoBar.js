@@ -41,29 +41,30 @@ const InfoBar = (props) => {
                 }
         }
     }
-    return(
+    return (
         !props.delete ?
             <>
-            <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.open(link, '_blank')}>
-                {show.height === '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
-                }
-                {barTitle}
-            </div>
-            <div style={show}>
-                {/* <PassCheck advice='Write your password to reveal the seed phrase'/> */}
-                {content}
-            </div>
-            </>
-        :
-            <>
-                <div style={info_bar_style} >
+                <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.open(link, '_blank')}>
                     {show.height === '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
                     }
-                    Delete Wallet
-                </div> 
+                    {barTitle}
+                </div>
+
+                <div>
+                    {content}
+                </div>
             </>
+        :
+            <div style={info_bar_style} >
+                {show.height === '0px' ? 
+                    <CaretRightOutlined style={iconAnimation} /> 
+                    : 
+                    <CaretRightOutlined style={iconAnimation} />
+                }
+                Delete Wallet
+            </div> 
         
-    )
+    );
 
 }
 
