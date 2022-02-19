@@ -33,10 +33,10 @@ const Settings = () => {
                   <>
                     {decpryt ? 
                       mnemonic : 
-                      <FormPassword 
-                        setMnemonic={setMnemonic}
-                        setDecrypt={setDecrypt}
-                      />
+                        <FormPassword 
+                          setMnemonic={setMnemonic}
+                          setDecrypt={setDecrypt}
+                        />
                     }
                   </>
               }/>

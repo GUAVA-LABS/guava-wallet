@@ -4,6 +4,8 @@ import {FiEyeOff, FiEye} from 'react-icons/fi';
 
 import { WalletContext } from "@utils/context";
 
+import { Container, Submit } from './styles'
+
 export const FormPassword = ({setMnemonic, setDecrypt}) => {
   const ContextValue = React.useContext(WalletContext);
   const { wallet, decryptData } = ContextValue;
@@ -27,30 +29,34 @@ export const FormPassword = ({setMnemonic, setDecrypt}) => {
   }, [decryptData, password, setDecrypt, setMnemonic, wallet.mnemonicCypher]);
 
   return (
-    <form onSubmit={handleDecrypt}>
+    <Container>
+      <form onSubmit={handleDecrypt}>
 
-      <input 
-        name='password' 
-        className='confirm-input' 
-        placeholder='Password' 
-        type={!passwordView ? 'password' : 'text'}
-        onChange={(e) => handlePasswordChange(e)}
-      />
+        <input 
+          name='password' 
+          className='confirm-input' 
+          placeholder='Password' 
+          type={!passwordView ? 'password' : 'text'}
+          onChange={(e) => handlePasswordChange(e)}
+        />
 
-      <button 
-        type='button' 
-        onClick={() => (setPasswordView(!passwordView))} 
-      >
-       {!passwordView ? <FiEyeOff/> : <FiEye/>}
-      </button>
+        <button 
+          type='button' 
+          onClick={() => (setPasswordView(!passwordView))} 
+        >
+        {!passwordView ? <FiEyeOff/> : <FiEye/>}
+        </button>
+        
+        <Submit>
+          <button 
+            type='submit' 
+            onSubmit={handleDecrypt} 
+          >
+            Recover
+          </button>
+        </Submit>
       
-      <button 
-        type='submit' 
-        onSubmit={handleDecrypt} 
-      >
-        Recover
-      </button>
-    
-    </form>
+      </form>
+    </Container>
   );
 };
