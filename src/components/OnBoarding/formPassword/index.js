@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
+import {FiEyeOff, FiEye} from 'react-icons/fi';
+
 import { WalletContext } from "@utils/context";
 
 export const FormPassword = ({setMnemonic, setDecrypt}) => {
@@ -8,6 +10,8 @@ export const FormPassword = ({setMnemonic, setDecrypt}) => {
 
   const [password, setPassword] = useState('');
 
+  const [passwordView, setPasswordView] = useState(false);
+  
   const handlePasswordChange = useCallback((e) => {
     setPassword(e.target.value);
   }, []);
@@ -24,19 +28,29 @@ export const FormPassword = ({setMnemonic, setDecrypt}) => {
 
   return (
     <form onSubmit={handleDecrypt}>
+
       <input 
         name='password' 
         className='confirm-input' 
         placeholder='Password' 
-        type='password'
+        type={!passwordView ? 'password' : 'text'}
         onChange={(e) => handlePasswordChange(e)}
       />
+
+      <button 
+        type='button' 
+        onClick={() => (setPasswordView(!passwordView))} 
+      >
+       {!passwordView ? <FiEyeOff/> : <FiEye/>}
+      </button>
+      
       <button 
         type='submit' 
         onSubmit={handleDecrypt} 
       >
-        show
+        Recover
       </button>
+    
     </form>
   );
 };
