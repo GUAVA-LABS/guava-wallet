@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import '../../../global.css'
-import closeIcon from '../../../assets/close-icon.png'
+import React, { useState } from 'react';
+import '../../../../global.css'
 import './modal.css'
-
 
 export default function Modal(props) {
     const [state, setState] = useState({
@@ -17,9 +15,6 @@ export default function Modal(props) {
           }, 120);
       }
 
-    //   const testFunction = () => {
-    //       console.log('WORKING BUTTON')
-    //   }
     return (
         <>
             <div className={state.move ? 'modal-container card-up' : 'modal-container card-down'}>
@@ -34,12 +29,12 @@ export default function Modal(props) {
                         {props.content}
                     </div>
                     {/* <a className='continue-btn' onClick={props.sendConfirmation}> */}
-                    <a className='continue-btn' onClick={props.sendConfirmation}>
+                    <div className='continue-btn' onClick={props.sendConfirmation}>
                         {props.continueBtnTitle} 
-                    </a>
-                    <a className='cancel-btn' onClick={handleClose}>
+                    </div>
+                    <div className='cancel-btn' onClick={handleClose}>
                         Cancel
-                    </a>
+                    </div>
                 </div>
             </div>
         </>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import Receive from './Receive'
 import Send from './Send'
 import ConfirmSend from './ConfirmSend'
@@ -26,9 +26,9 @@ export default function Transactions(props) {
                     <img className='cancelIcon' src={closeIcon} />
                 </a>
                 <div className='trans-card'>
-                    {props.action == 'receive' ? <Receive /> : null}
-                    {props.action == 'send' ? <Send handleOpen={props.handleOpen} /> : null}
-                    {props.action == 'confirm' ? <ConfirmSend /> : null}
+                    {props.action === 'receive' ? <Receive /> : null}
+                    {props.action === 'send' ? <Send handleOpen={props.handleOpen} /> : null}
+                    {props.action === 'confirm' ? <ConfirmSend /> : null}
                 </div>
             </div>
         </>
