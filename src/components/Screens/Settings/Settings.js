@@ -39,28 +39,29 @@ const Settings = () => {
   }, [decryptData, password, wallet.mnemonicCypher]);
 
     return (
-      <>
         <div className='container'>
-          <div onClick={ () => setBackup(!backup)}>
             <InfoBar 
               title='Backup your wallet'
               droppable='true' 
               content={
-                  <p>
+                  <div>
+                    <form onSubmit={handleDecrypt}>
+                      <input 
+                        name='password' 
+                        className='confirm-input' 
+                        placeholder='Password' 
+                        type='password'
+                        onChange={(e) => handlePasswordChange(e)}
+                      />
+                    </form>
                     {decpryt ? 
                       mnemonic : ""
                     }
-                  </p>
+                  </div>
               }/>
-          </div>
+               
 
-          { backup && (
-              <form onSubmit={handleDecrypt}>
-              <input name='password' className='confirm-input' placeholder='Password' type='password'
-                onChange={(e) => handlePasswordChange(e)}
-              />
-            </form>
-          )}
+        
          
           
 
@@ -80,7 +81,6 @@ const Settings = () => {
             )}
           </div>
         </div>
-      </>       
     );
 };
 
