@@ -45,17 +45,17 @@ const Settings = () => {
               droppable='true' 
               content={
                   <div>
-                    <form onSubmit={handleDecrypt}>
-                      <input 
-                        name='password' 
-                        className='confirm-input' 
-                        placeholder='Password' 
-                        type='password'
-                        onChange={(e) => handlePasswordChange(e)}
-                      />
-                    </form>
                     {decpryt ? 
-                      mnemonic : ""
+                      mnemonic : 
+                      <form onSubmit={handleDecrypt}>
+                        <input 
+                          name='password' 
+                          className='confirm-input' 
+                          placeholder='Password' 
+                          type='password'
+                          onChange={(e) => handlePasswordChange(e)}
+                        />
+                      </form>
                     }
                   </div>
               }/>
