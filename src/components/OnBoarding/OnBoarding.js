@@ -12,7 +12,7 @@ import PrimaryButton, {
     SecondaryButton,
     SmartButton,
 } from '@components/Common/PrimaryButton';
-import FormPassword from '@components/OnBoarding/formPassword'
+import { FormPassword } from './formPassword';
 import logoIcon from '../../assets/guava-logo-landing.png'
 const bip39 = require('bip39');
 
