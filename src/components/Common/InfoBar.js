@@ -17,7 +17,7 @@ const InfoBar = (props) => {
         color: '#011437',
         borderRadius: '0 0 6px 6px',
         boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.16)',
-        zIndex:'-1',
+        zIndex:'2',
         transition: 'max-height .5s ease',
         overflow: 'hidden'
     });
@@ -50,7 +50,7 @@ const InfoBar = (props) => {
                     {barTitle}
                 </div>
 
-                <div>
+                <div style={show}>
                     {content}
                 </div>
             </>
