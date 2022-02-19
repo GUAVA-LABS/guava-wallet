@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react'
 import './Send.css'
 import { WalletContext } from "@utils/context";
-import Modal from "../../../components/Common/Modal/modal";
+import Modal from "../../../components/Common/Modals/modal";
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 
 

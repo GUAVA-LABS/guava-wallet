@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './DeleteModal.css'
-import closeIcon from '../../../assets/close-icon.png'
-
 
 export default function DeleteModal(props) {
     const [state, setState] = useState({
@@ -25,12 +23,12 @@ export default function DeleteModal(props) {
                 <span className='delete-warning'>
                     Remember if you don't have your seed phrase you can lose your tokens
                 </span>
-                <a className='delete-btn' onClick={props.deleteWallet}>
+                <div className='delete-btn' onClick={props.deleteWallet}>
                     Delete
-                </a>
-                <a className='delete-cancel-btn' onClick={handleClose}>
+                </div>
+                <div className='delete-cancel-btn' onClick={handleClose}>
                     Cancel
-                </a>
+                </div>
             </div>
         </div>
     )

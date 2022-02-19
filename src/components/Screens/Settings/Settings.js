@@ -5,7 +5,7 @@ import InfoBar from '@components/Common/InfoBar';
 
 import { FormPassword } from '../../OnBoarding/formPassword';
 
-import DeleteModal from './DeleteModal';
+import DeleteModal from '../../Common/Modals/Delete';
 
 import './Settings.css';
 

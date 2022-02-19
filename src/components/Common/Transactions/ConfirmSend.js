@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import '../../Screens/Settings/DeleteModal.css'
-import closeIcon from '../../../assets/close-icon.png'
-
-
+import React, { useState } from 'react'
+import '../Modals/Delete/DeleteModal.css'
 const ConfirmSend = (props) => {
 
     const [state, setState] = useState({
