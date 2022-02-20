@@ -10,8 +10,16 @@ export const Container = styled.div`
         }
     
         input {
+            flex: 1;
+            background: transparent;
+            border-radius: 6px;            
             width: 160px;
-            height: 8px;
+            height: 6px;
+            padding: 12px;
+
+            &::placeholder {
+                color: #000;
+            }
         }
     }
 `;
