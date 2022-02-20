@@ -4,6 +4,11 @@ export const Container = styled.div`
     width: 100%;
     align-items: center;
     form {
+
+        h1 {
+            font-size: 14px;
+        }
+    
         input {
             width: 160px;
             height: 8px;
