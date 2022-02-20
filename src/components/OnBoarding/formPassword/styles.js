@@ -35,4 +35,5 @@ export const Error = styled.div`
 export const Submit = styled.div`
     margin: 0 auto;
     display: block;
+    margin-bottom: 8px;
 `
