@@ -4,15 +4,16 @@ import {FiEyeOff, FiEye} from 'react-icons/fi';
 
 import { WalletContext } from "@utils/context";
 
-import { Container, Submit } from './styles'
+import { Container, Error , Submit } from './styles'
 
 export const FormPassword = ({setMnemonic, setDecrypt}) => {
   const ContextValue = React.useContext(WalletContext);
   const { wallet, decryptData } = ContextValue;
 
   const [password, setPassword] = useState('');
-
   const [passwordView, setPasswordView] = useState(false);
+
+  const [error, setError] = useState('');       
   
   const handlePasswordChange = useCallback((e) => {
     setPassword(e.target.value);
@@ -46,6 +47,12 @@ export const FormPassword = ({setMnemonic, setDecrypt}) => {
         >
         {!passwordView ? <FiEyeOff/> : <FiEye/>}
         </button>
+
+        <Error>
+          <span>
+            {error}
+          </span>
+        </Error>
         
         <Submit>
           <button 
