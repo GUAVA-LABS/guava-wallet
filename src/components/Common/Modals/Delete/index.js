@@ -8,10 +8,10 @@ export default function DeleteModal(props) {
       });
   
       const handleClose = () => {
-          setState({...state, open:false, move:false})
+          setState({...state, move:false})
           setTimeout(() => {
-              props.setOpen({...props.open, open:false, action:'receive'})
-          }, 120);
+              props.setOpen({...props.open, open:!props.open})
+          }, 500);
       }
 
     return (

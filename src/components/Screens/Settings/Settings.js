@@ -19,10 +19,17 @@ const Settings = () => {
 
     const [mnemonic, setMnemonic] = useState(false);
     const [decpryt, setDecrypt] = useState(false);
-
+    const handleAnimation = () => {
+      setTimeout(() => {
+        setOpen({open:false})
+      }, 1500);
+    }
     const handleOpen = useCallback(() => {
-      setOpen({open: !open.open});
+      !open ? handleAnimation()
+      : setOpen({open:true})
+
     }, [open.open]);
+
 
     return (
         <div className='container'>
