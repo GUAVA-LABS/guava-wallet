@@ -21,12 +21,19 @@ export const FormPassword = ({setMnemonic, setDecrypt}) => {
 
   const handleDecrypt = useCallback((e) => {
     e.preventDefault();
-    const data = decryptData(password, wallet.mnemonicCypher);
-    if (data) {
-      setDecrypt(true);
-      setMnemonic(data);
+    setError('');
+    if (password.length > 6) {
+      const data = decryptData(password, wallet.mnemonicCypher);
+      if (data) {
+        setDecrypt(true);
+        setMnemonic(data);
+        setPassword('');
+      }else{
+        setError('Invalid Password, please try again');
+      }
+    }else{
+      setError('Password must have more than 6 characters');
     }
-    setPassword('');
   }, [decryptData, password, setDecrypt, setMnemonic, wallet.mnemonicCypher]);
 
   return (
