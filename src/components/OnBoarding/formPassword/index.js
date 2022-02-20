@@ -39,10 +39,9 @@ export const FormPassword = ({setMnemonic, setDecrypt}) => {
   return (
     <Container>
       <form onSubmit={handleDecrypt}>
-
+        <h1>Insert your password: </h1>
         <input 
           name='password' 
-          className='confirm-input' 
           placeholder='Password' 
           type={!passwordView ? 'password' : 'text'}
           onChange={(e) => handlePasswordChange(e)}
