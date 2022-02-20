@@ -24,6 +24,14 @@ export const Container = styled.div`
     }
 `;
 
+export const Error = styled.div`
+    span {        
+        color:  #c53030;
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+`;
+
 export const Submit = styled.div`
     margin: 0 auto;
     display: block;
