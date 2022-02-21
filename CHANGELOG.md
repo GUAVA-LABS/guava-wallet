@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/GUAVA-LABS/guava-wallet/compare/v1.21.0...v1.22.0) (2022-02-21)
+
+
+### Features
+
+* added decruptData function wich is a copy of decrypt without changing the encryption status ([d0a78dc](https://github.com/GUAVA-LABS/guava-wallet/commit/d0a78dc17d28167506ad6d44aa622f6ebd2bf931))
+* working send transction and clean code ([7e6ebbf](https://github.com/GUAVA-LABS/guava-wallet/commit/7e6ebbf862265cebcc9312c4a6de5b1d97663cd3))
+
+
+### Bug Fixes
+
+* added a e.preventDefault to stop screen refreshing and added a clear state on end of function ([357eea7](https://github.com/GUAVA-LABS/guava-wallet/commit/357eea7e05ea1062310b0a1e4fa56f5aa8ec3db2))
+* fixed wrong iddentation of modal css ([11b1728](https://github.com/GUAVA-LABS/guava-wallet/commit/11b1728a132c021f6ddd4dbcbe17e06690ff006d))
+* now backup wallet shows the phase if users enters the correct password ([d5e1ea6](https://github.com/GUAVA-LABS/guava-wallet/commit/d5e1ea6d35d04464072b452842338308374febe2))
+
 ## 1.21.0 (2021-08-10)
 
 ## 1.20.0 (2021-08-10)
