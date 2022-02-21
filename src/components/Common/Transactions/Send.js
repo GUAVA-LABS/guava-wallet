@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react'
 import './Send.css'
 import { WalletContext } from "@utils/context";
-import Modal from "../../../components/Common/Modal/modal";
+import Modal from "../../../components/Common/Modals/modal";
 import { ENCRYPTION_STATUS_CODE } from '@hooks/useEncryption';
 
 
@@ -61,33 +61,16 @@ const Send = ({ filledAddress }) => {
         const password = formData.password;
         console.log('current encryption status', encryptionStatus);
         
-        switch (encryptionStatus) {
-          
-          // case ENCRYPTION_STATUS_CODE.DECRYPTED:
-          //   const mnemonicCypher = encrypt(password, wallet.mnemonic);
-          //   console.log('mnemonic cypher objects on DECRYPTED case', password, wallet, mnemonicCypher);
-          //   setWallet({
-          //     ...wallet,
-          //     mnemonicCypher,
-          //     mnemonic: false
-          //   });
-          // break;
-            
+        switch (encryptionStatus) {            
           case ENCRYPTION_STATUS_CODE.ENCRYPTED:
-              // console.log('decrypt', password, wallet);
-              // const decryptedMnemonic = decrypt(password, wallet.mnemonicCypher);
-              // console.log('decryptedMnemonic:',decryptedMnemonic);
               const mnemonic = decryptData(password, wallet.mnemonicCypher)
               console.log(mnemonic, 'mnem DecryptedData');
               submit( mnemonic );
-
-              // updateMnemonic(decryptedMnemonic);
-              // console.log('walletDecryptedMnemonic on ENCRYPTED CASE:',wallet);
           break;
               
           default:
           
-          }
+        }
     }, [decryptData, encryptionStatus, formData.password, submit, wallet]);
   
     const handleAddressChange = (e) => {

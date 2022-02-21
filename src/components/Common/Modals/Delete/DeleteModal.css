@@ -2,7 +2,7 @@
     .delete-container{
         position: fixed;
         bottom: -100%;
-        height: 60vh;
+        /* height: 60vh; */
         width: 90vw;
         margin-left: 5vw;
         margin-right: 5vw;
@@ -64,7 +64,7 @@
         color: white;
         font-weight: 700;
         margin: 0 30px;
-        margin-top: 70px;
+        margin-top: 30px;
     }
     .delete-cancel-btn{
         width: 100%;
@@ -81,16 +81,19 @@
         transform: scale(1.005);
         transition: .3s;
     }
+    .delete-warning{
+        margin-top: 0;
+    }
 }
 @media (min-width:768px){
     .delete-container{
         position: fixed;
         bottom: -100%;
-        height: 60vh;
+        /* height: 60vh; */
         width: 50vw;
         margin-left: 0vw;
         margin-right: 0vw;
-        margin-bottom: 0vh;
+        margin-bottom: 0;
         overflow: hidden;
         border-radius: 25px;
         animation-fill-mode: forwards;

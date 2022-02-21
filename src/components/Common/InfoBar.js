@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { CaretRightOutlined } from '@ant-design/icons';
-// import PassCheck from './PassCheck';
-
 
 const InfoBar = (props) => {
     const barTitle = props.title;
@@ -19,7 +17,7 @@ const InfoBar = (props) => {
         color: '#011437',
         borderRadius: '0 0 6px 6px',
         boxShadow: '0px 3px 6px 0px rgba(0,0,0,0.16)',
-        zIndex:'-1',
+        zIndex:'2',
         transition: 'max-height .5s ease',
         overflow: 'hidden'
     });
@@ -34,7 +32,7 @@ const InfoBar = (props) => {
     let dropDown = props.droppable;
     if(isDroppable){
         dropDown = () => {
-            if(show.maxHeight == '0px'){
+            if(show.maxHeight === '0px'){
                 showState(prevState => ({...prevState,maxHeight: '550px'}))
                 setIconAnimation(prevState => ({...prevState, transform: 'rotate(90deg)'}))
             }else{
@@ -43,41 +41,40 @@ const InfoBar = (props) => {
                 }
         }
     }
-    return(
+    return (
         !props.delete ?
             <>
-            <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.open(link, '_blank')}>
-                {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
-                }
-                {barTitle}
-            </div>
-            <div style={show}>
-                {/* <PassCheck advice='Write your password to reveal the seed phrase'/> */}
-                {content}
-            </div>
+                <div style={info_bar_style} onClick={() => isDroppable ? dropDown() : window.open(link, '_blank')}>
+                    {show.height === '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
+                    }
+                    {barTitle}
+                </div>
+
+                <div style={show}>
+                    {content}
+                </div>
             </>
         :
-            <>
-                <div style={info_bar_style} >
-                    {show.height == '0px' ? <CaretRightOutlined style={iconAnimation} /> : <CaretRightOutlined style={iconAnimation} />
-                    }
-                    Delete Wallet
-                </div> 
-            </>
+            <div style={info_bar_style} >
+                {show.height === '0px' ? 
+                    <CaretRightOutlined style={iconAnimation} /> 
+                    : 
+                    <CaretRightOutlined style={iconAnimation} />
+                }
+                Delete Wallet
+            </div> 
         
-    )
+    );
 
 }
 
 
 const info_bar_style = {
     fontSize:'11pt',
-    // position:'relative',
     display: 'flex',
     margin:'auto',
     alignItems: 'center',
     width: '85%',
-    backgroundColor:'red',
     textAlign:'left',
     padding:'10px',
     fontWeight:'600',
