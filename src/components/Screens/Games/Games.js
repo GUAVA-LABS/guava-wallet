@@ -1,11 +1,21 @@
 import React from 'react'
 import flipCardIcon from '../../../assets/guava-history-icon.png'
-import './Games.css'
+import comingSoonGif from '../../../assets/coming-soon.gif'
+import './coming_soon.css'
+// import './Games.css'
 
 export default function Games() {
     return (
         <>
-            <div className='container'>
+            <div className='games_container'>
+                <h1 className='cs_h1'>
+                    Coming soon!
+                </h1>
+                <img className='gif' src={comingSoonGif} width="100%"/>
+            </div>
+
+
+            {/* <div className='container'>
                 <div className='table'>
                     <div className='row'>
                         <div className='col-icon'>
@@ -22,7 +32,7 @@ export default function Games() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
