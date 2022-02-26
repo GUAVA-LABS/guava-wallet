@@ -6,13 +6,27 @@
         width: 100%;
         height: 120px;
     }
+    .right_content{
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        width: 160px;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        margin-right: 80px;
+        margin-top: -5px;
+    }
     .logo{
         text-align: right;
         width: 160px;
         margin-right: 80px;
         vertical-align: middle;
-        height: 100%;
         margin-top: -5px;
+    }
+    .version{
+        color: white;
+        font-style: italic;
     }
     div .header {
         display: flex;
@@ -34,7 +48,7 @@
         justify-content: center;
         color: white;
     }
-    .logo{
+    .right_content{
         order: 2;
     }
     .transactions{
@@ -90,7 +104,17 @@
     }
 }
 
-@media (max-width:769px){    
+@media (max-width:769px){   
+    .right_content{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    } 
+    .version{
+        color: white;
+        font-weight: 300;
+        font-style: italic;
+    }
     .box-complete {
         width: 100%;
         /* height: 120px; */
