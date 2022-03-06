@@ -13,7 +13,7 @@ import Home from '@components/Screens/Home/Home';
 import Settings from '@components/Screens/Settings/Settings';
 import Games from '@components/Screens/Games/Games';
 import NavBar from '@components/Common/NavBar/NavBar';
-import Header from '@components/Common/Header/Header';
+import { Header } from '@components/Common/Header/Header';
 
 import OnBoarding from "@components/Screens/OnBoarding/OnBoarding";
 
@@ -30,7 +30,12 @@ const App = () => {
   const WalletInitialized = () => {
     return (
       <>
-        <Header balanceUSD={wallet.avaxBalance ? '$' + wallet.avaxBalance : '$' + 0} balanceAVAX={wallet.avaxBalance ? wallet.avaxBalance + ' AVAX' : 0 + ' AVAX'}/>
+        <Header 
+          balanceUSD={wallet.avaxBalance ? '$' + wallet.avaxBalance : '$' + 0} 
+          balanceAVAX={wallet.avaxBalance ? wallet.avaxBalance + ' AVAX' : 0 + ' AVAX'}
+          avaxBalance={wallet.avaxBalance}
+          />
+          
           {wallet ? <NavBar isSelected={selectedKey}/> : <NavBar isSelected={selectedKey}/>}
             <Switch>        
                 <Route path="/home">
