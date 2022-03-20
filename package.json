@@ -1,11 +1,13 @@
 {
     "name": "guava-wallet",
+    "proxy": "https://wallet.guava.network",
     "version": "2.0.0",
     "private": true,
     "dependencies": {
         "@ant-design/icons": "^4.3.0",
         "@apollo/client": "^3.3.19",
         "@fortawesome/fontawesome-free": "^5.15.1",
+        "@testing-library/jest-dom": "^5.16.2",
         "@zxing/library": "0.8.0",
         "activity-detector": "^3.0.0",
         "antd": "^4.9.3",
@@ -161,7 +163,7 @@
         "@commitlint/cli": "^12.1.1",
         "@commitlint/config-conventional": "^12.1.1",
         "@svgr/webpack": "^5.5.0",
-        "@testing-library/react": "^11.2.2",
+        "@testing-library/react": "^12.1.3",
         "@testing-library/react-hooks": "^3.7.0",
         "babel-eslint": "^10.0.3",
         "babel-jest": "^26.6.3",
