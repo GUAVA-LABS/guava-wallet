@@ -13,7 +13,7 @@ import Home from '@components/Screens/Home/Home';
 import Settings from '@components/Screens/Settings/Settings';
 import Games from '@components/Screens/Games/Games';
 import NavBar from '@components/Common/NavBar/NavBar';
-import { Header } from '@components/Common/Header/Header';
+import { Header } from '@components/Common/Header';
 
 import OnBoarding from "@components/Screens/OnBoarding/OnBoarding";
 

@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useCallback} from 'react';
+
+import { FiInfo } from 'react-icons/fi';
+
 import logoPinkBg from '../../../assets/guavaheader.svg';
 import sendIcon from '../../../assets/send-icon.png';
 import receiveIcon from '../../../assets/receive-icon.png';
@@ -21,6 +24,8 @@ export const Header = (props)  => {
         open: false,
         action: ''
     });
+
+    const[show, setShow] = useState(false);
 
     const handleOpen = useCallback((action) => {
         setOpen({open:!open.open, action: action})
@@ -58,13 +63,19 @@ export const Header = (props)  => {
                         </span>
                     </div>
                     <div className='info'>
-                        <h1 className='balance-usd'>
-                            {`${balanceUSD} USD`}
-                        </h1>
+                        <h1 className='balance-usd'>{`${balanceUSD} USD`}</h1>
+                        {show && (
+                            <h3 className='balance-usd'>Data Fetched with CoinGecko</h3>
+                        )}
+                        <button 
+                            onMouseOver={() => {setShow(true)}}
+                            onMouseOut={() => {setShow(false)}}
+                        ><FiInfo/></button>
                         <h3 style={{margin:'0px !important'}} className='balance-avax'>
                             {props.balanceAVAX}
                         </h3>
                     </div>
+
                     <div className='transactions'>
                         <div id='btn-receive' className='transaction-button btn-send'
                             onClick={() => handleOpen('send')}
@@ -88,15 +99,3 @@ export const Header = (props)  => {
 
     )
 }
-
-
-// const transButton = (props) => {
-
-//     return(
-//         props.left ? 
-//         <div>
-
-//         </div>
-//     )
-
-// }
